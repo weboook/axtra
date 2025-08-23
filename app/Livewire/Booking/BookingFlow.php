@@ -110,6 +110,11 @@ class BookingFlow extends Component
                 $this->nextStep();
             }
         }
+        
+        // Load time slots if we're on step 2 and have a date
+        if ($this->step >= 2) {
+            $this->loadAvailableSlots();
+        }
     }
 
     public function updatePlayerCount()
@@ -171,12 +176,35 @@ class BookingFlow extends Component
 
     public function loadAvailableSlots()
     {
+        if (!$this->selectedDate) {
+            $this->availableSlots = [];
+            return;
+        }
+        
         // For now, generate some sample time slots
-        // In production, this would query actual availability
+        // In production, this would query actual availability based on:
+        // - selected date
+        // - selected service duration
+        // - existing bookings
+        // - business hours
         $this->availableSlots = [
             '09:00', '10:00', '11:00', '12:00', '13:00', 
             '14:00', '15:00', '16:00', '17:00', '18:00'
         ];
+    }
+    
+    public function updatedSelectedDate()
+    {
+        // Called automatically when selectedDate property changes
+        $this->selectedTime = ''; // Reset selected time
+        $this->loadAvailableSlots();
+    }
+    
+    public function setSelectedDate($date)
+    {
+        $this->selectedDate = $date;
+        $this->selectedTime = ''; // Reset selected time
+        $this->loadAvailableSlots();
     }
 
     public function applyCoupon()

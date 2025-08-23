@@ -75,8 +75,8 @@
                 allowInput: false,
                 clickOpens: true,
                 onChange: function(selectedDates, dateStr, instance) {
-                    // Update Livewire property
-                    @this.set('selectedDate', dateStr);
+                    // Update Livewire property and trigger slot loading
+                    @this.call('setSelectedDate', dateStr);
                 },
                 locale: {
                     firstDayOfWeek: 1 // Start week on Monday
