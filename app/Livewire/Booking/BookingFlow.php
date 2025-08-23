@@ -8,6 +8,7 @@ use App\Models\Coupon;
 use App\Models\Booking;
 use App\Models\Lane;
 use App\Models\EventType;
+use App\Services\TimeSlotService;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
 
@@ -176,21 +177,17 @@ class BookingFlow extends Component
 
     public function loadAvailableSlots()
     {
-        if (!$this->selectedDate) {
+        if (!$this->selectedDate || !$this->selectedService) {
             $this->availableSlots = [];
             return;
         }
         
-        // For now, generate some sample time slots
-        // In production, this would query actual availability based on:
-        // - selected date
-        // - selected service duration
-        // - existing bookings
-        // - business hours
-        $this->availableSlots = [
-            '09:00', '10:00', '11:00', '12:00', '13:00', 
-            '14:00', '15:00', '16:00', '17:00', '18:00'
-        ];
+        $timeSlotService = new TimeSlotService();
+        $this->availableSlots = $timeSlotService->getAvailableSlots(
+            $this->selectedDate,
+            $this->selectedService,
+            $this->playerCount
+        );
     }
     
     public function updatedSelectedDate()
@@ -205,6 +202,25 @@ class BookingFlow extends Component
         $this->selectedDate = $date;
         $this->selectedTime = ''; // Reset selected time
         $this->loadAvailableSlots();
+    }
+    
+    public function getSlotCapacityInfo($startTime)
+    {
+        if (!$this->selectedDate || !$this->selectedService || !$startTime) {
+            return null;
+        }
+        
+        $service = Service::find($this->selectedService);
+        if (!$service) {
+            return null;
+        }
+        
+        $timeSlotService = new TimeSlotService();
+        return $timeSlotService->getSlotCapacityInfo(
+            $this->selectedDate,
+            $startTime,
+            $service->duration_hours
+        );
     }
 
     public function applyCoupon()
@@ -274,12 +290,18 @@ class BookingFlow extends Component
     {
         $this->validate($this->getRulesForStep($this->step));
         
+        // Calculate end time using TimeSlotService
+        $timeSlotService = new TimeSlotService();
+        $startDateTime = $this->selectedDate . ' ' . $this->selectedTime;
+        $endTime = $timeSlotService->calculateEndTime($startDateTime, $this->selectedService);
+        
         // Create booking record
         $bookingData = [
             'service_id' => $this->selectedService,
             'participants' => $this->playerCount,
             'booking_date' => $this->selectedDate,
-            'start_time' => $this->selectedTime,
+            'start_time' => $startDateTime,
+            'end_time' => $endTime,
             'total_price' => $this->total,
             'discount_amount' => $this->discount,
             'status' => 'pending',

@@ -81,18 +81,54 @@
                             <i class="fas fa-clock me-2" style="color: #c02425;"></i>
                             Preferred Time
                         </label>
-                        @if($selectedDate)
-                            <div class="row g-2">
-                                @foreach($availableSlots as $slot)
-                                    <div class="col-6 col-sm-4">
-                                        <button type="button" 
-                                                class="btn w-100 {{ $selectedTime === $slot ? 'btn-primary' : 'btn-outline-secondary' }}"
-                                                wire:click="$set('selectedTime', '{{ $slot }}')"
-                                                style="border-radius: 0.5rem; font-weight: 600; {{ $selectedTime === $slot ? 'background: linear-gradient(135deg, #c02425 0%, #d63031 100%); border-color: #c02425;' : '' }}">
-                                            {{ $slot }}
-                                        </button>
-                                    </div>
-                                @endforeach
+                        @if($selectedDate && $selectedService)
+                            @if(count($availableSlots) > 0)
+                                <div class="row g-2">
+                                    @foreach($availableSlots as $slot)
+                                        @php
+                                            $capacityInfo = $this->getSlotCapacityInfo($slot);
+                                            $availableCapacity = $capacityInfo['available_capacity'] ?? 0;
+                                            $isLowCapacity = $availableCapacity <= 10;
+                                        @endphp
+                                        <div class="col-6 col-sm-4">
+                                            <button type="button" 
+                                                    class="btn w-100 position-relative {{ $selectedTime === $slot ? 'btn-primary' : 'btn-outline-secondary' }}"
+                                                    wire:click="$set('selectedTime', '{{ $slot }}')"
+                                                    style="border-radius: 0.5rem; font-weight: 600; min-height: 60px; {{ $selectedTime === $slot ? 'background: linear-gradient(135deg, #c02425 0%, #d63031 100%); border-color: #c02425;' : '' }}">
+                                                <div class="d-flex flex-column align-items-center">
+                                                    <div class="fw-bold">{{ $slot }}</div>
+                                                    <small class="text-muted" style="font-size: 0.75rem;">
+                                                        {{ $availableCapacity }}/55 available
+                                                    </small>
+                                                </div>
+                                                @if($isLowCapacity && $availableCapacity > 0)
+                                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 0.6rem;">
+                                                        Low
+                                                    </span>
+                                                @endif
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                
+                                <!-- Capacity Legend -->
+                                <div class="mt-3 text-center">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Maximum capacity: 55 participants at any time
+                                    </small>
+                                </div>
+                            @else
+                                <div class="alert alert-warning" style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); color: #856404;">
+                                    <i class="fas fa-calendar-times me-2"></i>
+                                    <strong>Fully Booked</strong><br>
+                                    <small>All time slots are fully booked for this date. Please try a different date.</small>
+                                </div>
+                            @endif
+                        @elseif($selectedDate && !$selectedService)
+                            <div class="alert alert-info" style="background: rgba(192, 36, 37, 0.1); border: 1px solid rgba(192, 36, 37, 0.2); color: #c02425;">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Please select a service first to see available times
                             </div>
                         @else
                             <div class="alert alert-info" style="background: rgba(192, 36, 37, 0.1); border: 1px solid rgba(192, 36, 37, 0.2); color: #c02425;">
