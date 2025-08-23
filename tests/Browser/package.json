@@ -1,0 +1,16 @@
+{
+  "name": "axtra-puppeteer-tests",
+  "version": "1.0.0",
+  "description": "Puppeteer test suite for Axtra.ch booking system",
+  "main": "PuppeteerTest.js",
+  "scripts": {
+    "test": "node PuppeteerTest.js",
+    "test:headless": "HEADLESS=true node PuppeteerTest.js",
+    "install-deps": "npm install puppeteer"
+  },
+  "dependencies": {
+    "puppeteer": "^24.0.0"
+  },
+  "author": "Axtra Team",
+  "license": "MIT"
+}
