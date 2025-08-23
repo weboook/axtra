@@ -23,6 +23,10 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
         
+        <!-- Flatpickr CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_red.css">
+        
         <!-- SweetAlert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -104,6 +108,23 @@
             .nav-link:not(.active):hover {
                 background: rgba(192, 36, 37, 0.1) !important;
                 border-color: rgba(192, 36, 37, 0.3) !important;
+            }
+            
+            /* Flatpickr custom styling */
+            .flatpickr-calendar {
+                border-radius: 1rem;
+                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+                border: none;
+            }
+            
+            .flatpickr-day.selected {
+                background: linear-gradient(135deg, #c02425 0%, #d63031 100%);
+                border-color: #c02425;
+            }
+            
+            .flatpickr-day:hover {
+                background: rgba(192, 36, 37, 0.1);
+                border-color: #c02425;
             }
         </style>
     </head>
@@ -220,6 +241,9 @@
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <!-- Flatpickr JS -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         
         @livewireScripts
         @stack('scripts')
