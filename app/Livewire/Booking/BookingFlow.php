@@ -470,7 +470,7 @@ class BookingFlow extends Component
         // Use different layouts for guest vs authenticated users
         if ($this->isGuest) {
             return view('livewire.booking.booking-flow', compact('upsells', 'eventTypes'))
-                ->layout('layouts.guest');
+                ->layout('layouts.public');
         }
 
         return view('livewire.booking.booking-flow', compact('upsells', 'eventTypes'))

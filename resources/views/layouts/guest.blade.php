@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-    <title>{{ config('app.name', 'Axtra') }} - Book Your Experience</title>
+    <title>{{ config('app.name', 'Axtra') }}</title>
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -20,10 +20,6 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Flatpickr CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_red.css">
-    
     <!-- Custom Styles -->
     <style>
         :root {
@@ -32,117 +28,253 @@
         }
         
         body {
-            font-family: 'Open Sans', sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            min-height: 100vh;
+            font-family: 'Figtree', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        .auth-container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .auth-form {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            padding: 2rem;
+        }
+        
+        .auth-video {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-video video {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+        
+        .auth-video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(192, 36, 37, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        
+        .auth-video-content {
+            max-width: 400px;
+            padding: 2rem;
+        }
+        
+        .auth-video-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .auth-video-content p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .auth-form-inner {
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .auth-logo {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .auth-logo img {
+            max-height: 60px;
+            width: auto;
+        }
+        
+        .auth-title {
+            font-size: 2rem;
+            font-weight: 700;
             color: #1b1b1b;
+            text-align: center;
+            margin-bottom: 0.5rem;
         }
         
-        .btn-axtra {
-            background: linear-gradient(135deg, var(--axtra-red) 0%, var(--axtra-red-dark) 100%);
-            border: none;
-            color: white;
-            transition: all 0.3s ease;
+        .auth-subtitle {
+            color: #6c757d;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
         }
         
-        .btn-axtra:hover {
-            background: linear-gradient(135deg, var(--axtra-red-dark) 0%, var(--axtra-red) 100%);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(192, 36, 37, 0.3);
-        }
-        
-        .card {
-            border: 0;
-            border-radius: 1.25rem;
-            background: white;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-        }
-        
-        .card-header {
-            background: white;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            border-radius: 1.25rem 1.25rem 0 0 !important;
-        }
-        
-        .btn-primary, .btn-danger {
-            background: linear-gradient(135deg, #c02425 0%, #d63031 100%);
-            border: none;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            padding: 0.75rem 1.5rem;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-primary:hover, .btn-danger:hover {
-            background: linear-gradient(135deg, #d63031 0%, #c02425 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(192, 36, 37, 0.3);
-        }
-        
-        .btn-outline-primary, .btn-outline-danger {
-            border: 2px solid #c02425;
-            color: #c02425;
-            border-radius: 0.75rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-outline-primary:hover, .btn-outline-danger:hover {
-            background: linear-gradient(135deg, #c02425 0%, #d63031 100%);
-            border-color: #c02425;
-            color: white;
-            transform: translateY(-2px);
+        .form-group {
+            margin-bottom: 1.5rem;
         }
         
         .form-control {
-            border: 2px solid #e9ecef;
+            padding: 1rem;
+            font-size: 1rem;
             border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            font-weight: 500;
+            border: 2px solid #e9ecef;
             transition: all 0.3s ease;
+            width: 100%;
         }
         
         .form-control:focus {
-            border-color: #c02425;
+            border-color: var(--axtra-red);
             box-shadow: 0 0 0 0.2rem rgba(192, 36, 37, 0.15);
+            outline: none;
         }
         
-        .badge {
-            border-radius: 0.5rem;
+        .form-check {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-check-input:checked {
+            background-color: var(--axtra-red);
+            border-color: var(--axtra-red);
+        }
+        
+        .form-check-input:focus {
+            border-color: var(--axtra-red);
+            box-shadow: 0 0 0 0.25rem rgba(192, 36, 37, 0.25);
+        }
+        
+        .btn-primary {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
             font-weight: 600;
-            padding: 0.5rem 0.75rem;
+            border-radius: 0.75rem;
+            border: none;
+            background: linear-gradient(135deg, var(--axtra-red) 0%, var(--axtra-red-dark) 100%);
+            color: white;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
         }
         
-        /* Flatpickr custom styling */
-        .flatpickr-calendar {
-            border-radius: 1rem;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--axtra-red-dark) 0%, var(--axtra-red) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(192, 36, 37, 0.3);
+            color: white;
+        }
+        
+        .auth-links {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        
+        .auth-links a {
+            color: var(--axtra-red);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .auth-links a:hover {
+            color: var(--axtra-red-dark);
+            text-decoration: underline;
+        }
+        
+        .social-divider {
+            text-align: center;
+            margin: 2rem 0 1rem;
+            position: relative;
+        }
+        
+        .social-divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #e9ecef;
+        }
+        
+        .social-divider span {
+            background: white;
+            padding: 0 1rem;
+            color: #6c757d;
+            font-size: 0.9rem;
+        }
+        
+        .social-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn-social {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 0.75rem;
+            color: #495057;
+            text-decoration: none;
+            font-weight: 500;
+            text-align: center;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn-social:hover {
+            border-color: var(--axtra-red);
+            color: var(--axtra-red);
+            background: rgba(192, 36, 37, 0.05);
+            text-decoration: none;
+        }
+        
+        .alert {
+            border-radius: 0.75rem;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
             border: none;
         }
         
-        .flatpickr-day.selected {
-            background: linear-gradient(135deg, #c02425 0%, #d63031 100%);
-            border-color: #c02425;
+        .alert-danger {
+            background: rgba(220, 53, 69, 0.1);
+            color: #721c24;
         }
         
-        .flatpickr-day:hover {
-            background: rgba(192, 36, 37, 0.1);
-            border-color: #c02425;
+        .alert-success {
+            background: rgba(25, 135, 84, 0.1);
+            color: #0f5132;
         }
         
-        .text-axtra {
-            color: var(--axtra-red) !important;
-        }
-        
-        .border-axtra {
-            border-color: var(--axtra-red) !important;
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+            }
+            
+            .auth-video {
+                display: none;
+            }
+            
+            body {
+                overflow: auto;
+                height: auto;
+            }
         }
         
         /* Loading spinner */
@@ -162,49 +294,28 @@
     @livewireStyles
 </head>
 <body>
-    <!-- Modern Header for Guest -->
-    <nav class="navbar navbar-expand-lg py-4" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(0,0,0,0.05);">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="/" style="color: #c02425; font-size: 1.5rem;">
-                <i class="fas fa-bullseye me-2"></i>
-                AXTRA
-            </a>
-            
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link fw-semibold me-3" href="{{ route('login') }}" style="color: #1b1b1b;">
-                    <i class="fas fa-sign-in-alt me-1"></i>Login
-                </a>
-                <a class="btn btn-primary" href="{{ route('register') }}">
-                    <i class="fas fa-user-plus me-1"></i>Sign Up
-                </a>
+    <div class="auth-container">
+        <!-- Auth Form Section -->
+        <div class="auth-form">
+            <div class="auth-form-inner">
+                {{ $slot }}
             </div>
         </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="py-5">
-        {{ $slot }}
-    </main>
-
-    <!-- Simple Footer -->
-    <footer class="bg-dark text-light py-4 mt-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div class="d-flex align-items-center">
-                        <i class="fas fa-bullseye text-danger me-2"></i>
-                        <span class="fw-bold">AXTRA</span>
-                        <span class="ms-2 text-muted">Premium Axe Throwing Experience</span>
-                    </div>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <small class="text-muted">
-                        © {{ date('Y') }} Axtra. All rights reserved.
-                    </small>
+        
+        <!-- Video Section -->
+        <div class="auth-video">
+            <video autoplay muted loop>
+                <source src="{{ asset('videos/axe-throwing-bg.mp4') }}" type="video/mp4">
+                <!-- Fallback background if video doesn't load -->
+            </video>
+            <div class="auth-video-overlay">
+                <div class="auth-video-content">
+                    <h2>Welcome to Axtra</h2>
+                    <p>Experience the thrill of axe throwing in Switzerland's premier venue</p>
                 </div>
             </div>
         </div>
-    </footer>
+    </div>
 
     <!-- Loading Indicator -->
     <div wire:loading.delay class="livewire-loading">
@@ -216,32 +327,7 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Flatpickr JS -->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    
     @livewireScripts
     @stack('scripts')
-    
-    <script>
-        // Handle Livewire loading states
-        document.addEventListener('livewire:navigating', () => {
-            document.body.style.opacity = '0.7';
-        });
-        
-        document.addEventListener('livewire:navigated', () => {
-            document.body.style.opacity = '1';
-        });
-        
-        // Smooth scrolling for step navigation
-        document.addEventListener('DOMContentLoaded', function() {
-            // Auto scroll to current step on load
-            const currentStep = document.querySelector('[id^="step-"]');
-            if (currentStep) {
-                setTimeout(() => {
-                    currentStep.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 500);
-            }
-        });
-    </script>
 </body>
 </html>
