@@ -41,10 +41,47 @@ class BookingFlow extends Component
     // Track changes for upsell recalculation
     public $listeners = ['updateUpsell' => 'updateUpsellQuantity'];
     
+    // Auto-save state when properties change
+    public function updatedSelectedTime()
+    {
+        $this->saveToSession();
+    }
+    
+    public function updatedEventType()
+    {
+        $this->saveToSession();
+    }
+    
+    public function updatedCustomEventType()
+    {
+        $this->saveToSession();
+    }
+    
+    public function updatedComments()
+    {
+        $this->saveToSession();
+    }
+    
+    public function updatedGuestName()
+    {
+        $this->saveToSession();
+    }
+    
+    public function updatedGuestEmail()
+    {
+        $this->saveToSession();
+    }
+    
+    public function updatedGuestPhone()
+    {
+        $this->saveToSession();
+    }
+    
     public function updateUpsellQuantity($upsellId, $quantity)
     {
         $this->selectedUpsells[$upsellId] = max(0, (int) $quantity);
         $this->calculateTotals();
+        $this->saveToSession();
     }
     
     // Guest booking
@@ -58,9 +95,15 @@ class BookingFlow extends Component
     public $preSelectedType = null;
 
     protected $queryString = [
+        'step' => ['except' => 1],
         'players' => ['except' => ''],
         'type' => ['except' => ''],
-        'step' => ['except' => 1],
+        'selectedCategory' => ['except' => ''],
+        'selectedService' => ['except' => ''],
+        'selectedDate' => ['except' => ''],
+        'selectedTime' => ['except' => ''],
+        'eventType' => ['except' => ''],
+        'playerCount' => ['except' => 2],
     ];
 
     protected $rules = [
@@ -77,13 +120,16 @@ class BookingFlow extends Component
 
     public function mount()
     {
-        // Handle pre-selected parameters
-        if (request('players')) {
+        // Restore from session first if available
+        $this->restoreFromSession();
+        
+        // Handle pre-selected parameters from URL (override session if present)
+        if (request('players') && !$this->playerCount) {
             $this->preSelectedPlayers = (int) request('players');
             $this->playerCount = $this->preSelectedPlayers;
         }
         
-        if (request('type')) {
+        if (request('type') && !$this->selectedCategory) {
             $this->preSelectedType = request('type');
             $this->selectedCategory = $this->mapTypeToCategory($this->preSelectedType);
         }
@@ -97,25 +143,35 @@ class BookingFlow extends Component
             session()->forget(['booking_state', 'restore_booking']);
         }
         
+        // Validate step based on available data
+        $this->validateCurrentStep();
+        
         // Load initial services if category is pre-selected
         if ($this->selectedCategory) {
             $this->updateAvailableServices();
         }
         
         // Auto-advance if we have all step 1 info
-        if ($this->selectedCategory && $this->playerCount && $this->availableServices) {
+        if ($this->step === 1 && $this->selectedCategory && $this->playerCount && $this->availableServices) {
             // Auto-select service if only one matches
             if (count($this->availableServices) === 1) {
                 $this->selectedService = $this->availableServices[0]->id;
                 $this->calculateTotals();
-                $this->nextStep();
             }
         }
         
-        // Load time slots if we're on step 2 and have a date
+        // Load time slots if we're on step 2+ and have required data
         if ($this->step >= 2) {
             $this->loadAvailableSlots();
         }
+        
+        // Calculate totals if we're on step 3
+        if ($this->step >= 3) {
+            $this->calculateTotals();
+        }
+        
+        // Save current state to session
+        $this->saveToSession();
     }
 
     public function updatePlayerCount()
@@ -151,6 +207,7 @@ class BookingFlow extends Component
     {
         $this->selectedService = $serviceId;
         $this->calculateTotals();
+        $this->saveToSession();
         
         // Auto-advance to next step after a short delay
         $this->dispatch('service-selected');
@@ -236,6 +293,7 @@ class BookingFlow extends Component
         $this->selectedDate = $date;
         $this->selectedTime = ''; // Reset selected time
         $this->loadAvailableSlots();
+        $this->saveToSession();
     }
     
     public function getSlotCapacityInfo($startTime)
@@ -460,6 +518,69 @@ class BookingFlow extends Component
             ],
             default => [],
         };
+    }
+    
+    private function saveToSession()
+    {
+        Session::put('booking_flow_state', [
+            'step' => $this->step,
+            'selectedCategory' => $this->selectedCategory,
+            'playerCount' => $this->playerCount,
+            'selectedService' => $this->selectedService,
+            'eventType' => $this->eventType,
+            'customEventType' => $this->customEventType,
+            'comments' => $this->comments,
+            'selectedDate' => $this->selectedDate,
+            'selectedTime' => $this->selectedTime,
+            'selectedUpsells' => $this->selectedUpsells,
+            'couponCode' => $this->couponCode,
+            'appliedCoupon' => $this->appliedCoupon,
+            'subtotal' => $this->subtotal,
+            'discount' => $this->discount,
+            'total' => $this->total,
+            'guestName' => $this->guestName,
+            'guestEmail' => $this->guestEmail,
+            'guestPhone' => $this->guestPhone,
+        ]);
+    }
+    
+    private function restoreFromSession()
+    {
+        $state = Session::get('booking_flow_state');
+        
+        if ($state) {
+            $this->step = $state['step'] ?? 1;
+            $this->selectedCategory = $state['selectedCategory'] ?? '';
+            $this->playerCount = $state['playerCount'] ?? 2;
+            $this->selectedService = $state['selectedService'] ?? null;
+            $this->eventType = $state['eventType'] ?? '';
+            $this->customEventType = $state['customEventType'] ?? '';
+            $this->comments = $state['comments'] ?? '';
+            $this->selectedDate = $state['selectedDate'] ?? '';
+            $this->selectedTime = $state['selectedTime'] ?? '';
+            $this->selectedUpsells = $state['selectedUpsells'] ?? [];
+            $this->couponCode = $state['couponCode'] ?? '';
+            $this->appliedCoupon = $state['appliedCoupon'] ?? null;
+            $this->subtotal = $state['subtotal'] ?? 0;
+            $this->discount = $state['discount'] ?? 0;
+            $this->total = $state['total'] ?? 0;
+            $this->guestName = $state['guestName'] ?? '';
+            $this->guestEmail = $state['guestEmail'] ?? '';
+            $this->guestPhone = $state['guestPhone'] ?? '';
+        }
+    }
+    
+    private function validateCurrentStep()
+    {
+        // If on step 2+ but missing step 1 data, go back to step 1
+        if ($this->step >= 2 && (!$this->selectedService || !$this->playerCount)) {
+            $this->step = 1;
+        }
+        
+        // If on step 3 but missing step 2 data, go back to step 2
+        if ($this->step >= 3 && (!$this->selectedDate || !$this->selectedTime || !$this->eventType)) {
+            $this->step = 2;
+        }
     }
 
     public function render()

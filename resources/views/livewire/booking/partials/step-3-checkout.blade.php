@@ -18,6 +18,18 @@
                         $service = \App\Models\Service::find($selectedService);
                         $eventTypeModel = \App\Models\EventType::where('slug', $eventType)->first();
                     @endphp
+                    
+                    @if(!$service)
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            Service information not found. Please go back to step 1 to reselect your service.
+                            <div class="mt-2">
+                                <button type="button" class="btn btn-primary btn-sm" wire:click="$set('step', 1)">
+                                    Go to Step 1
+                                </button>
+                            </div>
+                        </div>
+                    @endif
 
                     <!-- Main Service -->
                     <div class="card border mb-4">
@@ -111,6 +123,16 @@
                             </div>
                         </div>
                     @endif
+                @else
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        No service selected. Please complete the booking process from the beginning.
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-primary btn-sm" wire:click="$set('step', 1)">
+                                Start Over
+                            </button>
+                        </div>
+                    </div>
                 @endif
             </div>
 
