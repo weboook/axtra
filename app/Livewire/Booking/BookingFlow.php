@@ -177,17 +177,51 @@ class BookingFlow extends Component
 
     public function loadAvailableSlots()
     {
-        if (!$this->selectedDate || !$this->selectedService) {
+        if (!$this->selectedDate) {
             $this->availableSlots = [];
             return;
         }
         
-        $timeSlotService = new TimeSlotService();
-        $this->availableSlots = $timeSlotService->getAvailableSlots(
-            $this->selectedDate,
-            $this->selectedService,
-            $this->playerCount
-        );
+        // If no service is selected, use a default duration of 2 hours
+        $serviceId = $this->selectedService;
+        if (!$serviceId && $this->selectedCategory) {
+            // Try to get the first available service for this category
+            $defaultService = Service::active()
+                ->byCategory($this->selectedCategory)
+                ->forPlayerCount($this->playerCount)
+                ->first();
+            $serviceId = $defaultService ? $defaultService->id : null;
+        }
+        
+        if (!$serviceId) {
+            // Fallback: generate slots assuming 2-hour duration
+            $this->generateFallbackSlots();
+            return;
+        }
+        
+        try {
+            $timeSlotService = new TimeSlotService();
+            $this->availableSlots = $timeSlotService->getAvailableSlots(
+                $this->selectedDate,
+                $serviceId,
+                $this->playerCount
+            );
+        } catch (\Exception $e) {
+            // Fallback to simple slots if there's an error
+            $this->generateFallbackSlots();
+            \Log::error('TimeSlot generation error: ' . $e->getMessage());
+        }
+    }
+    
+    private function generateFallbackSlots()
+    {
+        // Simple fallback slots in 30-minute increments
+        $this->availableSlots = [
+            '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
+            '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+            '15:00', '15:30', '16:00', '16:30', '17:00', '17:30',
+            '18:00', '18:30', '19:00', '19:30', '20:00', '20:30'
+        ];
     }
     
     public function updatedSelectedDate()

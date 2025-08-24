@@ -81,14 +81,24 @@
                             <i class="fas fa-clock me-2" style="color: #c02425;"></i>
                             Preferred Time
                         </label>
-                        @if($selectedDate && $selectedService)
+                        @if($selectedDate)
                             @if(count($availableSlots) > 0)
                                 <div class="row g-2">
                                     @foreach($availableSlots as $slot)
                                         @php
-                                            $capacityInfo = $this->getSlotCapacityInfo($slot);
-                                            $availableCapacity = $capacityInfo['available_capacity'] ?? 0;
-                                            $isLowCapacity = $availableCapacity <= 10;
+                                            $capacityInfo = null;
+                                            $availableCapacity = 55; // Default if no capacity info
+                                            $isLowCapacity = false;
+                                            
+                                            if ($selectedService) {
+                                                try {
+                                                    $capacityInfo = $this->getSlotCapacityInfo($slot);
+                                                    $availableCapacity = $capacityInfo['available_capacity'] ?? 55;
+                                                    $isLowCapacity = $availableCapacity <= 10;
+                                                } catch (\Exception $e) {
+                                                    // Ignore capacity info errors for now
+                                                }
+                                            }
                                         @endphp
                                         <div class="col-6 col-sm-4">
                                             <button type="button" 
@@ -97,9 +107,15 @@
                                                     style="border-radius: 0.5rem; font-weight: 600; min-height: 60px; {{ $selectedTime === $slot ? 'background: linear-gradient(135deg, #c02425 0%, #d63031 100%); border-color: #c02425;' : '' }}">
                                                 <div class="d-flex flex-column align-items-center">
                                                     <div class="fw-bold">{{ $slot }}</div>
-                                                    <small class="text-muted" style="font-size: 0.75rem;">
-                                                        {{ $availableCapacity }}/55 available
-                                                    </small>
+                                                    @if($selectedService)
+                                                        <small class="text-muted" style="font-size: 0.75rem;">
+                                                            {{ $availableCapacity }}/55 available
+                                                        </small>
+                                                    @else
+                                                        <small class="text-muted" style="font-size: 0.75rem;">
+                                                            Available
+                                                        </small>
+                                                    @endif
                                                 </div>
                                                 @if($isLowCapacity && $availableCapacity > 0)
                                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 0.6rem;">
@@ -125,11 +141,6 @@
                                     <small>All time slots are fully booked for this date. Please try a different date.</small>
                                 </div>
                             @endif
-                        @elseif($selectedDate && !$selectedService)
-                            <div class="alert alert-info" style="background: rgba(192, 36, 37, 0.1); border: 1px solid rgba(192, 36, 37, 0.2); color: #c02425;">
-                                <i class="fas fa-info-circle me-2"></i>
-                                Please select a service first to see available times
-                            </div>
                         @else
                             <div class="alert alert-info" style="background: rgba(192, 36, 37, 0.1); border: 1px solid rgba(192, 36, 37, 0.2); color: #c02425;">
                                 <i class="fas fa-info-circle me-2"></i>

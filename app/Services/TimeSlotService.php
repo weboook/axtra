@@ -30,6 +30,7 @@ class TimeSlotService
     {
         $service = Service::find($serviceId);
         if (!$service) {
+            \Log::info('TimeSlot: Service not found', ['serviceId' => $serviceId]);
             return [];
         }
 
@@ -41,11 +42,27 @@ class TimeSlotService
         $openTime = Carbon::parse($date->format('Y-m-d') . ' ' . $businessHours[0]);
         $closeTime = Carbon::parse($date->format('Y-m-d') . ' ' . $businessHours[1]);
         
+        \Log::info('TimeSlot: Generating slots', [
+            'date' => $date->format('Y-m-d'),
+            'dayOfWeek' => $dayOfWeek,
+            'businessHours' => $businessHours,
+            'openTime' => $openTime->format('Y-m-d H:i'),
+            'closeTime' => $closeTime->format('Y-m-d H:i'),
+            'service' => $service->name,
+            'duration' => $service->duration_hours
+        ]);
+        
         // Don't allow bookings in the past
         if ($date->isToday()) {
             $now = now()->addMinutes(30); // 30 minute buffer
             if ($openTime->lt($now)) {
-                $openTime = $now->copy()->roundUp(self::SLOT_DURATION_MINUTES . ' minutes');
+                // Round up to next 30-minute slot
+                $minutes = $now->minute;
+                $roundedMinutes = $minutes < 30 ? 30 : 0;
+                $openTime = $now->copy()->setMinute($roundedMinutes)->setSecond(0);
+                if ($roundedMinutes === 0) {
+                    $openTime->addHour();
+                }
             }
         }
 
@@ -64,6 +81,11 @@ class TimeSlotService
             
             $currentSlot->addMinutes(self::SLOT_DURATION_MINUTES);
         }
+
+        \Log::info('TimeSlot: Generated slots', [
+            'count' => count($availableSlots),
+            'slots' => $availableSlots
+        ]);
 
         return $availableSlots;
     }
