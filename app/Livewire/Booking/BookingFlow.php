@@ -106,17 +106,20 @@ class BookingFlow extends Component
         'playerCount' => ['except' => 2],
     ];
 
-    protected $rules = [
-        'playerCount' => 'required|integer|min:1|max:55',
-        'selectedService' => 'required|integer|exists:services,id',
-        'selectedDate' => 'required|date|after_or_equal:today',
-        'selectedTime' => 'required',
-        'eventType' => 'required|string',
-        'customEventType' => 'required_if:eventType,other',
-        'guestName' => 'required_if:isGuest,true|string|max:255',
-        'guestEmail' => 'required_if:isGuest,true|email|max:255',
-        'guestPhone' => 'required_if:isGuest,true|string|max:20',
-    ];
+    protected function rules()
+    {
+        return [
+            'playerCount' => 'required|integer|min:1|max:55',
+            'selectedService' => 'required|integer|exists:services,id',
+            'selectedDate' => 'required|date|after_or_equal:today',
+            'selectedTime' => 'required',
+            'eventType' => 'required|string',
+            'customEventType' => 'required_if:eventType,other',
+            'guestName' => 'required_if:isGuest,true|string|max:255',
+            'guestEmail' => 'required_if:isGuest,true|email|max:255',
+            'guestPhone' => 'required_if:isGuest,true|string|max:20',
+        ];
+    }
 
     public function mount()
     {

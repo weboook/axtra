@@ -100,26 +100,51 @@
                                                 }
                                             }
                                         @endphp
+                                        @php
+                                            $usedCapacity = 55 - $availableCapacity;
+                                            $capacityPercentage = ($usedCapacity / 55) * 100;
+                                            $isNearFull = $availableCapacity <= 10;
+                                            $isFull = $availableCapacity <= 0;
+                                        @endphp
                                         <div class="col-6 col-sm-4">
                                             <button type="button" 
-                                                    class="btn w-100 position-relative {{ $selectedTime === $slot ? 'btn-primary' : 'btn-outline-secondary' }}"
+                                                    class="btn w-100 position-relative {{ $selectedTime === $slot ? 'btn-primary' : 'btn-outline-secondary' }} {{ $isFull ? 'disabled' : '' }}"
                                                     wire:click="$set('selectedTime', '{{ $slot }}')"
-                                                    style="border-radius: 0.5rem; font-weight: 600; min-height: 60px; {{ $selectedTime === $slot ? 'background: linear-gradient(135deg, #c02425 0%, #d63031 100%); border-color: #c02425;' : '' }}">
-                                                <div class="d-flex flex-column align-items-center">
-                                                    <div class="fw-bold">{{ $slot }}</div>
+                                                    {{ $isFull ? 'disabled' : '' }}
+                                                    style="border-radius: 0.75rem; font-weight: 600; min-height: 80px; overflow: hidden; {{ $selectedTime === $slot ? 'background: linear-gradient(135deg, #c02425 0%, #d63031 100%); border-color: #c02425;' : '' }}">
+                                                
+                                                <!-- Capacity Bar Background -->
+                                                <div class="position-absolute bottom-0 start-0 w-100" 
+                                                     style="height: {{ $capacityPercentage }}%; background: rgba(192, 36, 37, {{ $selectedTime === $slot ? '0.3' : '0.15' }}); transition: all 0.3s ease;"></div>
+                                                
+                                                <!-- Content -->
+                                                <div class="d-flex flex-column align-items-center justify-content-center position-relative" style="z-index: 1;">
+                                                    <div class="fw-bold mb-1" style="font-size: 1rem;">{{ $slot }}</div>
                                                     @if($selectedService)
-                                                        <small class="text-muted" style="font-size: 0.75rem;">
-                                                            {{ $availableCapacity }}/55 available
-                                                        </small>
+                                                        @if($isFull)
+                                                            <small class="text-muted fw-semibold" style="font-size: 0.75rem;">
+                                                                <i class="fas fa-times-circle me-1"></i>Full
+                                                            </small>
+                                                        @elseif($isNearFull)
+                                                            <small class="text-warning fw-semibold" style="font-size: 0.75rem;">
+                                                                <i class="fas fa-exclamation-triangle me-1"></i>{{ $availableCapacity }} left
+                                                            </small>
+                                                        @else
+                                                            <small class="text-muted" style="font-size: 0.75rem;">
+                                                                {{ $availableCapacity }} available
+                                                            </small>
+                                                        @endif
                                                     @else
                                                         <small class="text-muted" style="font-size: 0.75rem;">
                                                             Available
                                                         </small>
                                                     @endif
                                                 </div>
-                                                @if($isLowCapacity && $availableCapacity > 0)
-                                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning text-dark" style="font-size: 0.6rem;">
-                                                        Low
+                                                
+                                                <!-- Status Icon -->
+                                                @if($isNearFull && !$isFull)
+                                                    <span class="position-absolute top-0 end-0 m-2">
+                                                        <i class="fas fa-fire text-warning" style="font-size: 0.8rem;"></i>
                                                     </span>
                                                 @endif
                                             </button>
@@ -128,11 +153,24 @@
                                 </div>
                                 
                                 <!-- Capacity Legend -->
-                                <div class="mt-3 text-center">
-                                    <small class="text-muted">
-                                        <i class="fas fa-info-circle me-1"></i>
-                                        Maximum capacity: 55 participants at any time
-                                    </small>
+                                <div class="mt-4">
+                                    <div class="d-flex align-items-center justify-content-between flex-wrap">
+                                        <small class="text-muted mb-2">
+                                            <i class="fas fa-chart-bar me-1"></i>
+                                            Visual capacity indicator (55 max)
+                                        </small>
+                                        <div class="d-flex align-items-center gap-3 mb-2">
+                                            <small class="text-muted">
+                                                <i class="fas fa-square text-success me-1"></i>Available
+                                            </small>
+                                            <small class="text-muted">
+                                                <i class="fas fa-fire text-warning me-1"></i>Nearly Full
+                                            </small>
+                                            <small class="text-muted">
+                                                <i class="fas fa-times-circle text-danger me-1"></i>Full
+                                            </small>
+                                        </div>
+                                    </div>
                                 </div>
                             @else
                                 <div class="alert alert-warning" style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); color: #856404;">
