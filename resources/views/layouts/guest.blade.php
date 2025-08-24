@@ -55,10 +55,14 @@
             overflow: hidden;
         }
         
-        .auth-video video {
+        .auth-video iframe {
             width: 100%;
             height: 100vh;
-            object-fit: cover;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            pointer-events: none; /* Prevent interaction with video */
         }
         
         .auth-video-overlay {
@@ -304,10 +308,13 @@
         
         <!-- Video Section -->
         <div class="auth-video">
-            <video autoplay muted loop>
-                <source src="{{ asset('videos/axe-throwing-bg.mp4') }}" type="video/mp4">
-                <!-- Fallback background if video doesn't load -->
-            </video>
+            <iframe 
+                src="https://www.youtube.com/embed/HaqcFlAi_5I?controls=0&rel=0&playsinline=1&cc_load_policy=0&enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=HaqcFlAi_5I&origin=https%3A%2F%2Faxtra.ch&widgetid=1&forigin=https%3A%2F%2Faxtra.ch%2F&aoriginsup=1&vf=6"
+                frameborder="0" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen
+                style="width: 100%; height: 100vh; object-fit: cover;">
+            </iframe>
             <div class="auth-video-overlay">
                 <div class="auth-video-content">
                     <h2>Welcome to Axtra</h2>
