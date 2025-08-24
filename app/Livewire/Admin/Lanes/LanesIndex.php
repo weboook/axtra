@@ -219,7 +219,12 @@ class LanesIndex extends Component
                 $query->where('maintenance_status', $this->maintenanceFilter);
             })
             ->withCount(['axeBreaks', 'blockReplacements', 'history'])
-            ->orderBy($this->sortBy, $this->sortDirection)
+            ->when($this->sortBy === 'name', function ($query) {
+                // Sort by lane number extracted from name (e.g., "Lane 1", "Lane 10")
+                $query->orderByRaw('CAST(SUBSTRING(name, 6) AS UNSIGNED) ASC');
+            }, function ($query) {
+                $query->orderBy($this->sortBy, $this->sortDirection);
+            })
             ->paginate($this->perPage);
 
         $stats = [

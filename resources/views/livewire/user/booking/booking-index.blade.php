@@ -206,7 +206,7 @@
                                         </li>
                                         @if($booking->status === 'confirmed' || $booking->status === 'pending')
                                             @php
-                                                $bookingDateTime = \Carbon\Carbon::parse($booking->booking_date . ' ' . $booking->start_time);
+                                                $bookingDateTime = \Carbon\Carbon::parse($booking->booking_date->format('Y-m-d') . ' ' . $booking->start_time->format('H:i:s'));
                                                 $canCancel = $bookingDateTime->isAfter(now()->addHours(24));
                                             @endphp
                                             @if($canCancel)

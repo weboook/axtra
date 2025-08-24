@@ -79,11 +79,11 @@
     <!-- Delete User Confirmation Modal -->
     <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true" 
          wire:ignore.self 
-         x-data="{ show: @entangle('confirmingUserDeletion') }" 
+         x-data="{ show: @entangle('confirmingUserDeletion').live }" 
          x-show="show" 
          x-on:keydown.escape.window="show = false"
          style="display: none;"
-         x-transition>
+         x-transition.duration.200ms>
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0" style="border-radius: 1.25rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); border: 2px solid rgba(220, 53, 69, 0.2);">
                 <div class="modal-header" style="background: rgba(220, 53, 69, 0.05); border-bottom: 1px solid rgba(220, 53, 69, 0.1); padding: 1.5rem 1.5rem 0; border-radius: 1.25rem 1.25rem 0 0;">
@@ -145,7 +145,7 @@
     <script>
     document.addEventListener('livewire:init', () => {
         Livewire.on('confirming-delete-user', () => {
-            document.querySelector('[x-data]').__x.$data.show = true;
+            // Let Alpine handle the modal state through entangle
         });
     });
     </script>

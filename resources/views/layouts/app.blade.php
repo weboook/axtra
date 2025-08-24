@@ -216,7 +216,11 @@
 
                         <!-- Main Content Area -->
                         <div class="fade-in">
-                            {{ $slot }}
+                            @isset($slot)
+                                {{ $slot }}
+                            @else
+                                @yield('content')
+                            @endisset
                         </div>
                     </div>
 
