@@ -8,8 +8,8 @@ class Booking extends Model
 {
     protected $fillable = [
         'user_id',
-        'product_id',
-        'service_id',
+        'product_id', // Optional - used for product-based bookings
+        'service_id', // Primary - used for service-based bookings
         'lane_id',
         'coupon_id',
         'gift_card_id',
