@@ -188,7 +188,7 @@
            onmouseover="this.style.background='rgba(192, 36, 37, 0.1)'; this.style.borderColor='rgba(192, 36, 37, 0.3)';"
            onmouseout="this.style.background='transparent'; this.style.borderColor='transparent';">
             <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
-                <i class="fas fa-search" style="transform: rotate(-45deg);"></i>
+                <i class="fas fa-binoculars"></i>
             </div>
             <div class="flex-grow-1">
                 <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Telescope</h6>
