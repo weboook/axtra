@@ -156,7 +156,8 @@ class PayRexxController extends Controller
      */
     public function success(Booking $booking)
     {
-        return view('booking.success', compact('booking'));
+        $layout = auth()->check() ? 'layouts.app' : 'layouts.public';
+        return view('booking.success', compact('booking', 'layout'));
     }
 
     /**
@@ -164,7 +165,8 @@ class PayRexxController extends Controller
      */
     public function failed(Booking $booking)
     {
-        return view('booking.failed', compact('booking'));
+        $layout = auth()->check() ? 'layouts.app' : 'layouts.public';
+        return view('booking.failed', compact('booking', 'layout'));
     }
 
     /**
@@ -172,7 +174,8 @@ class PayRexxController extends Controller
      */
     public function cancelled(Booking $booking)
     {
-        return view('booking.cancelled', compact('booking'));
+        $layout = auth()->check() ? 'layouts.app' : 'layouts.public';
+        return view('booking.cancelled', compact('booking', 'layout'));
     }
 
     /**
@@ -180,7 +183,8 @@ class PayRexxController extends Controller
      */
     public function error()
     {
-        return view('booking.error');
+        $layout = auth()->check() ? 'layouts.app' : 'layouts.public';
+        return view('booking.error', compact('layout'));
     }
 
     /**
