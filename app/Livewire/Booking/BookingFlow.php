@@ -201,13 +201,23 @@ class BookingFlow extends Component
 
         $this->availableServices = Service::active()
             ->byCategory($this->selectedCategory)
-            ->forPlayerCount($this->playerCount)
             ->orderBy('sort_order')
             ->get();
     }
 
+    public function isServiceAvailableForPlayerCount($service)
+    {
+        return $this->playerCount >= $service->min_players && $this->playerCount <= $service->max_players;
+    }
+
     public function selectService($serviceId)
     {
+        // Only allow selection if service is available for player count
+        $service = $this->availableServices->find($serviceId);
+        if (!$service || !$this->isServiceAvailableForPlayerCount($service)) {
+            return;
+        }
+
         $this->selectedService = $serviceId;
         $this->calculateTotals();
         $this->saveToSession();
@@ -575,14 +585,17 @@ class BookingFlow extends Component
     
     private function validateCurrentStep()
     {
-        // If on step 2+ but missing step 1 data, go back to step 1
-        if ($this->step >= 2 && (!$this->selectedService || !$this->playerCount)) {
+        // If on step 2+ but missing critical step 1 data, go back to step 1
+        if ($this->step >= 2 && (!$this->selectedService || !$this->playerCount || $this->playerCount < 1)) {
             $this->step = 1;
+            return;
         }
         
-        // If on step 3 but missing step 2 data, go back to step 2
-        if ($this->step >= 3 && (!$this->selectedDate || !$this->selectedTime || !$this->eventType)) {
+        // If on step 3 but missing critical step 2 data, go back to step 2
+        // Only validate date/time, not eventType as it might be optional for some flows
+        if ($this->step >= 3 && (!$this->selectedDate || !$this->selectedTime)) {
             $this->step = 2;
+            return;
         }
     }
 

@@ -227,9 +227,11 @@ class UsersIndex extends Component
 
     #[On('user-created')]
     #[On('user-updated')]
+    #[On('closeModals')]
     public function refreshList()
     {
-        // Component will re-render automatically
+        // Component will re-render automatically and handle modal closing
+        $this->closeModals();
     }
 
     public function render()

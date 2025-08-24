@@ -28,24 +28,24 @@ class UserEdit extends Component
     public $is_banned = false;
     public $ban_reason = '';
 
-    public function mount(User $user)
+    public function mount($userId)
     {
-        $this->user = $user;
+        $this->user = User::findOrFail($userId);
         $this->fill([
-            'name' => $user->name,
-            'email' => $user->email,
-            'phone' => $user->phone,
-            'date_of_birth' => $user->date_of_birth?->format('Y-m-d'),
-            'role' => $user->role,
-            'skill_level' => $user->skill_level,
-            'skill_points' => $user->skill_points,
-            'total_bookings' => $user->total_bookings,
-            'total_spent' => $user->total_spent,
-            'whatsapp_notifications' => $user->whatsapp_notifications,
-            'hidden_from_leaderboard' => $user->hidden_from_leaderboard,
-            'admin_notes' => $user->admin_notes,
-            'is_banned' => $user->is_banned,
-            'ban_reason' => $user->ban_reason,
+            'name' => $this->user->name,
+            'email' => $this->user->email,
+            'phone' => $this->user->phone,
+            'date_of_birth' => $this->user->date_of_birth?->format('Y-m-d'),
+            'role' => $this->user->role,
+            'skill_level' => $this->user->skill_level,
+            'skill_points' => $this->user->skill_points,
+            'total_bookings' => $this->user->total_bookings,
+            'total_spent' => $this->user->total_spent,
+            'whatsapp_notifications' => $this->user->whatsapp_notifications,
+            'hidden_from_leaderboard' => $this->user->hidden_from_leaderboard,
+            'admin_notes' => $this->user->admin_notes,
+            'is_banned' => $this->user->is_banned,
+            'ban_reason' => $this->user->ban_reason,
         ]);
     }
 
@@ -120,6 +120,7 @@ class UserEdit extends Component
 
             session()->flash('success', 'User updated successfully!');
             $this->dispatch('user-updated');
+            $this->dispatch('closeModals');
             
         } catch (\Exception $e) {
             session()->flash('error', 'Failed to update user: ' . $e->getMessage());

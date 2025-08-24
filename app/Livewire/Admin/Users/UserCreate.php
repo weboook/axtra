@@ -67,6 +67,7 @@ class UserCreate extends Component
 
             session()->flash('success', 'User created successfully!');
             $this->dispatch('user-created');
+            $this->dispatch('closeModals');
             $this->reset();
             
         } catch (\Exception $e) {

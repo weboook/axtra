@@ -35,41 +35,108 @@
         @if(auth()->user()->isAdmin())
             <div class="px-4 pb-3">
                 <div class="dropdown">
-                    <button class="btn btn-outline-light btn-sm dropdown-toggle w-100 d-flex justify-content-between align-items-center" 
-                            type="button" 
-                            data-bs-toggle="dropdown" 
-                            style="background: rgba(192, 36, 37, 0.1); border-color: rgba(192, 36, 37, 0.3);">
-                        <span>
-                            <i class="fas fa-user-shield me-2" style="color: #c02425;"></i>
-                            Switch Role View
-                        </span>
+                    <button class="btn d-flex align-items-center w-100" type="button" data-bs-toggle="dropdown" 
+                            style="background: rgba(255, 255, 255, 0.08); 
+                                   border: none; 
+                                   color: white; 
+                                   padding: 12px 16px; 
+                                   border-radius: 15px;
+                                   backdrop-filter: blur(10px);
+                                   transition: all 0.3s ease;"
+                            onmouseover="this.style.background='rgba(255, 255, 255, 0.15)';"
+                            onmouseout="this.style.background='rgba(255, 255, 255, 0.08)';">
+                        <div class="me-3 d-flex align-items-center justify-content-center" style="width: 35px; height: 35px; background: rgba(192, 36, 37, 0.15); border-radius: 10px; color: #c02425;">
+                            @php
+                                $currentView = session('admin_dashboard_view', 'admin');
+                                $icon = $currentView === 'admin' ? 'fa-crown' : ($currentView === 'employee' ? 'fa-user-tie' : 'fa-user');
+                                $color = $currentView === 'admin' ? '#c02425' : ($currentView === 'employee' ? '#17a2b8' : '#28a745');
+                            @endphp
+                            <i class="fas {{ $icon }}" style="color: {{ $color }};"></i>
+                        </div>
+                        <div class="flex-grow-1 text-start">
+                            <div style="font-weight: 600; font-size: 0.9rem;">
+                                @if($currentView === 'admin')
+                                    Admin View
+                                @elseif($currentView === 'employee')
+                                    Employee View
+                                @else
+                                    Customer View
+                                @endif
+                            </div>
+                            <small style="color: rgba(255, 255, 255, 0.6);">Switch dashboard role</small>
+                        </div>
+                        <i class="fas fa-chevron-down" style="color: rgba(255, 255, 255, 0.6); font-size: 0.8rem;"></i>
                     </button>
-                    <ul class="dropdown-menu w-100" style="background: #2d2d2d; border: 1px solid rgba(192, 36, 37, 0.3);">
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center {{ request()->routeIs('admin.*') ? 'active' : '' }}" 
-                               href="{{ route('admin.dashboard') }}"
-                               style="color: rgba(255, 255, 255, 0.8);">
-                                <i class="fas fa-crown me-2" style="color: #c02425;"></i>
-                                Admin Dashboard
+                    
+                    <!-- Modern Role Switcher Dropdown -->
+                    <div class="dropdown-menu w-100 p-0" style="background: rgba(17, 17, 17, 0.98); 
+                                                              backdrop-filter: blur(40px);
+                                                              border: none; 
+                                                              border-radius: 15px;
+                                                              box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+                                                              transform: translateY(10px);
+                                                              overflow: hidden;">
+                        
+                        <!-- Header -->
+                        <div class="p-3" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08);">
+                            <h6 class="mb-0 fw-bold" style="color: white; font-size: 0.9rem;">Switch Dashboard View</h6>
+                            <small style="color: rgba(255, 255, 255, 0.6);">Access different role interfaces</small>
+                        </div>
+                        
+                        <!-- Role Options -->
+                        <div class="py-2">
+                            <a href="{{ route('admin.dashboard') }}" 
+                               class="dropdown-item d-flex align-items-center px-3 py-3 {{ request()->routeIs('admin.*') ? 'current-role' : '' }}"
+                               style="color: white; text-decoration: none; background: {{ request()->routeIs('admin.*') ? 'rgba(192, 36, 37, 0.15)' : 'transparent' }}; border: none; transition: all 0.2s ease;"
+                               onmouseover="if (!this.classList.contains('current-role')) this.style.background='rgba(192, 36, 37, 0.1)';"
+                               onmouseout="if (!this.classList.contains('current-role')) this.style.background='transparent';">
+                                <div class="me-3 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(192, 36, 37, 0.15); border-radius: 8px; color: #c02425;">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div style="font-weight: 600; font-size: 0.85rem;">Admin Dashboard</div>
+                                    <small style="color: rgba(255, 255, 255, 0.6);">Full system access</small>
+                                </div>
+                                @if(request()->routeIs('admin.*'))
+                                    <i class="fas fa-check-circle" style="color: #c02425; font-size: 0.9rem;"></i>
+                                @endif
                             </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center {{ request()->routeIs('employee.*') ? 'active' : '' }}" 
-                               href="{{ route('employee.dashboard') }}"
-                               style="color: rgba(255, 255, 255, 0.8);">
-                                <i class="fas fa-user-tie me-2" style="color: #17a2b8;"></i>
-                                Employee Dashboard
+                            
+                            <a href="{{ route('employee.dashboard') }}" 
+                               class="dropdown-item d-flex align-items-center px-3 py-3 {{ request()->routeIs('employee.*') ? 'current-role' : '' }}"
+                               style="color: white; text-decoration: none; background: {{ request()->routeIs('employee.*') ? 'rgba(23, 162, 184, 0.15)' : 'transparent' }}; border: none; transition: all 0.2s ease;"
+                               onmouseover="if (!this.classList.contains('current-role')) this.style.background='rgba(23, 162, 184, 0.1)';"
+                               onmouseout="if (!this.classList.contains('current-role')) this.style.background='transparent';">
+                                <div class="me-3 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(23, 162, 184, 0.15); border-radius: 8px; color: #17a2b8;">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div style="font-weight: 600; font-size: 0.85rem;">Employee Dashboard</div>
+                                    <small style="color: rgba(255, 255, 255, 0.6);">Staff operations</small>
+                                </div>
+                                @if(request()->routeIs('employee.*'))
+                                    <i class="fas fa-check-circle" style="color: #17a2b8; font-size: 0.9rem;"></i>
+                                @endif
                             </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item d-flex align-items-center {{ request()->routeIs('dashboard') ? 'active' : '' }}" 
-                               href="{{ route('dashboard') }}"
-                               style="color: rgba(255, 255, 255, 0.8);">
-                                <i class="fas fa-user me-2" style="color: #28a745;"></i>
-                                Customer Dashboard
+                            
+                            <a href="{{ route('dashboard') }}" 
+                               class="dropdown-item d-flex align-items-center px-3 py-3 {{ request()->routeIs('dashboard') || request()->routeIs('user.*') ? 'current-role' : '' }}"
+                               style="color: white; text-decoration: none; background: {{ request()->routeIs('dashboard') || request()->routeIs('user.*') ? 'rgba(40, 167, 69, 0.15)' : 'transparent' }}; border: none; transition: all 0.2s ease;"
+                               onmouseover="if (!this.classList.contains('current-role')) this.style.background='rgba(40, 167, 69, 0.1)';"
+                               onmouseout="if (!this.classList.contains('current-role')) this.style.background='transparent';">
+                                <div class="me-3 d-flex align-items-center justify-content-center" style="width: 32px; height: 32px; background: rgba(40, 167, 69, 0.15); border-radius: 8px; color: #28a745;">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <div style="font-weight: 600; font-size: 0.85rem;">Customer Dashboard</div>
+                                    <small style="color: rgba(255, 255, 255, 0.6);">Customer experience</small>
+                                </div>
+                                @if(request()->routeIs('dashboard') || request()->routeIs('user.*'))
+                                    <i class="fas fa-check-circle" style="color: #28a745; font-size: 0.9rem;"></i>
+                                @endif
                             </a>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         @endif

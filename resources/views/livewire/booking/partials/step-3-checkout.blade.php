@@ -1,186 +1,139 @@
 <div id="step-3" class="mb-5">
-    <!-- Modern Header -->
-    <div class="row mb-5">
-        <div class="col-12">
-            <div class="card border-0 shadow-lg" style="border-radius: 1.5rem; background: linear-gradient(135deg, rgba(192, 36, 37, 0.05) 0%, rgba(255, 255, 255, 1) 100%);">
-                <div class="card-body p-5">
-                    <div class="row align-items-center">
-                        <div class="col-lg-8">
-                            <div class="d-flex align-items-center mb-3">
-                                <div class="bg-gradient p-3 rounded-circle me-4" style="background: linear-gradient(135deg, #c02425 0%, #d63031 100%);">
-                                    <i class="fas fa-credit-card text-white" style="font-size: 1.5rem;"></i>
-                                </div>
-                                <div>
-                                    <h2 class="fw-bold mb-1" style="color: #1b1b1b; font-size: 2rem;">Review & Checkout</h2>
-                                    <p class="text-muted mb-0 fs-5">You're almost there! Review your booking details and complete your payment.</p>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center text-muted">
-                                <i class="fas fa-shield-alt me-2 text-success"></i>
-                                <small>Secure SSL encrypted payment powered by PayRexx</small>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 text-lg-end">
-                            <button type="button" class="btn btn-outline-dark btn-lg" wire:click="previousStep"
-                                    style="border-radius: 1rem; padding: 0.75rem 2rem; border-width: 2px;">
-                                <i class="fas fa-arrow-left me-2"></i>Back to Details
+    <!-- Header with Back Button, Service Summary, and Complete Payment Button -->
+    @if($selectedService)
+        @php
+            $service = \App\Models\Service::find($selectedService);
+        @endphp
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <!-- Back Button -->
+            <button type="button" class="btn btn-outline-secondary" wire:click="previousStep"
+                    style="border-radius: 0.5rem; padding: 0.5rem 1.5rem; border-color: #c02425; color: #c02425;">
+                <i class="fas fa-arrow-left me-2"></i>Back
+            </button>
+
+            <!-- Selected Service Summary -->
+            <div class="d-inline-flex align-items-center px-4 py-2 rounded-pill" style="background: rgba(192, 36, 37, 0.1); border: 1px solid rgba(192, 36, 37, 0.2);">
+                <i class="fas fa-check-circle me-2" style="color: #c02425;"></i>
+                <span class="fw-semibold text-dark">{{ $service->name }}</span>
+                <span class="mx-2 text-muted">•</span>
+                <span class="text-muted">{{ $playerCount }} player{{ $playerCount > 1 ? 's' : '' }}</span>
+                <span class="mx-2 text-muted">•</span>
+                <span class="fw-bold" style="color: #c02425;">CHF {{ number_format($total, 2) }}</span>
+            </div>
+
+            <!-- Complete Payment Button -->
+            <button type="button" class="btn btn-lg px-4" wire:click="proceedToPayment"
+                    style="background: #c02425; border: none; color: white; border-radius: 0.5rem; padding: 0.5rem 1.5rem;">
+                Complete Payment <i class="fas fa-credit-card ms-2"></i>
+            </button>
+        </div>
+    @endif
+
+    <!-- Main Content Row -->
+    <div class="row g-4">
+        <!-- Booking Summary - 2/3 width -->
+        <div class="col-lg-8">
+            @if($selectedService)
+                @php
+                    $service = \App\Models\Service::find($selectedService);
+                    $eventTypeModel = \App\Models\EventType::where('slug', $eventType)->first();
+                @endphp
+                
+                @if(!$service)
+                    <div class="alert alert-warning border-0" style="border-radius: 0.5rem;">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Service information not found. Please go back to step 1.
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm" wire:click="$set('step', 1)"
+                                    style="background: #c02425; border: none; color: white; border-radius: 0.5rem;">
+                                Go to Step 1
                             </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                @endif
 
-    <div class="row g-4">
-        <!-- Booking Summary -->
-        <div class="col-lg-8">
-            @if($selectedService)
-                    @php
-                        $service = \App\Models\Service::find($selectedService);
-                        $eventTypeModel = \App\Models\EventType::where('slug', $eventType)->first();
-                    @endphp
-                    
-                    @if(!$service)
-                        <div class="alert alert-warning">
-                            <i class="fas fa-exclamation-triangle me-2"></i>
-                            Service information not found. Please go back to step 1 to reselect your service.
-                            <div class="mt-2">
-                                <button type="button" class="btn btn-primary btn-sm" wire:click="$set('step', 1)">
-                                    Go to Step 1
-                                </button>
-                            </div>
-                        </div>
-                    @endif
-
-                <!-- Main Service -->
-                <div class="card border-0 shadow-sm mb-4" style="border-radius: 1.5rem; background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 1) 100%);">
-                    <div class="card-header border-0 bg-transparent pb-2">
-                        <div class="d-flex align-items-center">
-                            <div class="bg-primary p-2 rounded-circle me-3" style="background: linear-gradient(135deg, #c02425 0%, #d63031 100%) !important;">
-                                <i class="fas fa-bullseye text-white"></i>
-                            </div>
-                            <h5 class="mb-0 fw-bold text-dark">Your Experience</h5>
-                        </div>
-                    </div>
-                    <div class="card-body pt-0">
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <h4 class="fw-bold mb-3 text-dark">{{ $service->name }}</h4>
-                                
-                                <!-- Experience Details -->
-                                <div class="row g-3 mb-3">
-                                    <div class="col-sm-6">
-                                        <div class="d-flex align-items-center p-3 rounded-3" style="background: rgba(192, 36, 37, 0.1);">
-                                            <i class="fas fa-users me-3" style="color: #c02425; font-size: 1.2rem;"></i>
-                                            <div>
-                                                <div class="fw-bold text-dark">{{ $playerCount }} {{ $playerCount > 1 ? 'Players' : 'Player' }}</div>
-                                                <small class="text-muted">Participants</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="d-flex align-items-center p-3 rounded-3" style="background: rgba(192, 36, 37, 0.1);">
-                                            <i class="fas fa-clock me-3" style="color: #c02425; font-size: 1.2rem;"></i>
-                                            <div>
-                                                <div class="fw-bold text-dark">{{ $service->duration_hours }}h</div>
-                                                <small class="text-muted">Duration</small>
-                                            </div>
-                                        </div>
+                <!-- Your Experience -->
+                <div class="card border-0 mb-4" style="background: #f8f9fa; border-radius: 1rem;">
+                    <div class="card-body p-4">
+                        <h5 class="fw-bold text-dark mb-3">Your Experience</h5>
+                        <!-- Service Details -->
+                        <div class="mb-3">
+                            <h6 class="fw-bold text-dark mb-2">{{ $service->name }}</h6>
+                            <div class="row g-3">
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-users me-2" style="color: #c02425;"></i>
+                                        <span class="small text-muted">{{ $playerCount }} player{{ $playerCount > 1 ? 's' : '' }}</span>
                                     </div>
                                 </div>
-                                
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-clock me-2" style="color: #c02425;"></i>
+                                        <span class="small text-muted">{{ $service->duration_hours }}h duration</span>
+                                    </div>
+                                </div>
                                 @if($selectedDate && $selectedTime)
-                                    <div class="p-3 rounded-3 mb-3" style="background: rgba(33, 37, 41, 0.1);">
-                                        <div class="row">
-                                            <div class="col-sm-6">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="fas fa-calendar me-2 text-primary"></i>
-                                                    <strong>{{ date('l, F j, Y', strtotime($selectedDate)) }}</strong>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <div class="d-flex align-items-center mb-2">
-                                                    <i class="fas fa-clock me-2 text-primary"></i>
-                                                    <strong>{{ $selectedTime }}</strong>
-                                                </div>
-                                            </div>
-                                        </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-center">
+                                        <i class="fas fa-calendar me-2" style="color: #c02425;"></i>
+                                        <span class="small text-muted">{{ date('M j, Y', strtotime($selectedDate)) }} at {{ $selectedTime }}</span>
                                     </div>
-                                @endif
-                                
-                                @if($eventTypeModel)
-                                    <div class="mb-3">
-                                        <span class="badge px-3 py-2" style="background: {{ $eventTypeModel->color }}20; color: {{ $eventTypeModel->color }}; border-radius: 1rem; font-size: 0.9rem;">
-                                            <i class="{{ $eventTypeModel->icon }} me-2"></i>
-                                            {{ $eventTypeModel->name }}
-                                            @if($eventType === 'other' && $customEventType)
-                                                - {{ $customEventType }}
-                                            @endif
-                                        </span>
-                                    </div>
-                                @endif
-                            </div>
-                            
-                            <div class="col-md-4 text-end">
-                                <div class="p-4 rounded-3" style="background: rgba(192, 36, 37, 0.1);">
-                                    <div class="fs-2 fw-bold text-primary mb-1">CHF {{ number_format($service->getTotalPriceForPlayers($playerCount), 2) }}</div>
-                                    <small class="text-muted">{{ $playerCount }} × CHF {{ number_format($service->price, 2) }}</small>
                                 </div>
+                                @endif
                             </div>
                         </div>
+
+                        @if($eventType && $eventTypeModel)
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="{{ $eventTypeModel->icon }} me-2" style="color: #c02425;"></i>
+                                    <span class="small text-muted">{{ $eventTypeModel->name }}</span>
+                                    @if($eventType === 'other' && $customEventType)
+                                        <span class="small text-muted">: {{ $customEventType }}</span>
+                                    @endif
+                                </div>
+                            </div>
+                        @endif
                     </div>
                 </div>
 
-                <!-- Upsells Section -->
+                <!-- Add-ons -->
                 @if(count($upsells) > 0)
-                    <div class="card border-0 shadow-sm mb-4" style="border-radius: 1.5rem;">
-                        <div class="card-header border-0 bg-transparent pb-2">
-                            <div class="d-flex align-items-center">
-                                <div class="bg-success p-2 rounded-circle me-3">
-                                    <i class="fas fa-plus text-white"></i>
-                                </div>
-                                <div>
-                                    <h5 class="mb-1 fw-bold text-dark">Enhance Your Experience</h5>
-                                    <small class="text-muted">Add extras to make your visit even more memorable</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body pt-0">
+                    <div class="card border-0 mb-4" style="background: white; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold text-dark mb-3">Add-ons</h5>
                             <div class="row g-4">
                                 @foreach($upsells as $upsell)
                                     <div class="col-md-6">
-                                        <div class="card border-0 h-100" style="background: linear-gradient(135deg, rgba(248, 249, 250, 1) 0%, rgba(233, 236, 239, 1) 100%); border-radius: 1rem;">
-                                            <div class="card-body p-4">
-                                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                                    <div class="flex-grow-1">
-                                                        <h6 class="fw-bold mb-2 text-dark">{{ $upsell->name }}</h6>
-                                                        <p class="text-muted mb-3" style="font-size: 0.9rem;">{{ $upsell->description }}</p>
-                                                        <div class="fs-5 fw-bold text-success">CHF {{ number_format($upsell->price, 2) }}</div>
-                                                    </div>
+                                        <div class="card border-0" style="border: 1px solid #dee2e6; border-radius: 0.75rem;">
+                                            <div class="card-body p-3">
+                                                <div class="mb-2">
+                                                    <h6 class="fw-bold mb-1 text-dark">{{ $upsell->name }}</h6>
+                                                    <p class="text-muted small mb-0">{{ Str::limit($upsell->description, 50) }}</p>
                                                 </div>
                                                 <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="fw-bold" style="color: #c02425;">CHF {{ number_format($upsell->price, 2) }}</div>
                                                     <div class="d-flex align-items-center">
-                                                        <button type="button" class="btn btn-outline-danger btn-sm rounded-circle me-2"
+                                                        <button type="button" class="btn btn-sm me-1"
                                                                 wire:click="updateUpsellQuantity({{ $upsell->id }}, {{ max(0, ($selectedUpsells[$upsell->id] ?? 0) - 1) }})"
-                                                                style="width: 40px; height: 40px;">
-                                                            <i class="fas fa-minus"></i>
+                                                                style="width: 28px; height: 28px; border-radius: 0.375rem; border: 1px solid #c02425; color: #c02425; background: white;">
+                                                            <i class="fas fa-minus" style="font-size: 0.7rem;"></i>
                                                         </button>
-                                                        <span class="fs-5 fw-bold text-dark mx-3">{{ $selectedUpsells[$upsell->id] ?? 0 }}</span>
-                                                        <button type="button" class="btn btn-danger btn-sm rounded-circle ms-2"
+                                                        <span class="fw-bold text-dark mx-2 small">{{ $selectedUpsells[$upsell->id] ?? 0 }}</span>
+                                                        <button type="button" class="btn btn-sm ms-1"
                                                                 wire:click="updateUpsellQuantity({{ $upsell->id }}, {{ ($selectedUpsells[$upsell->id] ?? 0) + 1 }})"
-                                                                style="width: 40px; height: 40px;">
-                                                            <i class="fas fa-plus"></i>
+                                                                style="width: 28px; height: 28px; border-radius: 0.375rem; border: none; background: #c02425; color: white;">
+                                                            <i class="fas fa-plus" style="font-size: 0.7rem;"></i>
                                                         </button>
                                                     </div>
-                                                    @if(($selectedUpsells[$upsell->id] ?? 0) > 0)
-                                                        <div class="text-end">
-                                                            <div class="fw-bold text-success">
-                                                                CHF {{ number_format($upsell->price * ($selectedUpsells[$upsell->id] ?? 0), 2) }}
-                                                            </div>
-                                                        </div>
-                                                    @endif
                                                 </div>
+                                                @if(($selectedUpsells[$upsell->id] ?? 0) > 0)
+                                                    <div class="text-end mt-1">
+                                                        <small class="fw-bold" style="color: #c02425;">
+                                                            Total: CHF {{ number_format($upsell->price * ($selectedUpsells[$upsell->id] ?? 0), 2) }}
+                                                        </small>
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -221,16 +174,11 @@
                 @endif
             </div>
 
-        <!-- Order Summary -->
+        <!-- Order Summary - 1/3 width -->
         <div class="col-lg-4">
-            <div class="card border-0 shadow-lg sticky-top" style="top: 20px; border-radius: 1.5rem;">
-                <div class="card-header border-0 text-center py-4" style="background: linear-gradient(135deg, #c02425 0%, #d63031 100%); border-radius: 1.5rem 1.5rem 0 0;">
-                    <div class="d-flex align-items-center justify-content-center text-white">
-                        <i class="fas fa-receipt me-2" style="font-size: 1.2rem;"></i>
-                        <h4 class="mb-0 fw-bold">Order Summary</h4>
-                    </div>
-                </div>
+            <div class="card border-0" style="background: white; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
                 <div class="card-body p-4">
+                    <h5 class="fw-bold text-dark mb-3">Order Summary</h5>
                     <!-- Service Total -->
                     @if($selectedService)
                         @php
@@ -305,9 +253,9 @@
                     <hr class="my-4" style="border-width: 2px;">
 
                     <!-- Total -->
-                    <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded-3" style="background: rgba(192, 36, 37, 0.1);">
-                        <span class="h5 fw-bold text-dark">Total</span>
-                        <span class="h4 fw-bold text-primary">CHF {{ number_format($total, 2) }}</span>
+                    <div class="d-flex justify-content-between align-items-center mb-4 p-3 rounded" style="background: rgba(192, 36, 37, 0.1);">
+                        <span class="fw-bold text-dark">Total</span>
+                        <span class="fw-bold" style="color: #c02425;">CHF {{ number_format($total, 2) }}</span>
                     </div>
 
                     <!-- Guest Info Summary -->
@@ -324,14 +272,6 @@
                         </div>
                     @endif
 
-                    <!-- Payment Button -->
-                    <button type="button" class="btn btn-lg w-100 mb-3 shadow" 
-                            style="background: linear-gradient(135deg, #c02425 0%, #d63031 100%); color: white; border: none; padding: 1rem; border-radius: 1rem; font-size: 1.1rem;"
-                            wire:click="proceedToPayment">
-                        <i class="fas fa-credit-card me-2"></i>Complete Payment
-                        <div class="small mt-1">CHF {{ number_format($total, 2) }}</div>
-                    </button>
-                    
                     <div class="text-center">
                         <div class="d-flex align-items-center justify-content-center text-muted">
                             <i class="fas fa-shield-alt me-2 text-success"></i>

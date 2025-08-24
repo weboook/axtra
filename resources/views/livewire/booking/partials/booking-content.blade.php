@@ -1,37 +1,26 @@
-<!-- Booking Header -->
-<div class="row mb-4">
-    <div class="col-12">
-        <div class="card border-0" style="background: linear-gradient(135deg, #c02425 0%, #d63031 100%); color: white; border-radius: 1.5rem; box-shadow: 0 20px 60px rgba(192, 36, 37, 0.3);">
-            <div class="card-body py-4 px-4">
-                <div class="d-flex align-items-center justify-content-between">
-                    <div>
-                        <h2 class="mb-2 fw-bold">Book Your Axe Throwing Experience</h2>
-                        <p class="mb-0 opacity-90" style="font-size: 1.1rem;">
-                            @if($step === 1) Choose your perfect axe throwing adventure
-                            @elseif($step === 2) Select your date and provide event details
-                            @else Review your booking and complete payment
-                            @endif
-                        </p>
-                    </div>
-                    <div class="d-none d-md-block">
-                        <i class="fas fa-bullseye" style="font-size: 4rem; opacity: 0.3;"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Booking Progress Steps -->
 <div class="row mb-4">
     <div class="col-12">
         <div class="card border-0" style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
             <div class="card-body p-4">
+                <!-- Main Titles inside card -->
+                <div class="text-center mb-4">
+                    @if($step === 1)
+                        <h2 class="h3 fw-bold text-dark mb-1">Choose your perfect axe throwing adventure</h2>
+                        <p class="text-muted mb-0">Book Your Axe Throwing Experience</p>
+                    @elseif($step === 2)
+                        <h2 class="h3 fw-bold text-dark mb-1">Book Your Axe Throwing Experience</h2>
+                        <p class="text-muted mb-0">Select your date and provide event details</p>
+                    @else
+                        <h2 class="h3 fw-bold text-dark mb-1">Book Your Axe Throwing Experience</h2>
+                        <p class="text-muted mb-0">Review your booking and complete payment</p>
+                    @endif
+                </div>
                 <div class="row g-0">
                     @foreach([
-                        ['step' => 1, 'icon' => 'fas fa-list', 'title' => 'Select Service', 'desc' => 'Choose your experience'],
-                        ['step' => 2, 'icon' => 'fas fa-calendar', 'title' => 'Date & Details', 'desc' => 'Schedule your visit'],
-                        ['step' => 3, 'icon' => 'fas fa-credit-card', 'title' => 'Checkout', 'desc' => 'Review & pay']
+                        ['step' => 1, 'icon' => 'fas fa-list', 'title' => 'Select Service'],
+                        ['step' => 2, 'icon' => 'fas fa-calendar', 'title' => 'Date & Details'],
+                        ['step' => 3, 'icon' => 'fas fa-credit-card', 'title' => 'Checkout']
                     ] as $progressStep)
                         <div class="col-4">
                             <div class="d-flex flex-column align-items-center text-center position-relative {{ $step >= $progressStep['step'] ? '' : 'opacity-50' }}">
@@ -51,7 +40,6 @@
                                 <!-- Step Content -->
                                 <div>
                                     <div class="fw-bold mb-1" style="color: #1b1b1b; font-size: 0.9rem;">{{ $progressStep['title'] }}</div>
-                                    <small class="text-muted d-none d-sm-block">{{ $progressStep['desc'] }}</small>
                                 </div>
                             </div>
                         </div>

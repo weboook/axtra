@@ -85,15 +85,18 @@
             const dateInput = document.querySelector('#selectedDate');
             if (dateInput && !dateInput.dataset.flatpickrInitialized) {
                 try {
-                    // Destroy existing instance if it exists
-                    if (dateInput._flatpickr) {
-                        dateInput._flatpickr.destroy();
-                        dateInput._flatpickr = null;
-                    }
+                    // Clean up any existing instance
+                    destroyFlatpickr(dateInput);
                     
                     // Ensure the input is clean
                     dateInput.removeAttribute('readonly');
                     dateInput.classList.remove('flatpickr-input');
+                    
+                    // Check if flatpickr is available
+                    if (typeof flatpickr === 'undefined') {
+                        console.warn('Flatpickr not loaded');
+                        return;
+                    }
                     
                     // Create new instance
                     const fp = flatpickr(dateInput, {
@@ -117,10 +120,13 @@
                     });
                     
                     // Store reference and mark as initialized
-                    dateInput._flatpickr = fp;
-                    dateInput.dataset.flatpickrInitialized = 'true';
-                    
-                    console.log('Flatpickr initialized for:', dateInput.id, 'with date:', @this.selectedDate);
+                    if (fp && typeof fp.destroy === 'function') {
+                        dateInput._flatpickr = fp;
+                        dateInput.dataset.flatpickrInitialized = 'true';
+                        console.log('Flatpickr initialized successfully');
+                    } else {
+                        console.error('Failed to create Flatpickr instance');
+                    }
                     
                 } catch (error) {
                     console.error('Error initializing Flatpickr:', error);
@@ -129,6 +135,23 @@
                 }
             }
         }, 100); // Small delay to ensure DOM is ready
+    }
+    
+    // Safe destroy function
+    function destroyFlatpickr(dateInput) {
+        try {
+            if (dateInput._flatpickr) {
+                if (typeof dateInput._flatpickr.destroy === 'function') {
+                    dateInput._flatpickr.destroy();
+                } else if (typeof dateInput._flatpickr.clear === 'function') {
+                    dateInput._flatpickr.clear();
+                }
+                dateInput._flatpickr = null;
+            }
+        } catch (error) {
+            console.warn('Error destroying Flatpickr:', error);
+            dateInput._flatpickr = null;
+        }
     }
     
     // Force reinitialize Flatpickr (for after errors)
@@ -140,11 +163,8 @@
                     // Remove initialization flag
                     delete dateInput.dataset.flatpickrInitialized;
                     
-                    // Destroy existing instance if it exists
-                    if (dateInput._flatpickr) {
-                        dateInput._flatpickr.destroy();
-                        dateInput._flatpickr = null;
-                    }
+                    // Safely destroy existing instance
+                    destroyFlatpickr(dateInput);
                     
                     // Clear any existing event listeners
                     dateInput.removeAttribute('readonly');
@@ -177,45 +197,34 @@
     // Additional safety net for any DOM mutations
     document.addEventListener('livewire:load', forceReinitFlatpickr);
     
-    // Also try to reinitialize when the date input becomes visible or errors appear
+    // Simplified mutation observer to avoid excessive reinitializations
     const observer = new MutationObserver(function(mutations) {
         let shouldReinit = false;
         
         mutations.forEach(function(mutation) {
-            // Check for added nodes containing date input or error messages
+            // Only check for added nodes containing the date input
             if (mutation.addedNodes.length > 0) {
                 mutation.addedNodes.forEach(function(node) {
                     if (node.nodeType === Node.ELEMENT_NODE) {
-                        // Check if date input was added or modified
-                        if (node.id === 'selectedDate' || node.querySelector('#selectedDate')) {
-                            shouldReinit = true;
-                        }
-                        // Check if error messages were added (indicating validation errors)
-                        if (node.classList && (node.classList.contains('text-danger') || node.querySelector('.text-danger'))) {
+                        // Check if date input was added
+                        if (node.id === 'selectedDate' || (node.querySelector && node.querySelector('#selectedDate'))) {
                             shouldReinit = true;
                         }
                     }
                 });
             }
-            
-            // Check for attribute changes on the date input
-            if (mutation.type === 'attributes' && mutation.target.id === 'selectedDate') {
-                shouldReinit = true;
-            }
         });
         
         if (shouldReinit) {
-            setTimeout(forceReinitFlatpickr, 100);
+            setTimeout(initFlatpickr, 150);
         }
     });
     
-    // Start observing
+    // Start observing with reduced scope
     if (document.body) {
         observer.observe(document.body, {
             childList: true,
-            subtree: true,
-            attributes: true,
-            attributeFilter: ['class', 'data-flatpickr-initialized', 'readonly']
+            subtree: true
         });
     }
     

@@ -17,7 +17,7 @@ class EventTypeSeeder extends Seeder
                 'name' => 'Bachelor & Bachelorette Party',
                 'slug' => 'bachelor-bachelorette-party',
                 'description' => 'Celebrate your last days of freedom with an unforgettable axe throwing experience',
-                'icon' => 'fas fa-rings-wedding',
+                'icon' => 'fas fa-crown',
                 'color' => '#e91e63',
                 'sort_order' => 1,
             ],

@@ -1,197 +1,220 @@
 <!-- Admin Navigation Menu -->
-<ul class="navbar-nav">
-    <!-- Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" 
-           href="{{ route('admin.dashboard') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">dashboard</i>
+<nav class="px-3">
+    <!-- Dashboard Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Overview</small>
+        
+        <!-- Dashboard -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" 
+           href="{{ route('admin.dashboard') }}"
+           style="color: {{ request()->routeIs('admin.dashboard') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.dashboard') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.dashboard') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-tachometer-alt"></i>
             </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-        </a>
-    </li>
-
-    <!-- Users Management -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.users*') ? 'active' : '' }}" 
-           href="{{ route('admin.users') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">people</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Dashboard</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">System overview</small>
             </div>
-            <span class="nav-link-text ms-1">Users</span>
         </a>
-    </li>
+    </div>
 
-    <!-- Products Management -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.products*') ? 'active' : '' }}" 
-           href="{{ route('admin.products') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">inventory_2</i>
+    <!-- User Management Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">User Management</small>
+        
+        <!-- Users -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.users*') ? 'active' : '' }}" 
+           href="{{ route('admin.users') }}"
+           style="color: {{ request()->routeIs('admin.users*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.users*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.users*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-users"></i>
             </div>
-            <span class="nav-link-text ms-1">Products</span>
-        </a>
-    </li>
-
-    <!-- Lanes Management -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.lanes*') ? 'active' : '' }}" 
-           href="{{ route('admin.lanes') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">sports</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Users</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Manage accounts</small>
             </div>
-            <span class="nav-link-text ms-1">Lanes</span>
         </a>
-    </li>
 
-    {{-- TODO: Create admin.bookings route and component
-    <!-- Bookings Management -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.bookings*') ? 'active' : '' }}" 
-           href="{{ route('admin.bookings') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">event</i>
+        <!-- Employees -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.employees*') ? 'active' : '' }}" 
+           href="{{ route('admin.employees') }}"
+           style="color: {{ request()->routeIs('admin.employees*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.employees*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.employees*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-user-tie"></i>
             </div>
-            <span class="nav-link-text ms-1">Bookings</span>
-        </a>
-    </li>
-    --}}
-
-    <!-- Divider -->
-    <hr class="horizontal light mt-3 mb-2">
-
-    <!-- Coupons & Promotions -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.coupons*') ? 'active' : '' }}" 
-           href="{{ route('admin.coupons') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">local_offer</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Employees</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Staff management</small>
             </div>
-            <span class="nav-link-text ms-1">Coupons</span>
         </a>
-    </li>
+    </div>
 
-    <!-- Gift Cards -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.gift-cards*') ? 'active' : '' }}" 
-           href="{{ route('admin.gift-cards') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">card_giftcard</i>
+    <!-- Business Management Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Business</small>
+        
+        <!-- Products -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.products*') ? 'active' : '' }}" 
+           href="{{ route('admin.products') }}"
+           style="color: {{ request()->routeIs('admin.products*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.products*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.products*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-box-open"></i>
             </div>
-            <span class="nav-link-text ms-1">Gift Cards</span>
-        </a>
-    </li>
-
-    <!-- Levels Management -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.levels*') ? 'active' : '' }}" 
-           href="{{ route('admin.levels') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">military_tech</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Products</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Inventory management</small>
             </div>
-            <span class="nav-link-text ms-1">Levels</span>
         </a>
-    </li>
 
-    <!-- Divider -->
-    <hr class="horizontal light mt-3 mb-2">
-
-    <!-- Employees -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.employees*') ? 'active' : '' }}" 
-           href="{{ route('admin.employees') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">badge</i>
+        <!-- Lanes -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.lanes*') ? 'active' : '' }}" 
+           href="{{ route('admin.lanes') }}"
+           style="color: {{ request()->routeIs('admin.lanes*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.lanes*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.lanes*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-bullseye"></i>
             </div>
-            <span class="nav-link-text ms-1">Employees</span>
-        </a>
-    </li>
-
-    {{-- TODO: Create missing admin routes and components
-    <!-- Equipment Management -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.equipment*') ? 'active' : '' }}" 
-           href="{{ route('admin.equipment') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">build</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Lanes</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Lane configuration</small>
             </div>
-            <span class="nav-link-text ms-1">Equipment</span>
         </a>
-    </li>
 
-    <!-- Divider -->
-    <hr class="horizontal light mt-3 mb-2">
-
-    <!-- Reports & Analytics -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.reports*') ? 'active' : '' }}" 
-           href="{{ route('admin.reports') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">analytics</i>
+        <!-- Levels -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.levels*') ? 'active' : '' }}" 
+           href="{{ route('admin.levels') }}"
+           style="color: {{ request()->routeIs('admin.levels*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.levels*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.levels*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-medal"></i>
             </div>
-            <span class="nav-link-text ms-1">Reports</span>
-        </a>
-    </li>
-
-    <!-- Payments -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.payments*') ? 'active' : '' }}" 
-           href="{{ route('admin.payments') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">payments</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Levels</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Skill progression</small>
             </div>
-            <span class="nav-link-text ms-1">Payments</span>
         </a>
-    </li>
+    </div>
 
-    <!-- Notifications -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.notifications*') ? 'active' : '' }}" 
-           href="{{ route('admin.notifications') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">notifications</i>
+    <!-- Marketing Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Marketing</small>
+        
+        <!-- Coupons -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.coupons*') ? 'active' : '' }}" 
+           href="{{ route('admin.coupons') }}"
+           style="color: {{ request()->routeIs('admin.coupons*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.coupons*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.coupons*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-tags"></i>
             </div>
-            <span class="nav-link-text ms-1">Notifications</span>
-        </a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="horizontal light mt-3 mb-2">
-
-    <!-- Settings -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('admin.settings*') ? 'active' : '' }}" 
-           href="{{ route('admin.settings') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">settings</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Coupons</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Discount codes</small>
             </div>
-            <span class="nav-link-text ms-1">Settings</span>
         </a>
-    </li>
-    --}}
 
-    <!-- Divider -->
-    <hr class="horizontal light mt-3 mb-2">
+        <!-- Gift Cards -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.gift-cards*') ? 'active' : '' }}" 
+           href="{{ route('admin.gift-cards') }}"
+           style="color: {{ request()->routeIs('admin.gift-cards*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.gift-cards*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.gift-cards*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-gift"></i>
+            </div>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Gift Cards</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Gift management</small>
+            </div>
+        </a>
+    </div>
 
-    <!-- Telescope (Development) -->
+    <!-- Development Tools Section -->
     @if(app()->environment(['local', 'staging']))
-    <li class="nav-item">
-        <a class="nav-link" href="/telescope" target="_blank">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">search</i>
+    <div class="nav-section">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Developer Tools</small>
+        
+        <!-- Telescope -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none" 
+           href="/telescope" target="_blank"
+           style="color: rgba(255, 255, 255, 0.8);
+                  background: transparent;
+                  transition: all 0.3s ease;
+                  border: 1px solid transparent;
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-telescope"></i>
             </div>
-            <span class="nav-link-text ms-1">Telescope</span>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Telescope</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Debug & monitor</small>
+            </div>
         </a>
-    </li>
+
+        <!-- Log Viewer -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none" 
+           href="/log-viewer" target="_blank"
+           style="color: rgba(255, 255, 255, 0.8);
+                  background: transparent;
+                  transition: all 0.3s ease;
+                  border: 1px solid transparent;
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Logs</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">System logs</small>
+            </div>
+        </a>
+    </div>
     @endif
 
-    <!-- Log Viewer -->
-    <li class="nav-item">
-        <a class="nav-link" href="/log-viewer" target="_blank">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">bug_report</i>
-            </div>
-            <span class="nav-link-text ms-1">Logs</span>
-        </a>
-    </li>
-</ul>
+    {{-- Future admin sections to be implemented:
+    
+    <!-- Operations Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Operations</small>
+        
+        <!-- Bookings (admin.bookings) -->
+        <!-- Equipment (admin.equipment) -->
+        <!-- Reports (admin.reports) -->
+        <!-- Payments (admin.payments) -->
+    </div>
+    
+    <!-- System Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">System</small>
+        
+        <!-- Notifications (admin.notifications) -->
+        <!-- Settings (admin.settings) -->
+    </div>
+    --}}
+</nav>

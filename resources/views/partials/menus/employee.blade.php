@@ -1,95 +1,158 @@
 <!-- Employee Navigation Menu -->
-<ul class="navbar-nav">
-    <!-- Dashboard -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('employee.dashboard') ? 'active' : '' }}" 
-           href="{{ route('employee.dashboard') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">dashboard</i>
+<nav class="px-3">
+    <!-- Dashboard Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Overview</small>
+        
+        <!-- Dashboard -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.dashboard') ? 'active' : '' }}" 
+           href="{{ route('employee.dashboard') }}"
+           style="color: {{ request()->routeIs('employee.dashboard') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('employee.dashboard') ? '#17a2b8' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('employee.dashboard') ? '#17a2b8' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-tachometer-alt"></i>
             </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
-        </a>
-    </li>
-
-    <!-- Schedule -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('employee.schedule*') ? 'active' : '' }}" 
-           href="{{ route('employee.schedule') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">schedule</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Dashboard</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Employee overview</small>
             </div>
-            <span class="nav-link-text ms-1">My Schedule</span>
         </a>
-    </li>
 
-    <!-- Quick Actions -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('employee.quick-actions*') ? 'active' : '' }}" 
-           href="{{ route('employee.quick-actions') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">flash_on</i>
+        <!-- My Schedule -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.schedule*') ? 'active' : '' }}" 
+           href="#"
+           style="color: {{ request()->routeIs('employee.schedule*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('employee.schedule*') ? '#17a2b8' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('employee.schedule*') ? '#17a2b8' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-calendar-check"></i>
             </div>
-            <span class="nav-link-text ms-1">Quick Actions</span>
-        </a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="horizontal light mt-3 mb-2">
-
-    <!-- Today's Bookings -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('employee.bookings*') ? 'active' : '' }}" 
-           href="{{ route('admin.bookings') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">today</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">My Schedule</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Work schedule</small>
             </div>
-            <span class="nav-link-text ms-1">Today's Bookings</span>
         </a>
-    </li>
+    </div>
 
-    <!-- Check-ins -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('employee.check-ins*') ? 'active' : '' }}" 
-           href="#">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">check_circle</i>
+    <!-- Operations Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Operations</small>
+        
+        <!-- Quick Actions -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.quick-actions*') ? 'active' : '' }}" 
+           href="#"
+           style="color: {{ request()->routeIs('employee.quick-actions*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('employee.quick-actions*') ? '#17a2b8' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('employee.quick-actions*') ? '#17a2b8' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-bolt"></i>
             </div>
-            <span class="nav-link-text ms-1">Check-ins</span>
-        </a>
-    </li>
-
-    <!-- Equipment Status -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('employee.equipment*') ? 'active' : '' }}" 
-           href="{{ route('admin.equipment') }}">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">build</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Quick Actions</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Fast operations</small>
             </div>
-            <span class="nav-link-text ms-1">Equipment</span>
         </a>
-    </li>
 
-    <!-- Divider -->
-    <hr class="horizontal light mt-3 mb-2">
-
-    <!-- Customer Support -->
-    <li class="nav-item">
-        <a class="nav-link" href="#">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">support_agent</i>
+        <!-- Today's Bookings -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.bookings*') ? 'active' : '' }}" 
+           href="#"
+           style="color: {{ request()->routeIs('employee.bookings*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('employee.bookings*') ? '#17a2b8' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('employee.bookings*') ? '#17a2b8' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-calendar-day"></i>
             </div>
-            <span class="nav-link-text ms-1">Customer Support</span>
-        </a>
-    </li>
-
-    <!-- Reports -->
-    <li class="nav-item">
-        <a class="nav-link {{ request()->routeIs('employee.reports*') ? 'active' : '' }}" 
-           href="#">
-            <div class="nav-icon">
-                <i class="material-icons opacity-10">assessment</i>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Today's Bookings</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Current reservations</small>
             </div>
-            <span class="nav-link-text ms-1">Daily Reports</span>
         </a>
-    </li>
-</ul>
+
+        <!-- Check-ins -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.check-ins*') ? 'active' : '' }}" 
+           href="#"
+           style="color: {{ request()->routeIs('employee.check-ins*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('employee.check-ins*') ? '#17a2b8' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('employee.check-ins*') ? '#17a2b8' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Check-ins</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Customer arrivals</small>
+            </div>
+        </a>
+    </div>
+
+    <!-- Facility Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Facility</small>
+        
+        <!-- Equipment Status -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.equipment*') ? 'active' : '' }}" 
+           href="#"
+           style="color: {{ request()->routeIs('employee.equipment*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('employee.equipment*') ? '#17a2b8' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('employee.equipment*') ? '#17a2b8' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-tools"></i>
+            </div>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Equipment</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Status & maintenance</small>
+            </div>
+        </a>
+
+        <!-- Customer Support -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none" 
+           href="#"
+           style="color: rgba(255, 255, 255, 0.8);
+                  background: transparent;
+                  transition: all 0.3s ease;
+                  border: 1px solid transparent;
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-headset"></i>
+            </div>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Customer Support</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Help customers</small>
+            </div>
+        </a>
+    </div>
+
+    <!-- Reports Section -->
+    <div class="nav-section">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Reports</small>
+        
+        <!-- Daily Reports -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.reports*') ? 'active' : '' }}" 
+           href="#"
+           style="color: {{ request()->routeIs('employee.reports*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('employee.reports*') ? '#17a2b8' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('employee.reports*') ? '#17a2b8' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Daily Reports</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Performance data</small>
+            </div>
+        </a>
+    </div>
+</nav>
