@@ -11,7 +11,6 @@ use App\Models\EventType;
 use App\Services\TimeSlotService;
 use Livewire\Component;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Validator;
 
 class BookingFlow extends Component
 {
@@ -219,10 +218,7 @@ class BookingFlow extends Component
 
     public function nextStep()
     {
-        $stepRules = $this->getRulesForStep($this->step);
-        foreach ($stepRules as $property => $rules) {
-            $this->validateOnly($property, [$property => $rules]);
-        }
+        $this->validate($this->getRulesForStep($this->step));
         $this->step++;
         
         if ($this->step === 2) {
@@ -387,10 +383,7 @@ class BookingFlow extends Component
 
     public function proceedToPayment()
     {
-        $stepRules = $this->getRulesForStep($this->step);
-        foreach ($stepRules as $property => $rules) {
-            $this->validateOnly($property, [$property => $rules]);
-        }
+        $this->validate($this->getRulesForStep($this->step));
         
         // Calculate end time using TimeSlotService
         $timeSlotService = new TimeSlotService();

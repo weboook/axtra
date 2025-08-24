@@ -100,16 +100,19 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    'redirect_based_on_role',
+    'access', // Unified access control (includes redirects and role checking)
 ])->group(function () {
 
-    // Customer dashboard - main /dashboard route
-    Route::middleware(['check_role:customer'])->get('/dashboard', App\Livewire\User\Dashboard\DashboardIndex::class)->name('dashboard');
+    // Customer dashboard - main /dashboard route (admins can access)
+    Route::middleware(['access:customer'])->get('/dashboard', App\Livewire\User\Dashboard\DashboardIndex::class)->name('dashboard');
 
     // Admin routes
-    Route::middleware(['check_role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(['access:admin'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('/dashboard', App\Livewire\Admin\Dashboard\DashboardIndex::class)->name('dashboard');
         Route::get('/users', App\Livewire\Admin\Users\UsersIndex::class)->name('users');
+        Route::get('/users/create', App\Livewire\Admin\Users\UserCreate::class)->name('users.create');
+        Route::get('/users/{user}/edit', App\Livewire\Admin\Users\UserEdit::class)->name('users.edit');
+        Route::get('/users/{user}/detail', App\Livewire\Admin\Users\UserDetail::class)->name('users.detail');
         Route::get('/products', App\Livewire\Admin\Products\ProductsIndex::class)->name('products');
         Route::get('/coupons', App\Livewire\Admin\Coupons\CouponsIndex::class)->name('coupons');
         Route::get('/lanes', App\Livewire\Admin\Lanes\LanesIndex::class)->name('lanes');
@@ -118,15 +121,15 @@ Route::middleware([
         Route::get('/levels', App\Livewire\Admin\Levels\LevelsIndex::class)->name('levels');
     });
 
-    // Employee routes
-    Route::middleware(['admin_or_employee'])->prefix('employee')->name('employee.')->group(function () {
+    // Employee routes (admins and employees can access)
+    Route::middleware(['access:admin_or_employee'])->prefix('employee')->name('employee.')->group(function () {
         Route::get('/dashboard', App\Livewire\Employee\Dashboard\DashboardIndex::class)->name('dashboard');
         Route::get('/schedule', App\Livewire\Employee\Schedule\ScheduleIndex::class)->name('schedule');
         Route::get('/quick-actions', App\Livewire\Employee\QuickActions\QuickActionsIndex::class)->name('quick-actions');
     });
 
-    // Customer routes - clean URLs without dashboard prefix
-    Route::middleware(['check_role:customer'])->name('user.')->group(function () {
+    // Customer routes - clean URLs without dashboard prefix (admins can access)
+    Route::middleware(['access:customer'])->name('user.')->group(function () {
         Route::get('/bookings', App\Livewire\User\Booking\BookingIndex::class)->name('bookings');
         Route::get('/book', App\Livewire\Booking\BookingFlow::class)->name('book');
         Route::get('/profile', function () {

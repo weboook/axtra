@@ -40,6 +40,13 @@ class User extends Authenticatable
         'google_id',
         'apple_id',
         'avatar',
+        'is_banned',
+        'ban_reason',
+        'banned_at',
+        'banned_by',
+        'hidden_from_leaderboard',
+        'last_activity',
+        'admin_notes',
     ];
 
     /**
@@ -76,6 +83,10 @@ class User extends Authenticatable
             'date_of_birth' => 'date',
             'total_spent' => 'decimal:2',
             'whatsapp_notifications' => 'boolean',
+            'is_banned' => 'boolean',
+            'banned_at' => 'datetime',
+            'hidden_from_leaderboard' => 'boolean',
+            'last_activity' => 'datetime',
         ];
     }
 
@@ -273,5 +284,40 @@ class User extends Authenticatable
     public function isCustomer()
     {
         return $this->role === 'customer';
+    }
+
+    public function bannedBy()
+    {
+        return $this->belongsTo(User::class, 'banned_by');
+    }
+
+    public function bannedUsers()
+    {
+        return $this->hasMany(User::class, 'banned_by');
+    }
+
+    public function isBanned()
+    {
+        return $this->is_banned;
+    }
+
+    public function ban($reason = null, $adminId = null)
+    {
+        $this->update([
+            'is_banned' => true,
+            'ban_reason' => $reason,
+            'banned_at' => now(),
+            'banned_by' => $adminId ?? auth()->id(),
+        ]);
+    }
+
+    public function unban()
+    {
+        $this->update([
+            'is_banned' => false,
+            'ban_reason' => null,
+            'banned_at' => null,
+            'banned_by' => null,
+        ]);
     }
 }

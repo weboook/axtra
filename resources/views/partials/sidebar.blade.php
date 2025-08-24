@@ -30,11 +30,65 @@
         </a>
     </div>
 
+    <!-- Admin Role Switcher -->
+    @auth
+        @if(auth()->user()->isAdmin())
+            <div class="px-4 pb-3">
+                <div class="dropdown">
+                    <button class="btn btn-outline-light btn-sm dropdown-toggle w-100 d-flex justify-content-between align-items-center" 
+                            type="button" 
+                            data-bs-toggle="dropdown" 
+                            style="background: rgba(192, 36, 37, 0.1); border-color: rgba(192, 36, 37, 0.3);">
+                        <span>
+                            <i class="fas fa-user-shield me-2" style="color: #c02425;"></i>
+                            Switch Role View
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu w-100" style="background: #2d2d2d; border: 1px solid rgba(192, 36, 37, 0.3);">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center {{ request()->routeIs('admin.*') ? 'active' : '' }}" 
+                               href="{{ route('admin.dashboard') }}"
+                               style="color: rgba(255, 255, 255, 0.8);">
+                                <i class="fas fa-crown me-2" style="color: #c02425;"></i>
+                                Admin Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center {{ request()->routeIs('employee.*') ? 'active' : '' }}" 
+                               href="{{ route('employee.dashboard') }}"
+                               style="color: rgba(255, 255, 255, 0.8);">
+                                <i class="fas fa-user-tie me-2" style="color: #17a2b8;"></i>
+                                Employee Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center {{ request()->routeIs('dashboard') ? 'active' : '' }}" 
+                               href="{{ route('dashboard') }}"
+                               style="color: rgba(255, 255, 255, 0.8);">
+                                <i class="fas fa-user me-2" style="color: #28a745;"></i>
+                                Customer Dashboard
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        @endif
+    @endauth
+
     <!-- Navigation Menu -->
     <div class="flex-grow-1 py-3">
         @auth
             @if(auth()->user()->isAdmin())
-                @include('partials.menus.admin')
+                @php
+                    $dashboardView = session('admin_dashboard_view', 'admin');
+                @endphp
+                @if($dashboardView === 'admin')
+                    @include('partials.menus.admin')
+                @elseif($dashboardView === 'employee')
+                    @include('partials.menus.employee')
+                @else
+                    @include('partials.menus.customer')
+                @endif
             @elseif(auth()->user()->isEmployee())
                 @include('partials.menus.employee')
             @else

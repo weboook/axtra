@@ -44,6 +44,7 @@
         </a>
     </li>
 
+    {{-- TODO: Create admin.bookings route and component
     <!-- Bookings Management -->
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.bookings*') ? 'active' : '' }}" 
@@ -54,6 +55,7 @@
             <span class="nav-link-text ms-1">Bookings</span>
         </a>
     </li>
+    --}}
 
     <!-- Divider -->
     <hr class="horizontal light mt-3 mb-2">
@@ -105,6 +107,7 @@
         </a>
     </li>
 
+    {{-- TODO: Create missing admin routes and components
     <!-- Equipment Management -->
     <li class="nav-item">
         <a class="nav-link {{ request()->routeIs('admin.equipment*') ? 'active' : '' }}" 
@@ -165,6 +168,10 @@
             <span class="nav-link-text ms-1">Settings</span>
         </a>
     </li>
+    --}}
+
+    <!-- Divider -->
+    <hr class="horizontal light mt-3 mb-2">
 
     <!-- Telescope (Development) -->
     @if(app()->environment(['local', 'staging']))

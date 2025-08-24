@@ -13,11 +13,9 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
-            'check_role' => \App\Http\Middleware\CheckRole::class,
+            'access' => \App\Http\Middleware\AccessController::class,
             'check_booking_ownership' => \App\Http\Middleware\CheckBookingOwnership::class,
-            'admin_or_employee' => \App\Http\Middleware\AdminOrEmployee::class,
             'claude_bypass' => \App\Http\Middleware\ClaudeBypass::class,
-            'redirect_based_on_role' => \App\Http\Middleware\RedirectBasedOnRole::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
