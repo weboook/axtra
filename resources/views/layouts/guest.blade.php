@@ -56,14 +56,16 @@
         }
         
         .auth-video iframe {
-            width: 100%;
-            height: 100vh;
+            width: 100vw;
+            height: 56.25vw; /* 16:9 aspect ratio */
+            min-height: 100vh;
+            min-width: 177.77vh; /* 16:9 aspect ratio */
             border: none;
             position: absolute;
-            top: 0;
-            left: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             pointer-events: none; /* Prevent interaction with video */
-            object-fit: cover;
         }
         
         .auth-video-overlay {
