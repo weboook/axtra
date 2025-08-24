@@ -115,6 +115,23 @@
                 <small class="opacity-75" style="font-size: 0.75rem;">Skill progression</small>
             </div>
         </a>
+
+        <!-- Achievements -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.achievements*') ? 'active' : '' }}" 
+           href="{{ route('admin.achievements') }}"
+           style="color: {{ request()->routeIs('admin.achievements*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.achievements*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.achievements*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Achievements</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Reward system</small>
+            </div>
+        </a>
     </div>
 
     <!-- Marketing Section -->
@@ -157,7 +174,6 @@
     </div>
 
     <!-- Development Tools Section -->
-    @if(app()->environment(['local', 'staging']))
     <div class="nav-section">
         <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Developer Tools</small>
         
@@ -168,9 +184,11 @@
                   background: transparent;
                   transition: all 0.3s ease;
                   border: 1px solid transparent;
-                  padding: 0.7rem 0.75rem !important;">
+                  padding: 0.7rem 0.75rem !important;"
+           onmouseover="this.style.background='rgba(192, 36, 37, 0.1)'; this.style.borderColor='rgba(192, 36, 37, 0.3)';"
+           onmouseout="this.style.background='transparent'; this.style.borderColor='transparent';">
             <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
-                <i class="fas fa-telescope"></i>
+                <i class="fas fa-search" style="transform: rotate(-45deg);"></i>
             </div>
             <div class="flex-grow-1">
                 <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Telescope</h6>
@@ -185,7 +203,9 @@
                   background: transparent;
                   transition: all 0.3s ease;
                   border: 1px solid transparent;
-                  padding: 0.7rem 0.75rem !important;">
+                  padding: 0.7rem 0.75rem !important;"
+           onmouseover="this.style.background='rgba(192, 36, 37, 0.1)'; this.style.borderColor='rgba(192, 36, 37, 0.3)';"
+           onmouseout="this.style.background='transparent'; this.style.borderColor='transparent';">
             <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
                 <i class="fas fa-file-alt"></i>
             </div>
@@ -195,7 +215,6 @@
             </div>
         </a>
     </div>
-    @endif
 
     {{-- Future admin sections to be implemented:
     

@@ -8,50 +8,11 @@
                                                       border: 1px solid rgba(255, 255, 255, 0.1);
                                                       width: 100%;">
         <div class="container-fluid h-100 px-4">
-            <!-- Left Side: Page Title & Search -->
+            <!-- Left Side: Search -->
             <div class="d-flex align-items-center">
-                <!-- Mobile Menu Toggle -->
-                <button class="btn d-lg-none me-3" id="sidebarToggle" style="background: rgba(192, 36, 37, 0.15); 
-                                                                              border: none; 
-                                                                              color: #c02425; 
-                                                                              width: 40px; 
-                                                                              height: 40px; 
-                                                                              border-radius: 20px;
-                                                                              display: flex;
-                                                                              align-items: center;
-                                                                              justify-content: center;">
-                    <i class="fas fa-bars"></i>
-                </button>
-                
-                <!-- Page Title -->
-                <div class="me-4">
-                    <h5 class="mb-0 fw-bold" style="color: white;">
-                        @yield('page-title', 'Dashboard')
-                    </h5>
-                    @if(isset($breadcrumb) && $breadcrumb)
-                        <small style="color: rgba(255, 255, 255, 0.6);">{{ $breadcrumb }}</small>
-                    @endif
-                </div>
-                
                 <!-- Search Bar -->
                 <div class="me-4 d-none d-md-flex">
-                    <div class="input-group" style="width: 320px;">
-                        <span class="input-group-text" style="background: transparent; 
-                                                              border: none; 
-                                                              color: rgba(255, 255, 255, 0.7); 
-                                                              border-radius: 25px 0 0 25px;
-                                                              border-right: 1px solid rgba(255, 255, 255, 0.2);">
-                            <i class="fas fa-search"></i>
-                        </span>
-                        <input type="search" class="form-control" placeholder="Search anything..." 
-                               style="background: transparent; 
-                                      border: none; 
-                                      color: white; 
-                                      border-radius: 0 25px 25px 0;
-                                      padding-left: 0;"
-                               onfocus="this.style.background='rgba(255, 255, 255, 0.1)'; this.previousElementSibling.style.background='rgba(255, 255, 255, 0.1)';"
-                               onblur="this.style.background='transparent'; this.previousElementSibling.style.background='transparent';">
-                    </div>
+                    @livewire('shared.search.search-index')
                 </div>
             </div>
             
@@ -176,15 +137,13 @@
                             @endforelse
                         </div>
                         
-                        @if($notificationCount > 0)
-                            <!-- Footer -->
-                            <div class="p-3 text-center" style="border-top: 1px solid rgba(255, 255, 255, 0.08);">
-                                <a href="{{ route('user.notifications') }}" class="text-decoration-none fw-semibold" 
-                                   style="color: #c02425; font-size: 0.9rem;">
-                                    View all notifications
-                                </a>
-                            </div>
-                        @endif
+                        <!-- Footer -->
+                        <div class="p-3 text-center" style="border-top: 1px solid rgba(255, 255, 255, 0.08);">
+                            <a href="{{ route('user.notifications') }}" class="text-decoration-none fw-semibold" 
+                               style="color: #c02425; font-size: 0.9rem;">
+                                View all notifications
+                            </a>
+                        </div>
                     </div>
                 </div>
                 

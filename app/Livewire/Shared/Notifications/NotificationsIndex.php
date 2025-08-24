@@ -54,7 +54,8 @@ class NotificationsIndex extends Component
 
     public function render()
     {
-        $query = auth()->user()->notifications();
+        $user = auth()->user();
+        $query = $user->notifications();
 
         if ($this->filter === 'unread') {
             $query->whereNull('read_at');
@@ -64,9 +65,9 @@ class NotificationsIndex extends Component
 
         $notifications = $query->orderBy('created_at', 'desc')->paginate(15);
 
-        $unreadCount = auth()->user()->unreadNotifications->count();
-        $readCount = auth()->user()->readNotifications->count();
-        $totalCount = auth()->user()->notifications->count();
+        $unreadCount = $user->unreadNotifications()->count();
+        $readCount = $user->readNotifications()->count(); 
+        $totalCount = $user->notifications()->count();
 
         return view('livewire.shared.notifications.notifications-index', [
             'notifications' => $notifications,

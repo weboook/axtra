@@ -224,10 +224,10 @@
                         </div>
                     </div>
 
-                    <!-- Footer -->
-                    <footer class="mt-auto">
+                    <!-- Footer (Hidden) -->
+                    {{-- <footer class="mt-auto">
                         @include('partials.footer')
-                    </footer>
+                    </footer> --}}
                 </main>
             </div>
         </div>

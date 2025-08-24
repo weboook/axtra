@@ -125,10 +125,6 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(OAuthProvider::class);
     }
 
-    public function notifications()
-    {
-        return $this->hasMany(\Illuminate\Notifications\DatabaseNotification::class);
-    }
 
     public function userAchievements()
     {

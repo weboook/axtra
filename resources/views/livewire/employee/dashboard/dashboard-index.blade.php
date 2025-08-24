@@ -28,7 +28,7 @@
                     <div class="mb-3">
                         <i class="fas fa-bowling-ball" style="font-size: 2.5rem; color: #28a745;"></i>
                     </div>
-                    <h5 class="mb-2 fw-bold" style="color: #1b1b1b;">{{ \App\Models\Lane::where('is_available', true)->count() }}</h5>
+                    <h5 class="mb-2 fw-bold" style="color: #1b1b1b;">{{ \App\Models\Lane::active()->operational()->count() }}</h5>
                     <p class="text-muted mb-0">Available Lanes</p>
                 </div>
             </div>
