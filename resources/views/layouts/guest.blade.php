@@ -63,6 +63,7 @@
             top: 0;
             left: 0;
             pointer-events: none; /* Prevent interaction with video */
+            object-fit: cover;
         }
         
         .auth-video-overlay {
