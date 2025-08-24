@@ -183,7 +183,11 @@
 
     <!-- Main Content -->
     <main class="py-5">
-        {{ $slot }}
+        @isset($slot)
+            {{ $slot }}
+        @else
+            @yield('content')
+        @endisset
     </main>
 
     <!-- Simple Footer -->
