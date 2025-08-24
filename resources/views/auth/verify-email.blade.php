@@ -1,45 +1,52 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
-            <x-authentication-card-logo />
-        </x-slot>
+    <!-- Logo -->
+    <div class="auth-logo">
+        <img src="{{ asset('images/brand/axtra-full-dark.png') }}" alt="Axtra Logo">
+    </div>
+    
+    <!-- Header -->
+    <h1 class="auth-title">Verify Your Email</h1>
+    <p class="auth-subtitle">We've sent a verification link to your email address</p>
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Before continuing, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+    <!-- Success Messages -->
+    @if (session('status') == 'verification-link-sent')
+        <div class="alert alert-success">
+            <i class="fas fa-check-circle me-2"></i>A new verification link has been sent to your email address.
         </div>
+    @endif
 
-        @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided in your profile settings.') }}
-            </div>
-        @endif
-
-        <div class="mt-4 flex items-center justify-between">
-            <form method="POST" action="{{ route('verification.send') }}">
-                @csrf
-
-                <div>
-                    <x-button type="submit">
-                        {{ __('Resend Verification Email') }}
-                    </x-button>
-                </div>
-            </form>
-
-            <div>
-                <a
-                    href="{{ route('profile.show') }}"
-                    class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                    {{ __('Edit Profile') }}</a>
-
-                <form method="POST" action="{{ route('logout') }}" class="inline">
-                    @csrf
-
-                    <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 ms-2">
-                        {{ __('Log Out') }}
-                    </button>
-                </form>
-            </div>
+    <!-- Main Content -->
+    <div style="background: #f8f9fa; border-radius: 1rem; padding: 2rem; margin-bottom: 2rem; text-align: center;">
+        <div style="margin-bottom: 1.5rem;">
+            <i class="fas fa-envelope-open" style="font-size: 3rem; color: var(--axtra-red); margin-bottom: 1rem;"></i>
+            <p style="color: #6c757d; font-size: 1rem; line-height: 1.6; margin: 0;">
+                Before continuing, please check your email and click on the verification link we sent you. 
+                If you didn't receive the email, we'll gladly send you another one.
+            </p>
         </div>
-    </x-authentication-card>
+    </div>
+
+    <!-- Resend Verification Form -->
+    <form method="POST" action="{{ route('verification.send') }}">
+        @csrf
+        <button type="submit" class="btn-primary">
+            <i class="fas fa-paper-plane me-2"></i>Resend Verification Email
+        </button>
+    </form>
+
+    <!-- Action Links -->
+    <div class="auth-links">
+        <a href="{{ route('profile.show') }}">
+            <i class="fas fa-user me-1"></i>Edit Profile
+        </a>
+    </div>
+
+    <div class="auth-links">
+        <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+            @csrf
+            <button type="submit" style="background: none; border: none; color: var(--axtra-red); font-weight: 500; text-decoration: none; cursor: pointer; font-size: inherit;">
+                <i class="fas fa-sign-out-alt me-1"></i>Sign Out
+            </button>
+        </form>
+    </div>
 </x-guest-layout>
