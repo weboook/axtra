@@ -442,13 +442,11 @@
             flex-shrink: 0;
         }
         
-        /* User dropdown adjustments for mobile */
+        /* All dropdowns base mobile styles */
         .dropdown-menu {
-            min-width: 260px !important;
-            left: auto !important;
+            max-width: calc(100vw - 40px) !important;
             right: 0 !important;
-            max-width: calc(100vw - 20px) !important;
-            transform: translateX(0) !important;
+            left: auto !important;
         }
         
         /* Hide user name on very small screens */
@@ -456,44 +454,57 @@
             display: none !important;
         }
         
+        /* User dropdown mobile */
+        .dropdown-menu:not(.dropdown-menu-end):not([style*="min-width"]) {
+            min-width: 260px !important;
+            max-width: calc(100vw - 40px) !important;
+        }
+        
         /* Notification dropdown mobile */
         .dropdown-menu.dropdown-menu-end {
-            min-width: 300px !important;
-            max-width: calc(100vw - 20px) !important;
+            min-width: 280px !important;
+            max-width: calc(100vw - 40px) !important;
+            right: 10px !important;
             left: auto !important;
-            right: 0 !important;
-            transform: translateX(0) !important;
         }
         
         /* Role switcher dropdown mobile */
         .dropdown-menu[style*="min-width"] {
             min-width: 250px !important;
-            max-width: calc(100vw - 20px) !important;
+            max-width: calc(100vw - 40px) !important;
+            right: 10px !important;
             left: auto !important;
-            right: 0 !important;
         }
         
         /* Ensure all dropdowns stay within viewport */
         .navbar .dropdown {
-            position: static !important;
+            position: relative !important;
         }
         
         .navbar .dropdown-menu {
-            position: fixed !important;
+            position: absolute !important;
             z-index: 9999 !important;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
             border: 1px solid rgba(0, 0, 0, 0.1) !important;
             border-radius: 12px !important;
-            top: 65px !important;
+            top: 100% !important;
+            right: 0 !important;
+            left: auto !important;
+            margin-top: 5px !important;
         }
         
-        /* Navbar overflow handling */
-        .navbar {
-            overflow: visible !important;
+        /* Specific positioning for notifications dropdown */
+        #notificationsDropdown + .dropdown-menu {
+            right: 0 !important;
+            left: auto !important;
+            transform: translateX(0) !important;
         }
         
-        .navbar .container-fluid {
-            overflow: visible !important;
+        /* Role switcher dropdown positioning */
+        .dropdown-menu[aria-labelledby*="role"] {
+            right: 0 !important;
+            left: auto !important;
+            transform: translateX(0) !important;
         }
         
         /* Mobile quick actions */
@@ -536,25 +547,20 @@
             height: 40px !important;
         }
         
-        /* Dropdowns full width on small screens */
+        /* Dropdowns more compact on small screens */
         .dropdown-menu {
-            min-width: calc(100vw - 30px) !important;
             max-width: calc(100vw - 30px) !important;
-            left: 15px !important;
             right: 15px !important;
-            transform: translateX(0) !important;
-            margin-left: 0 !important;
-            margin-right: 0 !important;
+            left: auto !important;
         }
         
-        /* Role switcher and notifications specific positioning */
+        /* All specific dropdowns on small screens */
         .dropdown-menu.dropdown-menu-end,
-        .dropdown-menu[style*="min-width"] {
-            left: 15px !important;
-            right: 15px !important;
-            width: calc(100vw - 30px) !important;
+        .dropdown-menu[style*="min-width"],
+        .dropdown-menu:not(.dropdown-menu-end):not([style*="min-width"]) {
             max-width: calc(100vw - 30px) !important;
-            min-width: calc(100vw - 30px) !important;
+            right: 15px !important;
+            left: auto !important;
         }
     }
 </style>
