@@ -344,5 +344,317 @@
         transform: translateY(-2px);
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12) !important;
     }
+
+    /* Mobile optimizations for employee schedule page */
+    @media (max-width: 768px) {
+        /* Header section mobile */
+        .card-body.py-4.px-4 {
+            padding: 1.5rem !important;
+        }
+        
+        .card-body h2 {
+            font-size: 1.5rem !important;
+        }
+        
+        .card-body p {
+            font-size: 1rem !important;
+        }
+        
+        /* View mode buttons mobile */
+        .btn-group {
+            max-width: none !important;
+        }
+        
+        .btn-group .btn {
+            padding: 12px 8px !important;
+            font-size: 0.85rem !important;
+        }
+        
+        /* Disable hover effects on mobile */
+        .btn-group .btn:hover,
+        .card:hover,
+        button:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Navigation controls mobile */
+        .card-body.d-flex.justify-content-between {
+            flex-direction: column !important;
+            gap: 1rem;
+            padding: 1.5rem !important;
+        }
+        
+        .card-body.d-flex .btn {
+            flex: 1;
+            padding: 12px 16px !important;
+            font-size: 0.9rem !important;
+        }
+        
+        .text-center h4 {
+            font-size: 1.2rem !important;
+            margin-bottom: 12px !important;
+        }
+        
+        .text-center .btn-sm {
+            font-size: 0.8rem !important;
+            padding: 8px 12px !important;
+        }
+        
+        /* Today's schedule mobile */
+        .col-md-6,
+        .col-lg-4 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body.p-3 {
+            padding: 1rem !important;
+        }
+        
+        .card-body.p-4 {
+            padding: 1rem !important;
+        }
+        
+        .card-header {
+            padding: 1rem !important;
+        }
+        
+        /* Daily view mobile */
+        .timeline .d-flex {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 1rem !important;
+        }
+        
+        .timeline .me-3 {
+            margin-right: 0 !important;
+            margin-bottom: 1rem !important;
+            align-self: center;
+        }
+        
+        .timeline .rounded-circle {
+            width: 40px !important;
+            height: 40px !important;
+        }
+        
+        .timeline .text-end {
+            align-self: stretch !important;
+            text-align: left !important;
+            margin-top: 0.5rem;
+        }
+        
+        /* Weekly view mobile - horizontal scroll */
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .table {
+            min-width: 800px;
+        }
+        
+        .table th {
+            padding: 12px 8px !important;
+            font-size: 0.8rem !important;
+        }
+        
+        .table td {
+            padding: 8px 6px !important;
+            height: 200px !important;
+        }
+        
+        .table .mb-2.p-2 {
+            padding: 6px !important;
+            margin-bottom: 6px !important;
+            font-size: 0.7rem !important;
+        }
+        
+        /* Monthly view mobile - horizontal scroll */
+        .table {
+            min-width: 700px;
+        }
+        
+        .table td {
+            height: 100px !important;
+            padding: 6px 4px !important;
+        }
+        
+        .table .d-flex.justify-content-between {
+            margin-bottom: 4px !important;
+        }
+        
+        .table .fw-bold {
+            font-size: 0.9rem !important;
+        }
+        
+        .table .badge {
+            font-size: 0.65rem !important;
+            padding: 2px 4px !important;
+        }
+        
+        /* Booking cards mobile */
+        .mb-1.p-1 {
+            padding: 4px !important;
+            margin-bottom: 4px !important;
+            font-size: 0.65rem !important;
+        }
+        
+        /* Empty states mobile */
+        .text-center.py-5 {
+            padding: 30px 15px !important;
+        }
+        
+        .text-center .fa-3x,
+        .text-center [style*="font-size: 3rem"] {
+            font-size: 2rem !important;
+        }
+        
+        .text-center h5 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Badge and small text mobile */
+        .badge {
+            font-size: 0.7rem !important;
+            padding: 4px 8px !important;
+        }
+        
+        .small {
+            font-size: 0.75rem !important;
+        }
+    }
+
+    /* Small mobile screens */
+    @media (max-width: 576px) {
+        .container-fluid {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        
+        /* Header even more compact */
+        .card-body h2 {
+            font-size: 1.25rem !important;
+        }
+        
+        .card-body p {
+            font-size: 0.9rem !important;
+        }
+        
+        /* View buttons more compact */
+        .btn-group .btn {
+            padding: 10px 6px !important;
+            font-size: 0.8rem !important;
+        }
+        
+        /* Navigation more compact */
+        .text-center h4 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Table more compact */
+        .table {
+            min-width: 600px;
+        }
+        
+        .table td {
+            height: 80px !important;
+            padding: 4px 2px !important;
+        }
+        
+        .table th {
+            padding: 8px 4px !important;
+            font-size: 0.75rem !important;
+        }
+        
+        /* Timeline more compact */
+        .timeline .rounded-circle {
+            width: 35px !important;
+            height: 35px !important;
+        }
+        
+        /* Booking cards smaller */
+        .card-body.p-3 {
+            padding: 0.75rem !important;
+        }
+        
+        .badge {
+            font-size: 0.65rem !important;
+            padding: 2px 6px !important;
+        }
+    }
+
+    /* Extra small mobile screens */
+    @media (max-width: 480px) {
+        /* Most compact layout */
+        .card-body h2 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* View buttons stack vertically */
+        .btn-group {
+            flex-direction: column !important;
+        }
+        
+        .btn-group .btn {
+            border-radius: 1rem !important;
+            margin-bottom: 0.5rem;
+            font-size: 0.85rem !important;
+        }
+        
+        /* Table most compact */
+        .table {
+            min-width: 500px;
+        }
+        
+        .table td {
+            height: 60px !important;
+        }
+        
+        /* Timeline most compact */
+        .timeline .rounded-circle {
+            width: 30px !important;
+            height: 30px !important;
+        }
+        
+        .timeline .fw-bold {
+            font-size: 0.9rem !important;
+        }
+    }
+
+    /* Employee schedule-specific mobile optimizations */
+    @media (max-width: 768px) {
+        /* Better touch targets */
+        .btn-group .btn {
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+        
+        /* Calendar responsiveness */
+        .table-responsive {
+            border-radius: 1rem;
+            margin: 0 -4px;
+        }
+        
+        /* Booking status colors maintained */
+        .bg-success { background-color: rgba(40, 167, 69, 0.1) !important; }
+        .bg-info { background-color: rgba(23, 162, 184, 0.1) !important; }
+        .bg-warning { background-color: rgba(255, 193, 7, 0.1) !important; }
+        .bg-primary { background-color: rgba(111, 66, 193, 0.1) !important; }
+        
+        /* Timeline responsiveness */
+        .timeline {
+            padding: 0;
+        }
+        
+        .timeline .d-flex {
+            border-radius: 1rem !important;
+        }
+        
+        /* Today indicator preserved */
+        .text-warning { color: #ffc107 !important; }
+        .bg-warning { background-color: rgba(255, 193, 7, 0.1) !important; }
+    }
     </style>
 </div>

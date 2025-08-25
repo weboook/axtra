@@ -1,7 +1,7 @@
-<div class="container-fluid px-0">
+<div class="container-fluid">
     @if($isGuest)
         <!-- Guest Layout - Clean without sidebar/navbar -->
-        <div class="container py-5">
+        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-xl-8">
                     @include('livewire.booking.partials.booking-content')
@@ -10,7 +10,7 @@
         </div>
     @else
         <!-- Authenticated Layout -->
-        <div class="container-fluid px-4">
+        <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-lg-12 col-xl-10">
                     @include('livewire.booking.partials.booking-content')

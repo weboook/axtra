@@ -1,4 +1,5 @@
-<div class="container-fluid p-4">
+<div class="container-fluid">
+
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -318,6 +319,310 @@
         transform: translateY(-2px);
         transition: all 0.2s ease;
         box-shadow: 0 6px 25px rgba(0,0,0,0.15) !important;
+    }
+
+    /* Mobile optimizations for admin lanes page */
+    @media (max-width: 768px) {
+        /* Header section mobile fixes */
+        .d-flex.justify-content-between.align-items-center.mb-4 {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 15px;
+        }
+        
+        .btn.btn-primary {
+            width: 100%;
+            justify-content: center;
+            font-size: 0.9rem !important;
+            padding: 12px 20px !important;
+        }
+        
+        /* Stats cards mobile layout - 6 cards in 2x3 grid */
+        .row.mb-4 .col-md-2 {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+            margin-bottom: 15px;
+        }
+        
+        .row.mb-4 .col-md-2:nth-child(odd) {
+            padding-right: 8px;
+        }
+        
+        .row.mb-4 .col-md-2:nth-child(even) {
+            padding-left: 8px;
+        }
+        
+        .card-body h4 {
+            font-size: 1.2rem !important;
+        }
+        
+        .card-body small {
+            font-size: 0.75rem !important;
+        }
+        
+        .card-body.p-3 {
+            padding: 16px !important;
+        }
+        
+        .card-body i.fa-2x {
+            font-size: 1.5rem !important;
+        }
+        
+        /* Filters section mobile layout */
+        .card-body.p-4 {
+            padding: 16px !important;
+        }
+        
+        .col-md-3,
+        .col-md-2 {
+            margin-bottom: 15px !important;
+        }
+        
+        .form-label {
+            font-size: 0.85rem !important;
+            margin-bottom: 6px !important;
+        }
+        
+        .input-group .btn {
+            font-size: 0.85rem !important;
+        }
+        
+        /* Lane cards mobile layout */
+        .col-xl-3,
+        .col-lg-4,
+        .col-md-6 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Lane card content mobile */
+        .card-header.p-3,
+        .card-body.p-3,
+        .card-footer.p-3 {
+            padding: 16px !important;
+        }
+        
+        .card h5 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Status badges mobile */
+        .badge {
+            font-size: 0.7rem !important;
+            padding: 4px 8px !important;
+        }
+        
+        /* Quick stats grid mobile */
+        .row.g-2.mb-3 .col-4 {
+            margin-bottom: 8px;
+        }
+        
+        .row.g-2.mb-3 .col-4 .p-2 {
+            padding: 10px !important;
+        }
+        
+        .row.g-2.mb-3 .fw-bold {
+            font-size: 0.9rem !important;
+        }
+        
+        .row.g-2.mb-3 small {
+            font-size: 0.7rem !important;
+        }
+        
+        /* Action buttons mobile */
+        .btn.btn-outline-primary.btn-sm {
+            font-size: 0.85rem !important;
+            padding: 8px 12px !important;
+        }
+        
+        /* Dropdown menu mobile */
+        .dropdown-menu {
+            min-width: 200px !important;
+        }
+        
+        .dropdown-item {
+            font-size: 0.85rem !important;
+            padding: 8px 16px !important;
+        }
+        
+        .dropdown-header {
+            font-size: 0.8rem !important;
+        }
+        
+        /* Modal mobile adjustments */
+        .modal-dialog {
+            margin: 10px !important;
+            max-width: calc(100vw - 20px) !important;
+        }
+        
+        .modal-dialog.modal-xl {
+            max-width: calc(100vw - 20px) !important;
+        }
+        
+        .modal-header,
+        .modal-body,
+        .modal-footer {
+            padding: 16px !important;
+        }
+        
+        .modal-title {
+            font-size: 1.1rem !important;
+        }
+    }
+
+    /* Small mobile screens */
+    @media (max-width: 576px) {
+        .container-fluid {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        
+        /* Stats cards single column on small screens */
+        .row.mb-4 .col-md-2 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+        
+        /* Even more compact stats cards */
+        .card-body h4 {
+            font-size: 1.1rem !important;
+        }
+        
+        .card-body small {
+            font-size: 0.7rem !important;
+        }
+        
+        .card-body.p-3 {
+            padding: 12px !important;
+        }
+        
+        /* Filters stacked vertically */
+        .col-md-3,
+        .col-md-2 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Lane cards more compact */
+        .card-header.p-3,
+        .card-body.p-3,
+        .card-footer.p-3 {
+            padding: 12px !important;
+        }
+        
+        .card h5 {
+            font-size: 1rem !important;
+        }
+        
+        /* Quick stats more compact */
+        .row.g-2.mb-3 .col-4 .p-2 {
+            padding: 8px !important;
+        }
+        
+        .row.g-2.mb-3 .fw-bold {
+            font-size: 0.85rem !important;
+        }
+        
+        .row.g-2.mb-3 small {
+            font-size: 0.65rem !important;
+        }
+        
+        /* Modal full screen on small screens */
+        .modal-dialog {
+            margin: 0 !important;
+            max-width: 100vw !important;
+            height: 100vh !important;
+        }
+        
+        .modal-content {
+            height: 100vh !important;
+            border-radius: 0 !important;
+        }
+    }
+
+    /* Extra small mobile screens */
+    @media (max-width: 480px) {
+        /* More compact everything */
+        .card-body h4 {
+            font-size: 1rem !important;
+        }
+        
+        .card-body small {
+            font-size: 0.65rem !important;
+        }
+        
+        /* Lane card title smaller */
+        .card h5 {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Badges smaller */
+        .badge {
+            font-size: 0.65rem !important;
+            padding: 3px 6px !important;
+        }
+        
+        /* Quick stats even more compact */
+        .row.g-2.mb-3 .col-4 .p-2 {
+            padding: 6px !important;
+        }
+        
+        .row.g-2.mb-3 .fw-bold {
+            font-size: 0.8rem !important;
+        }
+        
+        .row.g-2.mb-3 small {
+            font-size: 0.6rem !important;
+        }
+        
+        /* Action button more compact */
+        .btn.btn-outline-primary.btn-sm {
+            font-size: 0.8rem !important;
+            padding: 6px 10px !important;
+        }
+        
+        /* Checkbox and dropdown smaller */
+        .form-check-input {
+            transform: scale(0.9);
+        }
+        
+        .dropdown-toggle {
+            padding: 4px 8px !important;
+            font-size: 0.8rem !important;
+        }
+    }
+
+    /* Lane card specific mobile optimizations */
+    @media (max-width: 768px) {
+        /* Hover effects disabled on mobile */
+        .card:hover {
+            transform: none !important;
+        }
+        
+        /* Better touch targets */
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .dropdown-toggle {
+            min-width: 40px;
+            min-height: 40px;
+        }
+        
+        /* Empty state mobile */
+        .text-center.p-5 {
+            padding: 40px 20px !important;
+        }
+        
+        .text-center.p-5 .fa-3x {
+            font-size: 2rem !important;
+        }
+        
+        .text-center.p-5 h5 {
+            font-size: 1.1rem !important;
+        }
     }
 </style>
 @endpush

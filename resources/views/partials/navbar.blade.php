@@ -25,10 +25,28 @@
                     <i class="fas fa-bars" style="font-size: 0.9rem;"></i>
                 </button>
                 
-                <!-- Search Bar -->
-                <div class="flex-grow-1 me-4">
+                <!-- Search Bar (Desktop) / Search Icon (Mobile) -->
+                <div class="flex-grow-1 me-4 d-none d-md-block">
                     @livewire('shared.search.search-index')
                 </div>
+                
+                <!-- Mobile Search Icon -->
+                <button class="btn d-md-none me-3" id="mobileSearchToggle"
+                        style="background: rgba(255, 255, 255, 0.08); 
+                               color: white; 
+                               border: none; 
+                               border-radius: 8px; 
+                               width: 40px; 
+                               height: 40px; 
+                               display: flex;
+                               align-items: center;
+                               justify-content: center;
+                               backdrop-filter: blur(10px);
+                               transition: all 0.3s ease;"
+                        onmouseover="this.style.background='rgba(255, 255, 255, 0.15)';"
+                        onmouseout="this.style.background='rgba(255, 255, 255, 0.08)';">
+                    <i class="fas fa-search" style="font-size: 0.9rem;"></i>
+                </button>
             </div>
             
             <!-- Right Side -->
@@ -317,14 +335,62 @@
     </nav>
 </div>
 
-<!-- Mobile Search (Hidden by default) -->
-<div class="d-md-none" id="mobileSearch" style="display: none; background: #1b1b1b; border-bottom: 1px solid rgba(192, 36, 37, 0.2); padding: 1rem;">
-    <div class="input-group">
-        <span class="input-group-text" style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: rgba(255, 255, 255, 0.6);">
-            <i class="fas fa-search"></i>
-        </span>
-        <input type="search" class="form-control" placeholder="Search..." 
-               style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); color: white; border-left: none;">
+<!-- Mobile Search Modal (Hidden by default) -->
+<div class="d-md-none position-fixed w-100" id="mobileSearchModal" 
+     style="display: none; 
+            top: 0; 
+            left: 0; 
+            z-index: 9999; 
+            background: rgba(0, 0, 0, 0.8); 
+            backdrop-filter: blur(10px);
+            height: 100vh;">
+    
+    <!-- Search Container -->
+    <div style="background: rgba(27, 27, 27, 0.98); 
+                backdrop-filter: blur(20px);
+                border-bottom: 1px solid rgba(192, 36, 37, 0.2);
+                padding: 80px 20px 20px 20px;">
+        
+        <!-- Close Button -->
+        <button class="btn position-absolute" id="closeMobileSearch"
+                style="top: 20px; 
+                       right: 20px; 
+                       background: rgba(255, 255, 255, 0.1);
+                       color: white;
+                       border: none;
+                       width: 40px;
+                       height: 40px;
+                       border-radius: 50%;
+                       display: flex;
+                       align-items: center;
+                       justify-content: center;">
+            <i class="fas fa-times"></i>
+        </button>
+        
+        <!-- Search Input -->
+        <div class="input-group">
+            <span class="input-group-text" 
+                  style="background: rgba(192, 36, 37, 0.2); 
+                         border: 1px solid rgba(192, 36, 37, 0.3); 
+                         color: #c02425;
+                         border-radius: 15px 0 0 15px;">
+                <i class="fas fa-search"></i>
+            </span>
+            <input type="search" class="form-control" placeholder="Search anything..." id="mobileSearchInput"
+                   style="background: rgba(255, 255, 255, 0.1); 
+                          border: 1px solid rgba(192, 36, 37, 0.3); 
+                          color: white; 
+                          border-left: none;
+                          border-radius: 0 15px 15px 0;
+                          padding: 15px;
+                          font-size: 16px;">
+        </div>
+        
+        <!-- Search Suggestions/Results would go here -->
+        <div class="mt-3" style="color: rgba(255, 255, 255, 0.6); text-align: center;">
+            <i class="fas fa-search" style="font-size: 2rem; margin-bottom: 10px; opacity: 0.3;"></i>
+            <p>Start typing to search...</p>
+        </div>
     </div>
 </div>
 
@@ -343,4 +409,145 @@
     .dropdown-menu {
         animation: dropdownSlide 0.2s ease-out;
     }
+    
+    /* Mobile navbar fixes */
+    @media (max-width: 991px) {
+        .navbar {
+            height: auto !important;
+            min-height: 65px;
+            padding: 8px 12px !important;
+        }
+        
+        .navbar .container-fluid {
+            padding: 0 !important;
+        }
+        
+        /* Mobile sidebar toggle button */
+        #sidebarToggle {
+            flex-shrink: 0;
+            width: 42px !important;
+            height: 42px !important;
+            margin-right: 12px;
+        }
+        
+        /* Search bar on mobile - now just icon */
+        .navbar .d-flex:first-child {
+            flex-wrap: nowrap;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Mobile search icon styling */
+        #mobileSearchToggle {
+            flex-shrink: 0;
+        }
+        
+        /* User dropdown adjustments for mobile */
+        .dropdown-menu {
+            min-width: 260px !important;
+            left: auto !important;
+            right: 0 !important;
+        }
+        
+        /* Hide user name on very small screens */
+        .d-none.d-lg-block {
+            display: none !important;
+        }
+        
+        /* Notification dropdown mobile */
+        .dropdown-menu.dropdown-menu-end {
+            min-width: 300px !important;
+            max-width: calc(100vw - 20px);
+        }
+        
+        /* Mobile quick actions */
+        .d-none.d-md-flex {
+            display: none !important;
+        }
+    }
+    
+    /* Small mobile screens */
+    @media (max-width: 575px) {
+        .navbar {
+            margin: 0 8px;
+            width: calc(100% - 16px);
+        }
+        
+        .navbar .container-fluid {
+            gap: 8px;
+        }
+        
+        #sidebarToggle {
+            width: 38px !important;
+            height: 38px !important;
+            margin-right: 8px;
+        }
+        
+        /* User button smaller */
+        button[id="userDropdown"] {
+            padding: 6px 12px !important;
+        }
+        
+        button[id="userDropdown"] div:first-child img,
+        button[id="userDropdown"] div:first-child div {
+            width: 28px !important;
+            height: 28px !important;
+        }
+        
+        /* Notifications button smaller */
+        button[id="notificationsDropdown"] {
+            width: 40px !important;
+            height: 40px !important;
+        }
+        
+        /* Dropdowns full width on small screens */
+        .dropdown-menu {
+            min-width: calc(100vw - 30px) !important;
+            max-width: calc(100vw - 30px) !important;
+        }
+    }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Mobile search functionality
+    const mobileSearchToggle = document.getElementById('mobileSearchToggle');
+    const mobileSearchModal = document.getElementById('mobileSearchModal');
+    const closeMobileSearch = document.getElementById('closeMobileSearch');
+    const mobileSearchInput = document.getElementById('mobileSearchInput');
+    
+    if (mobileSearchToggle && mobileSearchModal) {
+        // Open mobile search modal
+        mobileSearchToggle.addEventListener('click', function() {
+            mobileSearchModal.style.display = 'block';
+            // Focus on input after a short delay to ensure modal is visible
+            setTimeout(() => {
+                if (mobileSearchInput) {
+                    mobileSearchInput.focus();
+                }
+            }, 100);
+        });
+        
+        // Close mobile search modal
+        if (closeMobileSearch) {
+            closeMobileSearch.addEventListener('click', function() {
+                mobileSearchModal.style.display = 'none';
+            });
+        }
+        
+        // Close on backdrop click
+        mobileSearchModal.addEventListener('click', function(e) {
+            if (e.target === mobileSearchModal) {
+                mobileSearchModal.style.display = 'none';
+            }
+        });
+        
+        // Close on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileSearchModal.style.display === 'block') {
+                mobileSearchModal.style.display = 'none';
+            }
+        });
+    }
+});
+</script>

@@ -1,4 +1,4 @@
-<div class="container-fluid p-4">
+<div class="container-fluid">
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -276,6 +276,329 @@
     border-color: #17a2b8 !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(23, 162, 184, 0.15);
+}
+
+/* Mobile optimizations for employee dashboard page */
+@media (max-width: 768px) {
+    /* Header section mobile fixes */
+    .d-flex.justify-content-between.align-items-center.mb-4 {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px;
+    }
+    
+    .d-flex.gap-2.align-items-center {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px !important;
+    }
+    
+    .badge.bg-success {
+        font-size: 0.85rem !important;
+        padding: 8px 16px !important;
+    }
+    
+    /* Stats cards mobile layout - 4 cards in 2x2 grid */
+    .row.mb-4 .col-lg-3 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        margin-bottom: 15px;
+    }
+    
+    .row.mb-4 .col-lg-3:nth-child(odd) {
+        padding-right: 8px;
+    }
+    
+    .row.mb-4 .col-lg-3:nth-child(even) {
+        padding-left: 8px;
+    }
+    
+    .card-body h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .card-body small {
+        font-size: 0.8rem !important;
+    }
+    
+    .card-body.p-3 {
+        padding: 16px !important;
+    }
+    
+    .card-body i.fa-2x {
+        font-size: 1.8rem !important;
+    }
+    
+    /* Quick Actions & My Shift sections mobile */
+    .col-lg-8,
+    .col-lg-4 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        margin-bottom: 20px;
+    }
+    
+    .card-header {
+        padding: 16px !important;
+    }
+    
+    .card-body {
+        padding: 16px !important;
+    }
+    
+    /* Quick actions grid mobile - 2x3 instead of 3x2 */
+    .col-md-4 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        margin-bottom: 12px;
+    }
+    
+    .quick-action-btn {
+        padding: 16px 12px !important;
+    }
+    
+    .quick-action-btn i {
+        font-size: 1.25rem !important;
+    }
+    
+    .quick-action-btn .fw-semibold {
+        font-size: 0.9rem !important;
+    }
+    
+    .quick-action-btn small {
+        font-size: 0.75rem !important;
+    }
+    
+    /* My Shift section mobile */
+    .rounded-circle {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    
+    .rounded-circle i {
+        font-size: 1.25rem !important;
+    }
+    
+    /* Activity section mobile */
+    .list-group-item {
+        padding: 16px 0 !important;
+    }
+    
+    .list-group-item .d-flex .me-3 .rounded-circle {
+        width: 35px !important;
+        height: 35px !important;
+    }
+    
+    .list-group-item .d-flex .me-3 .rounded-circle i {
+        font-size: 0.8rem !important;
+    }
+    
+    .list-group-item h6 {
+        font-size: 0.95rem !important;
+    }
+    
+    .list-group-item p {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Lane status mobile */
+    .d-flex.flex-column.gap-2 {
+        gap: 8px !important;
+    }
+    
+    .d-flex.align-items-center.p-2 {
+        padding: 12px !important;
+    }
+    
+    .d-flex.align-items-center.p-2 .rounded-circle {
+        width: 24px !important;
+        height: 24px !important;
+    }
+    
+    .d-flex.align-items-center.p-2 .rounded-circle i {
+        font-size: 0.6rem !important;
+    }
+    
+    .fw-semibold {
+        font-size: 0.9rem !important;
+    }
+    
+    .badge {
+        font-size: 0.65rem !important;
+        padding: 2px 6px !important;
+    }
+    
+    /* Empty states mobile */
+    .text-center.py-5 {
+        padding: 30px 15px !important;
+    }
+    
+    .text-center.py-4 {
+        padding: 25px 15px !important;
+    }
+    
+    .text-center .fa-3x {
+        font-size: 2rem !important;
+    }
+    
+    .text-center .fa-2x {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Progress bar mobile */
+    .progress {
+        height: 6px !important;
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 576px) {
+    .container-fluid {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    /* Full width stats cards on small screens */
+    .row.mb-4 .col-lg-3 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    
+    /* Quick actions single column */
+    .col-md-4 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .quick-action-btn {
+        padding: 14px 12px !important;
+    }
+    
+    .quick-action-btn .fw-semibold {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Even more compact cards */
+    .card-body h3 {
+        font-size: 1.3rem !important;
+    }
+    
+    .card-body small {
+        font-size: 0.75rem !important;
+    }
+    
+    .card-body.p-3 {
+        padding: 12px !important;
+    }
+    
+    /* Smaller My Shift elements */
+    .rounded-circle {
+        width: 45px !important;
+        height: 45px !important;
+    }
+    
+    .progress {
+        height: 5px !important;
+    }
+}
+
+/* Extra small mobile screens */
+@media (max-width: 480px) {
+    /* Most compact layout */
+    .card-body h3 {
+        font-size: 1.2rem !important;
+    }
+    
+    .card-body small {
+        font-size: 0.7rem !important;
+    }
+    
+    /* Quick actions more compact */
+    .quick-action-btn {
+        padding: 12px 8px !important;
+    }
+    
+    .quick-action-btn i {
+        font-size: 1.1rem !important;
+    }
+    
+    .quick-action-btn .fw-semibold {
+        font-size: 0.8rem !important;
+    }
+    
+    .quick-action-btn small {
+        font-size: 0.7rem !important;
+    }
+    
+    /* Activity list more compact */
+    .list-group-item .d-flex .me-3 .rounded-circle {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    
+    .list-group-item h6 {
+        font-size: 0.9rem !important;
+    }
+    
+    .list-group-item p {
+        font-size: 0.8rem !important;
+    }
+    
+    /* Lane status more compact */
+    .d-flex.align-items-center.p-2 .rounded-circle {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    
+    .d-flex.align-items-center.p-2 .rounded-circle i {
+        font-size: 0.5rem !important;
+    }
+    
+    .fw-semibold {
+        font-size: 0.85rem !important;
+    }
+}
+
+/* Employee dashboard-specific mobile optimizations */
+@media (max-width: 768px) {
+    /* Disable hover effects on mobile */
+    .quick-action-btn:hover {
+        transform: none !important;
+        border-color: #e5e7eb !important;
+        box-shadow: none !important;
+    }
+    
+    /* Better touch targets */
+    .quick-action-btn {
+        min-height: 80px;
+        touch-action: manipulation;
+    }
+    
+    /* Status badges mobile */
+    .badge {
+        border-radius: 10px !important;
+    }
+    
+    /* Card headers mobile */
+    .card-header h5 {
+        font-size: 1.1rem !important;
+    }
+    
+    .card-header p {
+        font-size: 0.8rem !important;
+    }
+    
+    /* Better spacing for activity items */
+    .list-group-item .d-flex.justify-content-between {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px;
+    }
+    
+    .list-group-item small {
+        align-self: flex-end;
+    }
 }
 </style>
 @endpush

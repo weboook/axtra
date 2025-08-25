@@ -1,4 +1,4 @@
-<div class="container-fluid p-4">
+<div class="container-fluid">
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -539,6 +539,243 @@
     .table-responsive .dropdown-menu {
         position: absolute !important;
         z-index: 1050 !important;
+    }
+
+    /* Mobile optimizations for admin users page */
+    @media (max-width: 768px) {
+        /* Header section mobile fixes */
+        .d-flex.justify-content-between.align-items-center.mb-4 {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 15px;
+        }
+        
+        .btn.btn-primary {
+            width: 100%;
+            justify-content: center;
+            font-size: 0.9rem !important;
+            padding: 12px 20px !important;
+        }
+        
+        /* Stats cards mobile layout */
+        .row.mb-4 .col-md-2 {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+            margin-bottom: 15px;
+        }
+        
+        .row.mb-4 .col-md-2:nth-child(odd) {
+            padding-right: 8px;
+        }
+        
+        .row.mb-4 .col-md-2:nth-child(even) {
+            padding-left: 8px;
+        }
+        
+        .card-body h3 {
+            font-size: 1.3rem !important;
+        }
+        
+        .card-body small {
+            font-size: 0.75rem !important;
+        }
+        
+        /* Filters section mobile layout */
+        .card-body.p-4 {
+            padding: 16px !important;
+        }
+        
+        .col-md-4,
+        .col-md-2 {
+            margin-bottom: 15px !important;
+        }
+        
+        .form-label {
+            font-size: 0.85rem !important;
+            margin-bottom: 6px !important;
+        }
+        
+        .input-group .btn {
+            font-size: 0.85rem !important;
+        }
+        
+        /* Table mobile responsiveness */
+        .table-responsive {
+            border-radius: 12px;
+            margin: 0 -8px;
+        }
+        
+        .table {
+            min-width: 800px;
+        }
+        
+        .table th,
+        .table td {
+            padding: 12px 8px !important;
+            font-size: 0.85rem !important;
+        }
+        
+        .table th {
+            font-size: 0.8rem !important;
+        }
+        
+        /* User info mobile layout */
+        .table .d-flex.align-items-center {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 8px;
+        }
+        
+        .table .d-flex.align-items-center .me-3 {
+            margin-right: 0 !important;
+            margin-bottom: 8px !important;
+        }
+        
+        .table .d-flex.align-items-center img {
+            width: 35px !important;
+            height: 35px !important;
+        }
+        
+        /* Badge adjustments */
+        .badge {
+            font-size: 0.7rem !important;
+            padding: 4px 8px !important;
+        }
+        
+        .dropdown-toggle {
+            font-size: 0.75rem !important;
+        }
+        
+        /* Status column mobile */
+        .d-flex.flex-column.gap-1 {
+            gap: 4px !important;
+        }
+        
+        /* Points column mobile */
+        .d-flex.align-items-center {
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .btn.btn-sm {
+            padding: 4px 6px !important;
+            font-size: 0.7rem !important;
+        }
+        
+        /* Actions dropdown mobile */
+        .dropdown-menu {
+            min-width: 200px !important;
+        }
+        
+        .dropdown-item {
+            font-size: 0.85rem !important;
+            padding: 8px 16px !important;
+        }
+        
+        /* Modal mobile adjustments */
+        .modal-dialog {
+            margin: 10px !important;
+            max-width: calc(100vw - 20px) !important;
+        }
+        
+        .modal-header,
+        .modal-body,
+        .modal-footer {
+            padding: 16px !important;
+        }
+        
+        .modal-title {
+            font-size: 1.1rem !important;
+        }
+        
+        /* User detail modal mobile */
+        .modal-dialog.modal-lg {
+            max-width: calc(100vw - 20px) !important;
+        }
+        
+        .modal-body .row {
+            flex-direction: column !important;
+        }
+        
+        .modal-body .col-md-4,
+        .modal-body .col-md-8 {
+            flex: none !important;
+            max-width: 100% !important;
+        }
+        
+        .modal-body .col-md-4 {
+            margin-bottom: 20px;
+        }
+        
+        .modal-body .col-6 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            margin-bottom: 15px;
+        }
+        
+        /* Card footer pagination mobile */
+        .card-footer {
+            padding: 12px !important;
+        }
+        
+        /* Hide some less important columns on mobile */
+        .table th:nth-child(6),
+        .table td:nth-child(6),
+        .table th:nth-child(7),
+        .table td:nth-child(7) {
+            display: none;
+        }
+    }
+
+    /* Small mobile screens */
+    @media (max-width: 576px) {
+        .container-fluid {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        
+        /* Full width stats cards on small screens */
+        .row.mb-4 .col-md-2 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+        
+        /* Smaller table text */
+        .table th,
+        .table td {
+            padding: 8px 4px !important;
+            font-size: 0.8rem !important;
+        }
+        
+        .table {
+            min-width: 600px;
+        }
+        
+        /* Hide more columns on very small screens */
+        .table th:nth-child(5),
+        .table td:nth-child(5) {
+            display: none;
+        }
+        
+        /* Filters stacked vertically */
+        .col-md-4,
+        .col-md-2 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Modal full screen on small screens */
+        .modal-dialog {
+            margin: 0 !important;
+            max-width: 100vw !important;
+            height: 100vh !important;
+        }
+        
+        .modal-content {
+            height: 100vh !important;
+            border-radius: 0 !important;
+        }
     }
 </style>
 @endpush

@@ -1,4 +1,4 @@
-<div class="container-fluid p-4">
+<div class="container-fluid">
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -133,6 +133,270 @@
     .nav-pills .nav-link:hover {
         background: rgba(192, 36, 37, 0.1) !important;
         color: #c02425 !important;
+    }
+
+    /* Mobile optimizations for admin products page */
+    @media (max-width: 768px) {
+        /* Header section mobile fixes */
+        .d-flex.justify-content-between.align-items-center.mb-4 {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 15px;
+        }
+        
+        .btn.btn-primary {
+            width: 100%;
+            justify-content: center;
+            font-size: 0.9rem !important;
+            padding: 12px 20px !important;
+        }
+        
+        /* Tab navigation mobile */
+        .nav.nav-pills.nav-fill {
+            flex-direction: column !important;
+            gap: 8px !important;
+        }
+        
+        .nav-pills .nav-link {
+            padding: 12px 16px !important;
+            font-size: 0.85rem !important;
+            text-align: left !important;
+            border-radius: 12px !important;
+        }
+        
+        .nav-pills .nav-link i {
+            font-size: 0.8rem !important;
+        }
+        
+        /* Stats cards mobile layout - 4 cards in 2x2 grid */
+        .row.mb-4 .col-md-3 {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+            margin-bottom: 15px;
+        }
+        
+        .row.mb-4 .col-md-3:nth-child(odd) {
+            padding-right: 8px;
+        }
+        
+        .row.mb-4 .col-md-3:nth-child(even) {
+            padding-left: 8px;
+        }
+        
+        .card-body h3 {
+            font-size: 1.3rem !important;
+        }
+        
+        .card-body small {
+            font-size: 0.75rem !important;
+        }
+        
+        /* Filters section mobile layout */
+        .card-body.p-4 {
+            padding: 16px !important;
+        }
+        
+        .col-md-4,
+        .col-md-2 {
+            margin-bottom: 15px !important;
+        }
+        
+        .form-label {
+            font-size: 0.85rem !important;
+            margin-bottom: 6px !important;
+        }
+        
+        .input-group .btn {
+            font-size: 0.85rem !important;
+        }
+        
+        /* Table mobile responsiveness */
+        .table-responsive {
+            border-radius: 12px;
+            margin: 0 -8px;
+        }
+        
+        .table {
+            min-width: 900px;
+        }
+        
+        .table th,
+        .table td {
+            padding: 12px 8px !important;
+            font-size: 0.85rem !important;
+        }
+        
+        .table th {
+            font-size: 0.8rem !important;
+        }
+        
+        /* Service/Product name mobile layout */
+        .table .fw-semibold.text-dark {
+            font-size: 0.9rem !important;
+        }
+        
+        .table small.text-muted {
+            font-size: 0.75rem !important;
+            display: block !important;
+            margin-top: 4px;
+        }
+        
+        /* Badge adjustments */
+        .badge {
+            font-size: 0.7rem !important;
+            padding: 4px 8px !important;
+        }
+        
+        /* Price and duration mobile */
+        .fw-semibold.text-success {
+            font-size: 0.85rem !important;
+        }
+        
+        .table small {
+            font-size: 0.7rem !important;
+        }
+        
+        /* Players column mobile */
+        .table .fw-semibold {
+            font-size: 0.85rem !important;
+        }
+        
+        /* Actions dropdown mobile */
+        .dropdown-menu {
+            min-width: 200px !important;
+        }
+        
+        .dropdown-item {
+            font-size: 0.85rem !important;
+            padding: 8px 16px !important;
+        }
+        
+        /* Modal mobile adjustments */
+        .modal-dialog {
+            margin: 10px !important;
+            max-width: calc(100vw - 20px) !important;
+        }
+        
+        .modal-header,
+        .modal-body,
+        .modal-footer {
+            padding: 16px !important;
+        }
+        
+        .modal-title {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Product detail modal mobile */
+        .modal-dialog.modal-lg {
+            max-width: calc(100vw - 20px) !important;
+        }
+        
+        /* Card footer pagination mobile */
+        .card-footer {
+            padding: 12px !important;
+        }
+        
+        /* Hide less important columns on mobile */
+        .table th:nth-child(5),
+        .table td:nth-child(5),
+        .table th:nth-child(6),
+        .table td:nth-child(6) {
+            display: none;
+        }
+    }
+
+    /* Small mobile screens */
+    @media (max-width: 576px) {
+        .container-fluid {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        
+        /* Full width stats cards on small screens */
+        .row.mb-4 .col-md-3 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            padding: 0 !important;
+        }
+        
+        /* Smaller table text */
+        .table th,
+        .table td {
+            padding: 8px 4px !important;
+            font-size: 0.8rem !important;
+        }
+        
+        .table {
+            min-width: 700px;
+        }
+        
+        /* Hide more columns on very small screens */
+        .table th:nth-child(4),
+        .table td:nth-child(4) {
+            display: none;
+        }
+        
+        /* Filters stacked vertically */
+        .col-md-4,
+        .col-md-2 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Modal full screen on small screens */
+        .modal-dialog {
+            margin: 0 !important;
+            max-width: 100vw !important;
+            height: 100vh !important;
+        }
+        
+        .modal-content {
+            height: 100vh !important;
+            border-radius: 0 !important;
+        }
+        
+        /* Tab navigation even more compact */
+        .nav-pills .nav-link {
+            padding: 10px 12px !important;
+            font-size: 0.8rem !important;
+        }
+        
+        .nav-pills .nav-link i {
+            font-size: 0.75rem !important;
+        }
+    }
+
+    /* Extra small mobile screens */
+    @media (max-width: 480px) {
+        /* Hide category column on very small screens */
+        .table th:nth-child(3),
+        .table td:nth-child(3) {
+            display: none;
+        }
+        
+        .table {
+            min-width: 600px;
+        }
+        
+        /* More compact cards */
+        .card-body {
+            padding: 12px !important;
+        }
+        
+        .card-body h3 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Tab text only, hide icons */
+        .nav-pills .nav-link i {
+            display: none !important;
+        }
+        
+        .nav-pills .nav-link {
+            padding: 8px 12px !important;
+            font-size: 0.75rem !important;
+        }
     }
 </style>
 @endpush

@@ -1,4 +1,4 @@
-<div class="container-fluid p-4">
+<div class="container-fluid">
     <!-- Header Section -->
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
@@ -559,6 +559,233 @@
 
 .weekly-calendar .card {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Mobile optimizations for admin dashboard */
+@media (max-width: 768px) {
+    /* Header section mobile fixes */
+    .d-flex.justify-content-between.align-items-center.mb-4 {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 15px;
+    }
+    
+    .d-flex.gap-2.align-items-center {
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 8px !important;
+    }
+    
+    /* Status badge and export button mobile */
+    .badge.bg-success {
+        font-size: 0.75rem !important;
+        padding: 8px 12px !important;
+    }
+    
+    .btn.btn-outline-primary {
+        font-size: 0.85rem !important;
+        padding: 8px 16px !important;
+    }
+    
+    /* Stats cards mobile responsiveness */
+    .row.mb-4 .col-lg-3 {
+        margin-bottom: 15px;
+    }
+    
+    .card-body.p-3 {
+        padding: 20px !important;
+    }
+    
+    .card-body h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    /* Today's performance mobile layout */
+    .col-md-3 {
+        margin-bottom: 10px;
+    }
+    
+    /* Calendar mobile optimizations with horizontal scroll */
+    .weekly-calendar {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .weekly-calendar .row {
+        min-width: 700px;
+        margin: 0;
+    }
+    
+    .weekly-calendar .col {
+        padding: 2px !important;
+        min-width: 100px;
+        flex: 0 0 auto;
+    }
+    
+    .calendar-day .card-header {
+        padding: 8px 4px !important;
+    }
+    
+    .calendar-day .card-body {
+        padding: 8px 4px !important;
+        min-height: 100px !important;
+    }
+    
+    .calendar-day .card-header div {
+        font-size: 0.7rem !important;
+    }
+    
+    .calendar-day .card-header .fw-bold:nth-child(2) {
+        font-size: 0.9rem !important;
+    }
+    
+    /* Lane performance mobile */
+    .lane-performance .mb-3 {
+        margin-bottom: 20px !important;
+    }
+    
+    .lane-performance .d-flex {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .lane-performance .badge {
+        font-size: 0.7rem !important;
+    }
+    
+    /* Achievement activity mobile */
+    .achievement-activity .col-6 {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    
+    /* Popular services mobile - add margins between items */
+    .card-body .mb-3 {
+        margin-bottom: 20px !important;
+    }
+    
+    /* Quick actions mobile layout */
+    .col-md-2 {
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+        margin-bottom: 15px;
+    }
+    
+    .quick-action-btn {
+        padding: 20px 10px !important;
+    }
+    
+    .quick-action-btn i {
+        font-size: 1.2rem !important;
+    }
+    
+    .quick-action-btn .fw-semibold {
+        font-size: 0.85rem !important;
+    }
+    
+    /* Recent bookings mobile */
+    .list-group-item {
+        padding: 15px 0 !important;
+    }
+    
+    .list-group-item .d-flex {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .list-group-item .flex-grow-1 {
+        min-width: 200px;
+    }
+    
+    .list-group-item .d-flex.justify-content-between {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 8px;
+    }
+    
+    /* New users section mobile */
+    .d-flex.flex-column.gap-3 {
+        gap: 20px !important;
+    }
+    
+    .d-flex.flex-column.gap-3 .d-flex {
+        margin-bottom: 15px !important;
+    }
+    
+    /* Card padding mobile adjustments */
+    .card-header {
+        padding: 16px !important;
+    }
+    
+    .card-body {
+        padding: 16px !important;
+    }
+    
+    /* Text size adjustments for mobile */
+    .h3 {
+        font-size: 1.5rem !important;
+    }
+    
+    .h5 {
+        font-size: 1.1rem !important;
+    }
+    
+    /* Booking item mobile layout */
+    .calendar-day .mb-2 {
+        margin-bottom: 8px !important;
+        padding: 6px !important;
+    }
+    
+    .calendar-day .fw-semibold {
+        font-size: 0.65rem !important;
+    }
+    
+    .calendar-day .text-muted {
+        font-size: 0.6rem !important;
+    }
+}
+
+/* Small mobile screens */
+@media (max-width: 576px) {
+    /* Even smaller text and spacing for very small screens */
+    .container-fluid {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+    
+    .col-md-2 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+    
+    .quick-action-btn {
+        padding: 15px !important;
+    }
+    
+    /* Calendar very compact on small screens - maintain scroll */
+    .weekly-calendar .row {
+        min-width: 600px;
+    }
+    
+    .weekly-calendar .col {
+        padding: 1px !important;
+        min-width: 85px;
+    }
+    
+    .calendar-day .card-header {
+        padding: 6px 2px !important;
+    }
+    
+    .calendar-day .card-body {
+        padding: 6px 2px !important;
+        min-height: 80px !important;
+    }
+    
+    /* Hide some non-essential info on very small screens */
+    .calendar-day small:last-child {
+        display: none;
+    }
 }
 </style>
 @endpush

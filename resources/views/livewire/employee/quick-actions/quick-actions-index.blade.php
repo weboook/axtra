@@ -582,5 +582,358 @@
         color: #28a745;
         border: 1px solid rgba(40, 167, 69, 0.2);
     }
+
+    /* Mobile optimizations for employee quick-actions page */
+    @media (max-width: 768px) {
+        /* Header section mobile */
+        .card-body.py-4.px-4 {
+            padding: 1.5rem !important;
+        }
+        
+        .card-body h2 {
+            font-size: 1.5rem !important;
+        }
+        
+        .card-body p {
+            font-size: 1rem !important;
+        }
+        
+        /* Disable hover effects on mobile */
+        .card:hover,
+        button:hover,
+        div[onmouseover]:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Success alert mobile */
+        .alert {
+            margin: 0 8px 16px 8px !important;
+            font-size: 0.9rem !important;
+        }
+        
+        /* Lane status and quick actions layout */
+        .row.g-4 .col-12.col-lg-4,
+        .row.g-4 .col-12.col-lg-8 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body.p-4 {
+            padding: 1rem !important;
+        }
+        
+        .card-header {
+            padding: 1rem !important;
+        }
+        
+        /* Lane status cards mobile */
+        .row.g-3 .col-6 {
+            margin-bottom: 1rem;
+        }
+        
+        .card.p-3 {
+            padding: 1rem !important;
+        }
+        
+        .card .mb-2 {
+            width: 35px !important;
+            height: 35px !important;
+        }
+        
+        .card h4 {
+            font-size: 1.3rem !important;
+        }
+        
+        /* Quick action cards mobile */
+        .col-md-4 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body.d-flex.flex-column {
+            padding: 1.5rem !important;
+        }
+        
+        .card .mb-3 {
+            width: 70px !important;
+            height: 70px !important;
+        }
+        
+        .card .mb-3 i {
+            font-size: 1.8rem !important;
+        }
+        
+        .card-title {
+            font-size: 1.1rem !important;
+        }
+        
+        .card-text {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Recent reports table mobile */
+        .table-responsive {
+            margin: 0 -8px;
+            border-radius: 1rem;
+        }
+        
+        .table {
+            min-width: 800px;
+        }
+        
+        .table th,
+        .table td {
+            padding: 12px 8px !important;
+            font-size: 0.85rem !important;
+        }
+        
+        .table th {
+            font-size: 0.8rem !important;
+        }
+        
+        .badge {
+            font-size: 0.7rem !important;
+            padding: 4px 8px !important;
+        }
+        
+        /* Empty state mobile */
+        .text-center.py-5 {
+            padding: 30px 15px !important;
+        }
+        
+        .text-center .fa-3x,
+        .text-center [style*="font-size: 3rem"] {
+            font-size: 2rem !important;
+        }
+        
+        .text-center h5 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Modal mobile */
+        .modal-dialog {
+            margin: 10px !important;
+            max-width: calc(100vw - 20px) !important;
+        }
+        
+        .modal-content {
+            border-radius: 1rem !important;
+        }
+        
+        .modal-header {
+            padding: 1rem !important;
+            border-radius: 1rem 1rem 0 0 !important;
+        }
+        
+        .modal-body {
+            padding: 1rem !important;
+        }
+        
+        .modal-title {
+            font-size: 1.1rem !important;
+        }
+        
+        .modal-header .me-3 {
+            width: 40px !important;
+            height: 40px !important;
+        }
+        
+        .modal-header .me-3 i {
+            font-size: 1rem !important;
+        }
+        
+        /* Form elements mobile */
+        .col-4.col-md-3 {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+        }
+        
+        .form-check.p-3 {
+            padding: 12px !important;
+        }
+        
+        .form-control,
+        .form-select {
+            font-size: 0.9rem !important;
+            padding: 12px 16px !important;
+        }
+        
+        textarea.form-control {
+            min-height: 80px !important;
+        }
+        
+        .col-md-6 {
+            margin-bottom: 1rem;
+        }
+        
+        /* Button spacing mobile */
+        .d-flex.justify-content-end.gap-3 {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+        }
+        
+        .d-flex.justify-content-end.gap-3 .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        /* Block/Axe modals mobile */
+        .d-flex.justify-content-end.gap-2 {
+            flex-direction: column !important;
+            gap: 0.5rem !important;
+        }
+        
+        .d-flex.justify-content-end.gap-2 .btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    /* Small mobile screens */
+    @media (max-width: 576px) {
+        .container-fluid {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        
+        /* Header more compact */
+        .card-body h2 {
+            font-size: 1.25rem !important;
+        }
+        
+        .card-body p {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Lane status single column */
+        .row.g-3 .col-6 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Action cards more compact */
+        .card .mb-3 {
+            width: 60px !important;
+            height: 60px !important;
+        }
+        
+        .card .mb-3 i {
+            font-size: 1.5rem !important;
+        }
+        
+        .card-title {
+            font-size: 1rem !important;
+        }
+        
+        /* Table more compact */
+        .table {
+            min-width: 600px;
+        }
+        
+        .table th,
+        .table td {
+            padding: 8px 4px !important;
+            font-size: 0.8rem !important;
+        }
+        
+        /* Form elements single column */
+        .col-4.col-md-3 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Modal full screen */
+        .modal-dialog {
+            margin: 0 !important;
+            max-width: 100vw !important;
+            height: 100vh !important;
+        }
+        
+        .modal-content {
+            height: 100vh !important;
+            border-radius: 0 !important;
+        }
+        
+        .modal-header {
+            border-radius: 0 !important;
+        }
+    }
+
+    /* Extra small mobile screens */
+    @media (max-width: 480px) {
+        /* Most compact layout */
+        .card-body h2 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Action cards smallest */
+        .card .mb-3 {
+            width: 50px !important;
+            height: 50px !important;
+        }
+        
+        .card .mb-3 i {
+            font-size: 1.25rem !important;
+        }
+        
+        .card-title {
+            font-size: 0.9rem !important;
+        }
+        
+        .card-text {
+            font-size: 0.8rem !important;
+        }
+        
+        /* Table most compact */
+        .table {
+            min-width: 500px;
+        }
+        
+        /* Forms most compact */
+        .form-control,
+        .form-select {
+            font-size: 0.85rem !important;
+            padding: 10px 12px !important;
+        }
+    }
+
+    /* Quick-actions specific mobile optimizations */
+    @media (max-width: 768px) {
+        /* Better touch targets */
+        .card[wire\:click] {
+            min-height: 120px;
+            touch-action: manipulation;
+        }
+        
+        /* Maintenance type colors maintained */
+        .bg-danger { background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%) !important; }
+        .bg-warning { background: linear-gradient(135deg, #fd7e14 0%, #ffc107 100%) !important; }
+        .bg-info { background: linear-gradient(135deg, #17a2b8 0%, #20c997 100%) !important; }
+        .bg-success { background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important; }
+        
+        /* Modal backdrop mobile */
+        .modal-backdrop {
+            backdrop-filter: blur(2px);
+        }
+        
+        /* Form validation mobile */
+        .text-danger.small {
+            font-size: 0.75rem !important;
+        }
+        
+        /* File inputs mobile */
+        input[type="file"] {
+            padding: 8px 12px !important;
+        }
+        
+        /* Severity badges preserved */
+        .badge[style*="background: rgba(220, 53, 69"] { background: rgba(220, 53, 69, 0.2) !important; }
+        .badge[style*="background: rgba(255, 193, 7"] { background: rgba(255, 193, 7, 0.2) !important; }
+        .badge[style*="background: rgba(23, 162, 184"] { background: rgba(23, 162, 184, 0.2) !important; }
+        .badge[style*="background: rgba(40, 167, 69"] { background: rgba(40, 167, 69, 0.2) !important; }
+    }
     </style>
 </div>

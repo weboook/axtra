@@ -764,21 +764,349 @@
         left: 100%;
     }
 
-    /* Responsive enhancements */
+    /* Mobile optimizations for employee reports page */
     @media (max-width: 768px) {
+        /* Header section mobile */
+        .card-body.py-4.px-4 {
+            padding: 1.5rem !important;
+        }
+        
+        .card-body h2 {
+            font-size: 1.5rem !important;
+        }
+        
+        .card-body p {
+            font-size: 1rem !important;
+        }
+        
+        /* Report type buttons mobile - vertical stack */
         .btn-group {
-            display: flex;
-            flex-direction: column;
-            width: 100%;
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
         }
         
         .btn-group .btn {
             border-radius: 12px !important;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.5rem !important;
+            padding: 12px 16px !important;
+            font-size: 0.9rem !important;
         }
         
         .btn-group .btn:last-child {
-            margin-bottom: 0;
+            margin-bottom: 0 !important;
+        }
+        
+        /* Disable hover effects on mobile */
+        .card:hover,
+        .card:hover::before,
+        div[onmouseover]:hover,
+        button:hover {
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Date selector mobile */
+        .col-lg-4.col-md-6 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body.p-4 {
+            padding: 1rem !important;
+        }
+        
+        .rounded-circle {
+            width: 40px !important;
+            height: 40px !important;
+        }
+        
+        /* Stats cards mobile layout */
+        .col-xl-2,
+        .col-lg-4,
+        .col-md-6 {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+            margin-bottom: 1rem;
+        }
+        
+        .card-body.py-4 {
+            padding: 1rem !important;
+        }
+        
+        .card-body h2 {
+            font-size: 1.5rem !important;
+        }
+        
+        .card-body p {
+            font-size: 0.85rem !important;
+        }
+        
+        .card-body i {
+            font-size: 1.5rem !important;
+        }
+        
+        /* Lane usage section mobile */
+        .col-lg-8 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            margin-bottom: 1rem;
+        }
+        
+        .card-header.p-0 {
+            padding: 1rem !important;
+        }
+        
+        .card-header .rounded-circle {
+            width: 40px !important;
+            height: 40px !important;
+        }
+        
+        .card-header h5 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Lane usage items mobile */
+        .d-flex.align-items-center.mb-4 {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            padding: 1rem !important;
+        }
+        
+        .me-4 {
+            margin-right: 0 !important;
+            margin-bottom: 1rem !important;
+            align-self: center;
+        }
+        
+        .me-4 .rounded-circle {
+            width: 50px !important;
+            height: 50px !important;
+        }
+        
+        .flex-grow-1 {
+            width: 100%;
+        }
+        
+        .d-flex.justify-content-between.align-items-center {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 0.5rem;
+        }
+        
+        .text-end {
+            align-self: stretch !important;
+            text-align: left !important;
+        }
+        
+        .progress {
+            height: 8px !important;
+        }
+        
+        /* Maintenance issues mobile */
+        .col-lg-4 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        .card-body[style*="max-height"] {
+            max-height: 400px !important;
+        }
+        
+        .d-flex.align-items-start.p-3 {
+            padding: 1rem !important;
+        }
+        
+        .me-3 .rounded-circle {
+            width: 35px !important;
+            height: 35px !important;
+        }
+        
+        .d-flex.justify-content-between.align-items-start {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+        }
+        
+        /* Weekly/Monthly specific mobile */
+        .col-xl-4,
+        .col-lg-8 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+            margin-bottom: 1rem;
+        }
+        
+        /* Performance highlight cards mobile */
+        .rounded-circle.mx-auto {
+            width: 60px !important;
+            height: 60px !important;
+        }
+        
+        .card-body.text-center h3 {
+            font-size: 1.3rem !important;
+        }
+        
+        .card-body.text-center h6 {
+            font-size: 1rem !important;
+        }
+        
+        /* Empty states mobile */
+        .text-center.py-5 {
+            padding: 30px 15px !important;
+        }
+        
+        .text-center .fa-4x,
+        .text-center [style*="font-size: 4rem"] {
+            font-size: 2.5rem !important;
+        }
+        
+        .text-center h6 {
+            font-size: 1rem !important;
+        }
+        
+        /* Badge adjustments mobile */
+        .badge {
+            font-size: 0.7rem !important;
+            padding: 4px 8px !important;
+        }
+    }
+
+    /* Small mobile screens */
+    @media (max-width: 576px) {
+        .container-fluid {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+        }
+        
+        /* Header more compact */
+        .card-body h2 {
+            font-size: 1.25rem !important;
+        }
+        
+        .card-body p {
+            font-size: 0.9rem !important;
+        }
+        
+        /* Stats cards single column */
+        .col-xl-2,
+        .col-lg-4,
+        .col-md-6 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        .card-body h2 {
+            font-size: 1.3rem !important;
+        }
+        
+        /* Date selector more compact */
+        .rounded-circle {
+            width: 35px !important;
+            height: 35px !important;
+        }
+        
+        /* Lane usage more compact */
+        .me-4 .rounded-circle {
+            width: 45px !important;
+            height: 45px !important;
+        }
+        
+        /* Maintenance issues more compact */
+        .me-3 .rounded-circle {
+            width: 30px !important;
+            height: 30px !important;
+        }
+        
+        .card-body[style*="max-height"] {
+            max-height: 300px !important;
+        }
+        
+        /* Performance highlights more compact */
+        .rounded-circle.mx-auto {
+            width: 50px !important;
+            height: 50px !important;
+        }
+    }
+
+    /* Extra small mobile screens */
+    @media (max-width: 480px) {
+        /* Most compact layout */
+        .card-body h2 {
+            font-size: 1.1rem !important;
+        }
+        
+        /* Report buttons more compact */
+        .btn-group .btn {
+            padding: 10px 12px !important;
+            font-size: 0.85rem !important;
+        }
+        
+        /* Stats cards most compact */
+        .card-body h2 {
+            font-size: 1.2rem !important;
+        }
+        
+        .card-body i {
+            font-size: 1.25rem !important;
+        }
+        
+        /* Lane usage most compact */
+        .me-4 .rounded-circle {
+            width: 40px !important;
+            height: 40px !important;
+        }
+        
+        .progress {
+            height: 6px !important;
+        }
+        
+        /* Maintenance issues most compact */
+        .me-3 .rounded-circle {
+            width: 25px !important;
+            height: 25px !important;
+        }
+        
+        .badge {
+            font-size: 0.65rem !important;
+            padding: 2px 6px !important;
+        }
+    }
+
+    /* Reports-specific mobile optimizations */
+    @media (max-width: 768px) {
+        /* Better touch targets */
+        .btn-group .btn {
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+        
+        /* Gradient backgrounds maintained */
+        .bg-info { background: linear-gradient(135deg, #17a2b8 0%, #20c997 100%) !important; }
+        .bg-success { background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important; }
+        .bg-danger { background: linear-gradient(135deg, #dc3545 0%, #fd7e14 100%) !important; }
+        .bg-warning { background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%) !important; }
+        .bg-primary { background: linear-gradient(135deg, #6610f2 0%, #6f42c1 100%) !important; }
+        
+        /* Progress animations disabled on mobile */
+        .progress-bar::before {
+            animation: none;
+        }
+        
+        /* Form elements mobile */
+        input[type="date"] {
+            font-size: 0.9rem !important;
+            padding: 12px !important;
+        }
+        
+        /* Scrollbar mobile */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        /* Card animations disabled */
+        .card::before,
+        .badge::before {
+            display: none;
         }
     }
     </style>

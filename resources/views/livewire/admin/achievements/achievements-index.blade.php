@@ -1,4 +1,4 @@
-<div class="container-fluid p-4">
+<div class="container-fluid">
     <!-- Flash Messages -->
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible fade show mb-4" role="alert" style="border-radius: 12px; border: none;">
@@ -332,6 +332,389 @@
     @include('livewire.admin.achievements.partials.create-modal')
     @include('livewire.admin.achievements.partials.edit-modal')
     @include('livewire.admin.achievements.partials.detail-modal')
+
+    @push('styles')
+    <style>
+        /* Mobile optimizations for admin achievements page */
+        @media (max-width: 768px) {
+            /* Header section mobile fixes */
+            .d-flex.justify-content-between.align-items-center.mb-4 {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 15px;
+            }
+            
+            .btn.btn-primary {
+                width: 100%;
+                justify-content: center;
+                font-size: 0.9rem !important;
+                padding: 12px 20px !important;
+            }
+            
+            /* Stats cards mobile layout - 6 cards in 2x3 grid */
+            .row.mb-4 .col-md-2 {
+                flex: 0 0 50% !important;
+                max-width: 50% !important;
+                margin-bottom: 15px;
+            }
+            
+            .row.mb-4 .col-md-2:nth-child(odd) {
+                padding-right: 8px;
+            }
+            
+            .row.mb-4 .col-md-2:nth-child(even) {
+                padding-left: 8px;
+            }
+            
+            .card-body h4 {
+                font-size: 1.2rem !important;
+            }
+            
+            .card-body small {
+                font-size: 0.75rem !important;
+            }
+            
+            .card-body.p-3 {
+                padding: 16px !important;
+            }
+            
+            .card-body i.fa-2x {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Main card mobile */
+            .card-header {
+                padding: 16px !important;
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 15px;
+            }
+            
+            .card-header .d-flex {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+                gap: 15px;
+                width: 100%;
+            }
+            
+            .card-header .d-flex.gap-2 {
+                width: 100%;
+                justify-content: stretch;
+            }
+            
+            .card-header .btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .card-body {
+                padding: 16px !important;
+            }
+            
+            /* Filters section mobile layout */
+            .col-md-3,
+            .col-md-2 {
+                margin-bottom: 15px !important;
+            }
+            
+            .form-select,
+            .form-control {
+                font-size: 0.9rem !important;
+            }
+            
+            .input-group {
+                border-radius: 8px !important;
+            }
+            
+            /* Bulk actions mobile */
+            .d-flex.gap-2 {
+                flex-direction: column !important;
+                gap: 10px !important;
+            }
+            
+            .d-flex.gap-2 .form-select,
+            .d-flex.gap-2 .btn {
+                width: 100%;
+            }
+            
+            /* Table mobile responsiveness */
+            .table-responsive {
+                border-radius: 8px !important;
+                margin: 0 -8px;
+            }
+            
+            .table {
+                min-width: 900px;
+            }
+            
+            .table th,
+            .table td {
+                padding: 12px 6px !important;
+                font-size: 0.85rem !important;
+            }
+            
+            .table th {
+                font-size: 0.8rem !important;
+            }
+            
+            /* Achievement preview mobile */
+            .d-flex.align-items-center.justify-content-center {
+                width: 30px !important;
+                height: 30px !important;
+            }
+            
+            .d-flex.align-items-center.justify-content-center i {
+                font-size: 0.85rem !important;
+            }
+            
+            /* Achievement name mobile */
+            .fw-semibold {
+                font-size: 0.85rem !important;
+            }
+            
+            .table small {
+                font-size: 0.75rem !important;
+            }
+            
+            /* Badge adjustments */
+            .badge {
+                font-size: 0.65rem !important;
+                padding: 4px 6px !important;
+            }
+            
+            /* Status badges mobile */
+            .d-flex.gap-1.justify-content-center.flex-wrap {
+                flex-direction: column !important;
+                gap: 4px !important;
+            }
+            
+            .d-flex.gap-1.justify-content-center.flex-wrap .badge {
+                font-size: 0.65rem !important;
+                padding: 3px 6px !important;
+            }
+            
+            /* Actions dropdown mobile */
+            .dropdown-menu {
+                min-width: 200px !important;
+            }
+            
+            .dropdown-item {
+                font-size: 0.85rem !important;
+                padding: 8px 16px !important;
+            }
+            
+            /* Modal mobile adjustments */
+            .modal-dialog {
+                margin: 10px !important;
+                max-width: calc(100vw - 20px) !important;
+            }
+            
+            .modal-header,
+            .modal-body,
+            .modal-footer {
+                padding: 16px !important;
+            }
+            
+            .modal-title {
+                font-size: 1.1rem !important;
+            }
+            
+            /* Pagination mobile */
+            .mt-4.d-flex.justify-content-center {
+                margin-top: 20px !important;
+            }
+            
+            /* Hide less important columns on mobile */
+            .table th:nth-child(5),
+            .table td:nth-child(5),
+            .table th:nth-child(6),
+            .table td:nth-child(6),
+            .table th:nth-child(7),
+            .table td:nth-child(7) {
+                display: none;
+            }
+            
+            /* Alert mobile */
+            .alert {
+                margin: 0 8px 16px 8px !important;
+                font-size: 0.9rem !important;
+            }
+            
+            /* Empty state mobile */
+            .text-center.py-5 {
+                padding: 30px 15px !important;
+            }
+            
+            .text-center.py-5 .fa-3x {
+                font-size: 2rem !important;
+            }
+            
+            .text-center.py-5 h6 {
+                font-size: 1rem !important;
+            }
+        }
+
+        /* Small mobile screens */
+        @media (max-width: 576px) {
+            .container-fluid {
+                padding-left: 10px !important;
+                padding-right: 10px !important;
+            }
+            
+            /* Full width stats cards on small screens */
+            .row.mb-4 .col-md-2 {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+                padding: 0 !important;
+            }
+            
+            /* Smaller table text */
+            .table th,
+            .table td {
+                padding: 8px 4px !important;
+                font-size: 0.8rem !important;
+            }
+            
+            .table {
+                min-width: 700px;
+            }
+            
+            /* Hide more columns on very small screens */
+            .table th:nth-child(4),
+            .table td:nth-child(4) {
+                display: none;
+            }
+            
+            /* Filters stacked vertically */
+            .col-md-3,
+            .col-md-2 {
+                flex: 0 0 100% !important;
+                max-width: 100% !important;
+            }
+            
+            /* Modal full screen on small screens */
+            .modal-dialog {
+                margin: 0 !important;
+                max-width: 100vw !important;
+                height: 100vh !important;
+            }
+            
+            .modal-content {
+                height: 100vh !important;
+                border-radius: 0 !important;
+            }
+            
+            /* Even more compact stats cards */
+            .card-body h4 {
+                font-size: 1.1rem !important;
+            }
+            
+            .card-body small {
+                font-size: 0.7rem !important;
+            }
+            
+            .card-body.p-3 {
+                padding: 12px !important;
+            }
+            
+            /* Card header more compact */
+            .card-header {
+                padding: 12px !important;
+            }
+            
+            .card-header h5 {
+                font-size: 1.1rem !important;
+            }
+            
+            .card-header p {
+                font-size: 0.8rem !important;
+            }
+        }
+
+        /* Extra small mobile screens */
+        @media (max-width: 480px) {
+            /* Hide preview column on very small screens */
+            .table th:nth-child(2),
+            .table td:nth-child(2) {
+                display: none;
+            }
+            
+            .table {
+                min-width: 600px;
+            }
+            
+            /* More compact cards */
+            .card-body {
+                padding: 12px !important;
+            }
+            
+            .card-body h4 {
+                font-size: 1rem !important;
+            }
+            
+            /* Very small badges */
+            .badge {
+                font-size: 0.6rem !important;
+                padding: 2px 4px !important;
+            }
+            
+            /* Form elements smaller */
+            .form-check-input {
+                transform: scale(0.9);
+            }
+            
+            .form-select,
+            .form-control {
+                font-size: 0.85rem !important;
+            }
+            
+            /* Alert more compact */
+            .alert {
+                padding: 10px 12px !important;
+            }
+            
+            /* Achievement name smaller */
+            .fw-semibold {
+                font-size: 0.8rem !important;
+            }
+            
+            .table small {
+                font-size: 0.7rem !important;
+            }
+        }
+
+        /* Achievement-specific mobile optimizations */
+        @media (max-width: 768px) {
+            /* Better touch targets */
+            .form-check-input {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .dropdown-toggle {
+                min-width: 40px;
+                min-height: 40px;
+            }
+            
+            .btn-light.btn-sm {
+                padding: 8px 12px !important;
+            }
+            
+            /* Cursor pointer for sortable columns */
+            .cursor-pointer {
+                cursor: pointer;
+            }
+            
+            /* Type badge colors maintained */
+            .badge[style*="background: #3b82f6"],
+            .badge[style*="background: #10b981"],
+            .badge[style*="background: #06b6d4"],
+            .badge[style*="background: #f59e0b"] {
+                font-size: 0.65rem !important;
+            }
+        }
+    </style>
+    @endpush
 
     @push('scripts')
     <script>

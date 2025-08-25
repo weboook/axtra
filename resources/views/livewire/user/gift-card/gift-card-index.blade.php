@@ -322,3 +322,125 @@
         </div>
     </div>
 </div>
+
+@push('styles')
+<style>
+    /* Mobile optimizations for user gift cards page */
+    @media (max-width: 768px) {
+        /* Header section mobile */
+        .card-body.py-4.px-4 {
+            padding: 1.5rem !important;
+        }
+        
+        .card-body h2 {
+            font-size: 1.5rem !important;
+        }
+        
+        .card-body p {
+            font-size: 1rem !important;
+        }
+        
+        /* Quick stats mobile - stack vertically */
+        .col-md-4 {
+            margin-bottom: 1rem;
+        }
+        
+        /* Card hover effects disabled on mobile */
+        .card[onmouseover]:hover {
+            transform: none !important;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+        }
+        
+        /* Purchase section mobile */
+        .card-header .d-flex {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+            gap: 1rem;
+        }
+        
+        .card-header .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        /* Features grid mobile - 2x2 instead of 4 columns */
+        .col-md-3 {
+            flex: 0 0 50% !important;
+            max-width: 50% !important;
+        }
+        
+        /* Gift cards grid mobile - single column */
+        .col-md-6 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Gift card content mobile */
+        .card-body.p-3 {
+            padding: 1rem !important;
+        }
+        
+        /* Button groups mobile */
+        .btn-group.btn-group-sm {
+            flex-direction: column;
+            width: auto;
+        }
+        
+        .btn-group.btn-group-sm .btn {
+            margin-bottom: 0.25rem;
+            border-radius: 0.5rem !important;
+        }
+        
+        /* Modal mobile */
+        .modal-dialog {
+            margin: 1rem;
+            max-width: calc(100vw - 2rem);
+        }
+        
+        .modal-content {
+            border-radius: 1rem !important;
+        }
+        
+        .modal-header,
+        .modal-body,
+        .modal-footer {
+            padding: 1rem !important;
+        }
+        
+        /* Form elements mobile */
+        .col-md-6 {
+            margin-bottom: 1rem;
+        }
+    }
+
+    /* Small mobile screens */
+    @media (max-width: 576px) {
+        /* Features grid mobile - single column */
+        .col-md-3 {
+            flex: 0 0 100% !important;
+            max-width: 100% !important;
+        }
+        
+        /* Full screen modal on small screens */
+        .modal-dialog {
+            margin: 0;
+            max-width: 100vw;
+            height: 100vh;
+        }
+        
+        .modal-content {
+            height: 100vh;
+            border-radius: 0 !important;
+        }
+        
+        /* Smaller text on very small screens */
+        .card-body h2 {
+            font-size: 1.25rem !important;
+        }
+        
+        .card-body p {
+            font-size: 0.9rem !important;
+        }
+    }
+</style>
+@endpush
