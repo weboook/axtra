@@ -34,7 +34,8 @@ class EquipmentIndex extends Component
             // Log the status change
             LaneHistory::create([
                 'lane_id' => $laneId,
-                'event_type' => 'status_change',
+                'event_type' => 'maintenance',
+                'title' => 'Status Change',
                 'description' => "Status changed to: " . str_replace('_', ' ', $status),
                 'severity' => $status === 'out_of_order' ? 'critical' : 'minor',
                 'performed_by' => auth()->id(),
@@ -64,7 +65,7 @@ class EquipmentIndex extends Component
             $query->where('maintenance_status', $this->statusFilter);
         }
         
-        return $query->orderBy('name')->get();
+        return $query->orderByRaw('CAST(SUBSTRING(name, 6) AS UNSIGNED)')->get();
     }
     
     private function getMaintenanceStats()
