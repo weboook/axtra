@@ -1,256 +1,281 @@
-<x-slot name="header">
-    Employee Dashboard
-</x-slot>
+<div class="container-fluid p-4">
+    <!-- Header Section -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-1" style="color: #1a1a1a; font-weight: 700;">Employee Dashboard</h1>
+            <p class="text-muted mb-0">Welcome back! Here's your shift overview for {{ \Carbon\Carbon::today()->format('F j, Y') }}.</p>
+        </div>
+        <div class="d-flex gap-2 align-items-center">
+            <span class="badge bg-success px-3 py-2" style="border-radius: 20px;">
+                <i class="fas fa-circle me-2" style="font-size: 0.6rem;"></i>On Duty
+            </span>
+            <span class="text-muted">{{ now()->format('g:i A') }}</span>
+        </div>
+    </div>
 
-<div>
-    <!-- Employee Stats -->
+    <!-- Key Performance Stats -->
     <div class="row mb-4">
-        <div class="col-md-3">
-            <div class="card border-0 text-center" 
-                 style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;"
-                 onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0, 0, 0, 0.12)';"
-                 onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.08)';">
-                <div class="card-body p-4">
-                    <div class="mb-3">
-                        <i class="fas fa-calendar-check" style="font-size: 2.5rem; color: #17a2b8;"></i>
+        <div class="col-lg-3 col-md-6">
+            <div class="card h-100" style="border: none; border-radius: 16px; background: linear-gradient(135deg, #17a2b8 0%, #20c997 100%);">
+                <div class="card-body text-white p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 fw-bold">{{ \App\Models\Booking::whereDate('booking_date', today())->count() }}</h3>
+                            <small class="opacity-75">Today's Bookings</small>
+                        </div>
+                        <i class="fas fa-calendar-check fa-2x opacity-50"></i>
                     </div>
-                    <h5 class="mb-2 fw-bold" style="color: #1b1b1b;">{{ \App\Models\Booking::whereDate('created_at', today())->count() }}</h5>
-                    <p class="text-muted mb-0">Today's Bookings</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card border-0 text-center" 
-                 style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;"
-                 onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0, 0, 0, 0.12)';"
-                 onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.08)';">
-                <div class="card-body p-4">
-                    <div class="mb-3">
-                        <i class="fas fa-bowling-ball" style="font-size: 2.5rem; color: #28a745;"></i>
+        <div class="col-lg-3 col-md-6">
+            <div class="card h-100" style="border: none; border-radius: 16px; background: linear-gradient(135deg, #28a745 0%, #20c997 100%);">
+                <div class="card-body text-white p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 fw-bold">{{ \App\Models\Lane::where('maintenance_status', 'operational')->count() }}</h3>
+                            <small class="opacity-75">Available Lanes</small>
+                        </div>
+                        <i class="fas fa-bowling-ball fa-2x opacity-50"></i>
                     </div>
-                    <h5 class="mb-2 fw-bold" style="color: #1b1b1b;">{{ \App\Models\Lane::active()->operational()->count() }}</h5>
-                    <p class="text-muted mb-0">Available Lanes</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card border-0 text-center" 
-                 style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;"
-                 onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0, 0, 0, 0.12)';"
-                 onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.08)';">
-                <div class="card-body p-4">
-                    <div class="mb-3">
-                        <i class="fas fa-clock" style="font-size: 2.5rem; color: #ffc107;"></i>
+        <div class="col-lg-3 col-md-6">
+            <div class="card h-100" style="border: none; border-radius: 16px; background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);">
+                <div class="card-body text-white p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 fw-bold">{{ \App\Models\Booking::where('status', 'pending')->count() }}</h3>
+                            <small class="opacity-75">Pending Check-ins</small>
+                        </div>
+                        <i class="fas fa-clock fa-2x opacity-50"></i>
                     </div>
-                    <h5 class="mb-2 fw-bold" style="color: #1b1b1b;">{{ \App\Models\Booking::where('status', 'pending')->count() }}</h5>
-                    <p class="text-muted mb-0">Pending Bookings</p>
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="card border-0 text-center" 
-                 style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); transition: transform 0.3s ease, box-shadow 0.3s ease;"
-                 onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 20px 40px rgba(0, 0, 0, 0.12)';"
-                 onmouseout="this.style.transform='translateY(0px)'; this.style.boxShadow='0 10px 30px rgba(0, 0, 0, 0.08)';">
-                <div class="card-body p-4">
-                    <div class="mb-3">
-                        <i class="fas fa-users" style="font-size: 2.5rem; color: #6f42c1;"></i>
+        <div class="col-lg-3 col-md-6">
+            <div class="card h-100" style="border: none; border-radius: 16px; background: linear-gradient(135deg, #6f42c1 0%, #e83e8c 100%);">
+                <div class="card-body text-white p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h3 class="mb-1 fw-bold">{{ \App\Models\Lane::where('maintenance_status', '!=', 'operational')->count() }}</h3>
+                            <small class="opacity-75">Maintenance Needed</small>
+                        </div>
+                        <i class="fas fa-wrench fa-2x opacity-50"></i>
                     </div>
-                    <h5 class="mb-2 fw-bold" style="color: #1b1b1b;">{{ \App\Models\User::customers()->count() }}</h5>
-                    <p class="text-muted mb-0">Total Customers</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Quick Actions -->
+    <!-- Quick Actions & Current Status -->
     <div class="row mb-4">
-        <div class="col-12">
-            <div class="card border-0" style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
-                <div class="card-header" style="background: transparent; border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding: 1.5rem 1.5rem 0; border-radius: 1.25rem 1.25rem 0 0;">
-                    <h5 class="mb-0 fw-bold d-flex align-items-center" style="color: #1b1b1b;">
-                        <i class="fas fa-bolt me-2" style="color: #17a2b8;"></i>
-                        Quick Actions
+        <div class="col-lg-8">
+            <div class="card" style="border: none; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="background: white; border-bottom: 1px solid #f1f5f9; border-radius: 16px 16px 0 0; padding: 24px;">
+                    <h5 class="mb-1" style="color: #1a1a1a; font-weight: 700;">
+                        <i class="fas fa-bolt me-2" style="color: #17a2b8;"></i>Quick Actions
                     </h5>
-                    <p class="text-muted mb-0 mt-1" style="font-size: 0.9rem;">Common staff tasks</p>
+                    <p class="text-muted mb-0" style="font-size: 0.9rem;">Common tasks and operations</p>
                 </div>
-                <div class="card-body p-4">
+                <div class="card-body" style="padding: 24px;">
                     <div class="row g-3">
                         <div class="col-md-4">
-                            <a href="{{ route('employee.schedule') }}" class="btn btn-outline-primary w-100 p-3 text-start" style="border-radius: 1rem; border: 1px solid #e0e6ed;">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-calendar-alt me-3" style="font-size: 1.5rem; color: #17a2b8;"></i>
-                                    <div>
-                                        <h6 class="mb-0 fw-semibold">My Schedule</h6>
-                                        <small class="text-muted">View work schedule</small>
-                                    </div>
-                                </div>
+                            <a href="{{ route('employee.quick-actions') }}" class="btn w-100 p-3 text-center quick-action-btn" style="border: 2px solid #e5e7eb; border-radius: 12px; background: white; transition: all 0.2s ease; text-decoration: none;">
+                                <i class="fas fa-tools d-block mb-2" style="font-size: 1.5rem; color: #17a2b8;"></i>
+                                <div class="fw-semibold" style="color: #1f2937;">Lane Maintenance</div>
+                                <small class="text-muted">Report issues</small>
                             </a>
                         </div>
                         <div class="col-md-4">
-                            <a href="{{ route('employee.quick-actions') }}" class="btn btn-outline-primary w-100 p-3 text-start" style="border-radius: 1rem; border: 1px solid #e0e6ed;">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-zap me-3" style="font-size: 1.5rem; color: #ffc107;"></i>
-                                    <div>
-                                        <h6 class="mb-0 fw-semibold">Quick Actions</h6>
-                                        <small class="text-muted">Common tasks</small>
-                                    </div>
-                                </div>
+                            <a href="{{ route('employee.bookings') }}" class="btn w-100 p-3 text-center quick-action-btn" style="border: 2px solid #e5e7eb; border-radius: 12px; background: white; transition: all 0.2s ease; text-decoration: none;">
+                                <i class="fas fa-calendar-day d-block mb-2" style="font-size: 1.5rem; color: #28a745;"></i>
+                                <div class="fw-semibold" style="color: #1f2937;">Today's Bookings</div>
+                                <small class="text-muted">View schedule</small>
                             </a>
                         </div>
                         <div class="col-md-4">
-                            <button type="button" class="btn btn-outline-primary w-100 p-3 text-start" style="border-radius: 1rem; border: 1px solid #e0e6ed;">
-                                <div class="d-flex align-items-center">
-                                    <i class="fas fa-headset me-3" style="font-size: 1.5rem; color: #28a745;"></i>
-                                    <div>
-                                        <h6 class="mb-0 fw-semibold">Customer Support</h6>
-                                        <small class="text-muted">Help customers</small>
-                                    </div>
-                                </div>
-                            </button>
+                            <a href="{{ route('employee.check-ins') }}" class="btn w-100 p-3 text-center quick-action-btn" style="border: 2px solid #e5e7eb; border-radius: 12px; background: white; transition: all 0.2s ease; text-decoration: none;">
+                                <i class="fas fa-check-circle d-block mb-2" style="font-size: 1.5rem; color: #ffc107;"></i>
+                                <div class="fw-semibold" style="color: #1f2937;">Customer Check-ins</div>
+                                <small class="text-muted">Process arrivals</small>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ route('employee.equipment') }}" class="btn w-100 p-3 text-center quick-action-btn" style="border: 2px solid #e5e7eb; border-radius: 12px; background: white; transition: all 0.2s ease; text-decoration: none;">
+                                <i class="fas fa-clipboard-check d-block mb-2" style="font-size: 1.5rem; color: #6f42c1;"></i>
+                                <div class="fw-semibold" style="color: #1f2937;">Equipment Status</div>
+                                <small class="text-muted">Check inventory</small>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ route('employee.schedule') }}" class="btn w-100 p-3 text-center quick-action-btn" style="border: 2px solid #e5e7eb; border-radius: 12px; background: white; transition: all 0.2s ease; text-decoration: none;">
+                                <i class="fas fa-calendar-alt d-block mb-2" style="font-size: 1.5rem; color: #e83e8c;"></i>
+                                <div class="fw-semibold" style="color: #1f2937;">My Schedule</div>
+                                <small class="text-muted">Work calendar</small>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="{{ route('employee.reports') }}" class="btn w-100 p-3 text-center quick-action-btn" style="border: 2px solid #e5e7eb; border-radius: 12px; background: white; transition: all 0.2s ease; text-decoration: none;">
+                                <i class="fas fa-chart-line d-block mb-2" style="font-size: 1.5rem; color: #dc3545;"></i>
+                                <div class="fw-semibold" style="color: #1f2937;">Daily Reports</div>
+                                <small class="text-muted">Shift summary</small>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Today's Schedule & Recent Bookings -->
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card border-0" style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
-                <div class="card-header" style="background: transparent; border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding: 1.5rem 1.5rem 0; border-radius: 1.25rem 1.25rem 0 0;">
-                    <h5 class="mb-0 fw-bold d-flex align-items-center" style="color: #1b1b1b;">
-                        <i class="fas fa-clock me-2" style="color: #17a2b8;"></i>
-                        Today's Schedule
+        <div class="col-lg-4">
+            <div class="card" style="border: none; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="background: white; border-bottom: 1px solid #f1f5f9; border-radius: 16px 16px 0 0; padding: 24px;">
+                    <h5 class="mb-1" style="color: #1a1a1a; font-weight: 700;">
+                        <i class="fas fa-clock me-2" style="color: #17a2b8;"></i>My Shift
                     </h5>
-                    <p class="text-muted mb-0 mt-1" style="font-size: 0.9rem;">Your work schedule for today</p>
+                    <p class="text-muted mb-0" style="font-size: 0.9rem;">Current work schedule</p>
                 </div>
-                <div class="card-body p-4">
-                    <div class="d-flex align-items-center p-3 rounded-3 mb-3" style="background: rgba(23, 162, 184, 0.1); border: 1px solid rgba(23, 162, 184, 0.2);">
-                        <div class="me-3">
-                            <i class="fas fa-briefcase" style="color: #17a2b8; font-size: 1.2rem;"></i>
-                        </div>
-                        <div class="flex-grow-1">
-                            <h6 class="mb-1 fw-semibold" style="color: #1b1b1b;">Regular Shift</h6>
-                            <p class="mb-0 text-muted" style="font-size: 0.85rem;">9:00 AM - 6:00 PM</p>
-                        </div>
-                        <div class="ms-3">
-                            <span class="badge rounded-pill" style="background: #28a745;">Active</span>
-                        </div>
-                    </div>
-                    
-                    <div class="text-center py-3">
+                <div class="card-body" style="padding: 24px;">
+                    <div class="text-center">
                         <div class="mb-3">
                             <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto" 
                                  style="width: 60px; height: 60px; background: rgba(23, 162, 184, 0.1);">
-                                <i class="fas fa-clock" style="color: #17a2b8; font-size: 1.5rem;"></i>
+                                <i class="fas fa-briefcase" style="color: #17a2b8; font-size: 1.5rem;"></i>
                             </div>
                         </div>
-                        <h6 class="fw-semibold mb-1" style="color: #1b1b1b;">Currently On Shift</h6>
-                        <p class="text-muted mb-0" style="font-size: 0.85rem;">{{ now()->format('g:i A') }}</p>
+                        <h6 class="fw-semibold mb-2" style="color: #1f2937;">Regular Shift</h6>
+                        <p class="text-muted mb-3">9:00 AM - 6:00 PM</p>
+                        <div class="progress mb-3" style="height: 8px; background: #f3f4f6; border-radius: 10px;">
+                            @php
+                                $currentHour = now()->hour;
+                                $shiftProgress = max(0, min(100, (($currentHour - 9) / 9) * 100));
+                            @endphp
+                            <div class="progress-bar" style="width: {{ $shiftProgress }}%; background: linear-gradient(90deg, #17a2b8, #20c997); border-radius: 10px;"></div>
+                        </div>
+                        <small class="text-muted">{{ round($shiftProgress) }}% of shift completed</small>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <div class="col-md-6">
-            <div class="card border-0" style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
-                <div class="card-header" style="background: transparent; border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding: 1.5rem 1.5rem 0; border-radius: 1.25rem 1.25rem 0 0;">
-                    <h5 class="mb-0 fw-bold d-flex align-items-center" style="color: #1b1b1b;">
-                        <i class="fas fa-calendar-check me-2" style="color: #17a2b8;"></i>
-                        Recent Bookings
+    </div>
+
+    <!-- Current Activity & Urgent Tasks -->
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card" style="border: none; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="background: white; border-bottom: 1px solid #f1f5f9; border-radius: 16px 16px 0 0; padding: 24px;">
+                    <h5 class="mb-1" style="color: #1a1a1a; font-weight: 700;">
+                        <i class="fas fa-calendar-day me-2" style="color: #17a2b8;"></i>Today's Activity
                     </h5>
-                    <p class="text-muted mb-0 mt-1" style="font-size: 0.9rem;">Latest customer reservations</p>
+                    <p class="text-muted mb-0" style="font-size: 0.9rem;">Recent bookings and check-ins</p>
                 </div>
-                <div class="card-body p-4">
+                <div class="card-body" style="padding: 24px;">
                     @php
-                        $todayBookings = \App\Models\Booking::with('user', 'lane')
-                            ->whereDate('created_at', today())
-                            ->orderBy('created_at', 'desc')
-                            ->take(4)
+                        $todayBookings = \App\Models\Booking::with(['user', 'lane'])
+                            ->whereDate('booking_date', today())
+                            ->orderBy('start_time')
+                            ->take(8)
                             ->get();
                     @endphp
                     
                     @if($todayBookings->count() > 0)
-                        <div class="d-grid gap-2">
-                            @foreach($todayBookings as $booking)
-                                <div class="d-flex align-items-center p-2 rounded-3" style="background: #f8f9fa;">
-                                    <div class="me-3">
-                                        <div class="rounded-circle d-flex align-items-center justify-content-center" 
-                                             style="width: 35px; height: 35px; background: rgba(23, 162, 184, 0.1);">
-                                            <i class="fas fa-user" style="color: #17a2b8; font-size: 0.9rem;"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <h6 class="mb-0 fw-semibold" style="font-size: 0.85rem;">{{ $booking->user->name }}</h6>
-                                        <p class="mb-0 text-muted" style="font-size: 0.75rem;">
-                                            {{ $booking->lane->name ?? 'Lane' }} • {{ $booking->created_at->format('g:i A') }}
-                                        </p>
-                                    </div>
-                                    <div class="ms-2">
-                                        <span class="badge rounded-pill" style="font-size: 0.7rem; background: {{ $booking->status === 'confirmed' ? '#28a745' : '#ffc107' }};">
-                                            {{ ucfirst($booking->status) }}
-                                        </span>
+                    <div class="list-group list-group-flush">
+                        @foreach($todayBookings as $booking)
+                        <div class="list-group-item border-0 px-0 py-3" style="border-bottom: 1px solid #f1f5f9 !important;">
+                            <div class="d-flex align-items-center">
+                                <div class="me-3">
+                                    <div class="rounded-circle d-flex align-items-center justify-content-center" 
+                                         style="width: 40px; height: 40px; background: {{ $booking->status === 'confirmed' ? 'linear-gradient(135deg, #28a745, #20c997)' : 'linear-gradient(135deg, #ffc107, #fd7e14)' }};">
+                                        <i class="fas fa-user text-white" style="font-size: 0.9rem;"></i>
                                     </div>
                                 </div>
-                            @endforeach
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <div>
+                                            <h6 class="mb-1 fw-semibold" style="color: #1f2937;">{{ $booking->user->name }}</h6>
+                                            <p class="mb-1 text-muted" style="font-size: 0.9rem;">
+                                                {{ $booking->lane->name ?? 'Lane TBD' }}
+                                                @if($booking->start_time)
+                                                • {{ \Carbon\Carbon::parse($booking->start_time)->format('g:i A') }}
+                                                @endif
+                                            </p>
+                                            <span class="badge" style="background: {{ $booking->status === 'confirmed' ? '#28a745' : ($booking->status === 'pending' ? '#ffc107' : '#6b7280') }}; color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem;">
+                                                {{ ucfirst($booking->status) }}
+                                            </span>
+                                        </div>
+                                        <small class="text-muted">{{ $booking->created_at->diffForHumans() }}</small>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                        @endforeach
+                    </div>
                     @else
-                        <div class="text-center py-4">
-                            <i class="fas fa-calendar-alt text-muted mb-3" style="font-size: 2rem; opacity: 0.3;"></i>
-                            <h6 class="text-muted" style="font-size: 0.9rem;">No bookings today</h6>
-                            <p class="text-muted mb-0" style="font-size: 0.8rem;">New bookings will appear here</p>
-                        </div>
+                    <div class="text-center py-5">
+                        <i class="fas fa-calendar-alt fa-3x text-muted mb-3" style="opacity: 0.3;"></i>
+                        <h6 class="text-muted">No bookings today</h6>
+                        <p class="text-muted">New bookings will appear here</p>
+                    </div>
                     @endif
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Lane Status -->
-    <div class="row mt-4">
-        <div class="col-12">
-            <div class="card border-0" style="background: white; border-radius: 1.25rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);">
-                <div class="card-header" style="background: transparent; border-bottom: 1px solid rgba(0, 0, 0, 0.05); padding: 1.5rem 1.5rem 0; border-radius: 1.25rem 1.25rem 0 0;">
-                    <h5 class="mb-0 fw-bold d-flex align-items-center" style="color: #1b1b1b;">
-                        <i class="fas fa-bowling-ball me-2" style="color: #17a2b8;"></i>
-                        Lane Status
+        
+        <div class="col-lg-4">
+            <div class="card" style="border: none; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="background: white; border-bottom: 1px solid #f1f5f9; border-radius: 16px 16px 0 0; padding: 24px;">
+                    <h5 class="mb-1" style="color: #1a1a1a; font-weight: 700;">
+                        <i class="fas fa-bowling-ball me-2" style="color: #17a2b8;"></i>Lane Status
                     </h5>
-                    <p class="text-muted mb-0 mt-1" style="font-size: 0.9rem;">Current status of all lanes</p>
+                    <p class="text-muted mb-0" style="font-size: 0.9rem;">Current lane availability</p>
                 </div>
-                <div class="card-body p-4">
+                <div class="card-body" style="padding: 24px;">
                     @php
-                        $lanes = \App\Models\Lane::all();
+                        $lanes = \App\Models\Lane::orderBy('name')->get();
                     @endphp
                     
                     @if($lanes->count() > 0)
-                        <div class="row g-3">
-                            @foreach($lanes as $lane)
-                                <div class="col-md-3">
-                                    <div class="card border" style="border-radius: 1rem; border-color: {{ $lane->is_available ? '#28a745' : '#dc3545' }} !important; background: {{ $lane->is_available ? 'rgba(40, 167, 69, 0.05)' : 'rgba(220, 53, 69, 0.05)' }};">
-                                        <div class="card-body p-3 text-center">
-                                            <div class="mb-2">
-                                                <i class="fas fa-bowling-ball" style="font-size: 1.5rem; color: {{ $lane->is_available ? '#28a745' : '#dc3545' }};"></i>
-                                            </div>
-                                            <h6 class="mb-1 fw-semibold">{{ $lane->name }}</h6>
-                                            <span class="badge rounded-pill" style="background: {{ $lane->is_available ? '#28a745' : '#dc3545' }};">
-                                                {{ $lane->is_available ? 'Available' : 'Occupied' }}
-                                            </span>
-                                        </div>
-                                    </div>
+                    <div class="d-flex flex-column gap-2">
+                        @foreach($lanes->take(6) as $lane)
+                        <div class="d-flex align-items-center p-2" style="background: #f8f9fa; border-radius: 12px;">
+                            <div class="me-2">
+                                <div class="rounded-circle d-flex align-items-center justify-content-center" 
+                                     style="width: 28px; height: 28px; background: {{ $lane->maintenance_status === 'operational' ? '#28a745' : '#dc3545' }};">
+                                    <i class="fas fa-bowling-ball text-white" style="font-size: 0.7rem;"></i>
                                 </div>
-                            @endforeach
+                            </div>
+                            <div class="flex-grow-1 min-w-0">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="fw-semibold text-truncate" style="color: #1f2937;">{{ $lane->name }}</span>
+                                    <span class="badge" style="background: {{ $lane->maintenance_status === 'operational' ? '#28a745' : '#dc3545' }}; color: white; padding: 2px 6px; border-radius: 8px; font-size: 0.7rem;">
+                                        {{ $lane->maintenance_status === 'operational' ? 'OK' : 'Issue' }}
+                                    </span>
+                                </div>
+                            </div>
                         </div>
+                        @endforeach
+                        @if($lanes->count() > 6)
+                        <small class="text-muted text-center">+{{ $lanes->count() - 6 }} more lanes</small>
+                        @endif
+                    </div>
                     @else
-                        <div class="text-center py-4">
-                            <i class="fas fa-bowling-ball text-muted mb-3" style="font-size: 3rem; opacity: 0.3;"></i>
-                            <h6 class="text-muted">No lanes configured</h6>
-                            <p class="text-muted mb-0">Contact admin to set up lanes</p>
-                        </div>
+                    <div class="text-center py-4">
+                        <i class="fas fa-bowling-ball fa-2x text-muted mb-2" style="opacity: 0.3;"></i>
+                        <p class="text-muted mb-0">No lanes configured</p>
+                    </div>
                     @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@push('styles')
+<style>
+.quick-action-btn:hover {
+    border-color: #17a2b8 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(23, 162, 184, 0.15);
+}
+</style>
+@endpush

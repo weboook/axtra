@@ -23,7 +23,7 @@
 
         <!-- My Schedule -->
         <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.schedule*') ? 'active' : '' }}" 
-           href="#"
+           href="{{ route('employee.schedule') }}"
            style="color: {{ request()->routeIs('employee.schedule*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
                   background: {{ request()->routeIs('employee.schedule*') ? '#17a2b8' : 'transparent' }};
                   transition: all 0.3s ease;
@@ -45,7 +45,7 @@
         
         <!-- Quick Actions -->
         <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.quick-actions*') ? 'active' : '' }}" 
-           href="#"
+           href="{{ route('employee.quick-actions') }}"
            style="color: {{ request()->routeIs('employee.quick-actions*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
                   background: {{ request()->routeIs('employee.quick-actions*') ? '#17a2b8' : 'transparent' }};
                   transition: all 0.3s ease;
@@ -62,7 +62,7 @@
 
         <!-- Today's Bookings -->
         <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.bookings*') ? 'active' : '' }}" 
-           href="#"
+           href="{{ route('employee.bookings') }}"
            style="color: {{ request()->routeIs('employee.bookings*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
                   background: {{ request()->routeIs('employee.bookings*') ? '#17a2b8' : 'transparent' }};
                   transition: all 0.3s ease;
@@ -79,7 +79,7 @@
 
         <!-- Check-ins -->
         <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.check-ins*') ? 'active' : '' }}" 
-           href="#"
+           href="{{ route('employee.check-ins') }}"
            style="color: {{ request()->routeIs('employee.check-ins*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
                   background: {{ request()->routeIs('employee.check-ins*') ? '#17a2b8' : 'transparent' }};
                   transition: all 0.3s ease;
@@ -101,7 +101,7 @@
         
         <!-- Equipment Status -->
         <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.equipment*') ? 'active' : '' }}" 
-           href="#"
+           href="{{ route('employee.equipment') }}"
            style="color: {{ request()->routeIs('employee.equipment*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
                   background: {{ request()->routeIs('employee.equipment*') ? '#17a2b8' : 'transparent' }};
                   transition: all 0.3s ease;
@@ -116,22 +116,6 @@
             </div>
         </a>
 
-        <!-- Customer Support -->
-        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none" 
-           href="#"
-           style="color: rgba(255, 255, 255, 0.8);
-                  background: transparent;
-                  transition: all 0.3s ease;
-                  border: 1px solid transparent;
-                  padding: 0.7rem 0.75rem !important;">
-            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
-                <i class="fas fa-headset"></i>
-            </div>
-            <div class="flex-grow-1">
-                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Customer Support</h6>
-                <small class="opacity-75" style="font-size: 0.75rem;">Help customers</small>
-            </div>
-        </a>
     </div>
 
     <!-- Reports Section -->
@@ -140,7 +124,7 @@
         
         <!-- Daily Reports -->
         <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('employee.reports*') ? 'active' : '' }}" 
-           href="#"
+           href="{{ route('employee.reports') }}"
            style="color: {{ request()->routeIs('employee.reports*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
                   background: {{ request()->routeIs('employee.reports*') ? '#17a2b8' : 'transparent' }};
                   transition: all 0.3s ease;

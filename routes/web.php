@@ -127,6 +127,10 @@ Route::middleware([
         Route::get('/dashboard', App\Livewire\Employee\Dashboard\DashboardIndex::class)->name('dashboard');
         Route::get('/schedule', App\Livewire\Employee\Schedule\ScheduleIndex::class)->name('schedule');
         Route::get('/quick-actions', App\Livewire\Employee\QuickActions\QuickActionsIndex::class)->name('quick-actions');
+        Route::get('/bookings', App\Livewire\Employee\Bookings\BookingsIndex::class)->name('bookings');
+        Route::get('/check-ins', App\Livewire\Employee\CheckIns\CheckInsIndex::class)->name('check-ins');
+        Route::get('/equipment', App\Livewire\Employee\Equipment\EquipmentIndex::class)->name('equipment');
+        Route::get('/reports', App\Livewire\Employee\Reports\ReportsIndex::class)->name('reports');
     });
 
     // Customer routes - clean URLs without dashboard prefix (admins can access)

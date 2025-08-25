@@ -39,6 +39,11 @@ class LaneHistory extends Model
         return $this->belongsTo(Lane::class);
     }
 
+    public function performer()
+    {
+        return $this->belongsTo(User::class, 'performed_by');
+    }
+
     public function scopeAxeBreaks($query)
     {
         return $query->where('event_type', 'axe_break');
