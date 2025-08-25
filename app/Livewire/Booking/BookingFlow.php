@@ -123,8 +123,18 @@ class BookingFlow extends Component
 
     public function mount()
     {
-        // Restore from session first if available
+        // Handle URL parameters first
+        if (request('step')) {
+            $this->step = (int) request('step');
+        }
+        
+        // Restore from session after URL parameters
         $this->restoreFromSession();
+        
+        // Override with URL parameters again if present
+        if (request('step')) {
+            $this->step = (int) request('step');
+        }
         
         // Handle pre-selected parameters from URL (override session if present)
         if (request('players') && !$this->playerCount) {
@@ -146,8 +156,10 @@ class BookingFlow extends Component
             session()->forget(['booking_state', 'restore_booking']);
         }
         
-        // Validate step based on available data
-        $this->validateCurrentStep();
+        // Only validate step if not explicitly set via URL
+        if (!request('step')) {
+            $this->validateCurrentStep();
+        }
         
         // Load initial services if category is pre-selected
         if ($this->selectedCategory) {
@@ -595,7 +607,7 @@ class BookingFlow extends Component
     }
     
     private function validateCurrentStep()
-    {
+    {        
         // If on step 2+ but missing critical step 1 data, go back to step 1
         if ($this->step >= 2 && (!$this->selectedService || !$this->playerCount || $this->playerCount < 1)) {
             $this->step = 1;
@@ -603,7 +615,6 @@ class BookingFlow extends Component
         }
         
         // If on step 3 but missing critical step 2 data, go back to step 2
-        // Only validate date/time, not eventType as it might be optional for some flows
         if ($this->step >= 3 && (!$this->selectedDate || !$this->selectedTime)) {
             $this->step = 2;
             return;
