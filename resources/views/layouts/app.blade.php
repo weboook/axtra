@@ -59,9 +59,22 @@
                 flex: 1;
                 display: flex;
                 flex-direction: column;
-                margin-left: 0; /* Remove margin */
+                margin-left: 0;
             }
             
+            /* Desktop styles */
+            @media (min-width: 992px) {
+                .sidebar-wrapper {
+                    position: relative;
+                    left: auto;
+                }
+                
+                #sidebarToggle {
+                    display: none !important;
+                }
+            }
+            
+            /* Mobile styles */
             @media (max-width: 991px) {
                 .sidebar-wrapper {
                     position: fixed;
@@ -78,6 +91,19 @@
                 
                 .content-wrapper {
                     margin-left: 0;
+                    width: 100%;
+                }
+                
+                #sidebarToggle {
+                    display: block !important;
+                }
+                
+                /* Force sidebar to be positioned relative on mobile to follow wrapper */
+                #sidenav-main {
+                    position: relative !important;
+                    left: 0 !important;
+                    transform: none !important;
+                    top: 0 !important;
                 }
             }
             
@@ -232,11 +258,6 @@
             </div>
         </div>
 
-        <!-- Mobile Sidebar Toggle -->
-        <button class="btn d-lg-none position-fixed" id="sidebarToggle" 
-                style="top: 1rem; left: 1rem; z-index: 1100; background: var(--gradient-red); color: white; border: none; border-radius: 0.75rem; width: 50px; height: 50px; box-shadow: var(--axtra-shadow);">
-            <i class="fas fa-bars"></i>
-        </button>
 
         <!-- Sidebar Overlay for Mobile -->
         <div class="sidebar-overlay d-lg-none" id="sidebarOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); z-index: 1040;"></div>

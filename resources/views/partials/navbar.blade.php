@@ -8,10 +8,25 @@
                                                       border: 1px solid rgba(255, 255, 255, 0.1);
                                                       width: 100%;">
         <div class="container-fluid h-100 px-4">
-            <!-- Left Side: Search -->
+            <!-- Left Side: Mobile Menu + Search -->
             <div class="d-flex align-items-center">
+                <!-- Mobile Sidebar Toggle -->
+                <button class="btn d-lg-none me-3" id="sidebarToggle" 
+                        style="background: linear-gradient(135deg, #c02425 0%, #d63031 100%); 
+                               color: white; 
+                               border: none; 
+                               border-radius: 8px; 
+                               width: 40px; 
+                               height: 40px; 
+                               display: flex;
+                               align-items: center;
+                               justify-content: center;
+                               box-shadow: 0 2px 8px rgba(192, 36, 37, 0.3);">
+                    <i class="fas fa-bars" style="font-size: 0.9rem;"></i>
+                </button>
+                
                 <!-- Search Bar -->
-                <div class="me-4 d-none d-md-flex">
+                <div class="flex-grow-1 me-4">
                     @livewire('shared.search.search-index')
                 </div>
             </div>

@@ -15,7 +15,7 @@
               scrollbar-color: rgba(192, 36, 37, 0.5) transparent;">
     
     <!-- Brand Header -->
-    <div class="py-4 px-4" style="border-bottom: 1px solid rgba(192, 36, 37, 0.3);">
+    <div class="py-4 px-4">
         <a href="{{ route('dashboard') }}" class="text-decoration-none d-flex align-items-center justify-content-center">
             <div class="text-center">
                 <img src="{{ asset('images/brand/axtra-full.png') }}" 
