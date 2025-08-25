@@ -4,7 +4,40 @@
         @php
             $service = \App\Models\Service::find($selectedService);
         @endphp
-        <div class="d-flex justify-content-between align-items-center mb-4">
+        <!-- Mobile Layout -->
+        <div class="d-block d-lg-none mb-4">
+            <!-- Back Button (Full Width on Mobile) -->
+            <div class="mb-3">
+                <button type="button" class="btn btn-outline-secondary w-100" wire:click="previousStep"
+                        style="border-radius: 0.75rem; padding: 0.75rem; border-color: #c02425; color: #c02425; font-weight: 600;">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Date & Details
+                </button>
+            </div>
+            
+            <!-- Selected Service Summary (Stacked on Mobile) -->
+            <div class="card mb-3" style="border: 1px solid rgba(192, 36, 37, 0.2); background: rgba(192, 36, 37, 0.05);">
+                <div class="card-body p-3 text-center">
+                    <div class="d-flex align-items-center justify-content-center mb-2">
+                        <i class="fas fa-check-circle me-2" style="color: #c02425;"></i>
+                        <span class="fw-bold text-dark">{{ $service->name }}</span>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center text-muted small">
+                        <span>{{ $playerCount }} player{{ $playerCount > 1 ? 's' : '' }}</span>
+                        <span class="mx-2">•</span>
+                        <span class="fw-bold" style="color: #c02425;">CHF {{ number_format($total, 2) }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complete Payment Button (Full Width on Mobile) -->
+            <button type="button" class="btn btn-lg w-100 py-3" wire:click="proceedToPayment"
+                    style="background: #c02425; border: none; color: white; border-radius: 0.75rem; font-weight: 600;">
+                Complete Payment <i class="fas fa-credit-card ms-2"></i>
+            </button>
+        </div>
+
+        <!-- Desktop Layout -->
+        <div class="d-none d-lg-flex justify-content-between align-items-center mb-4">
             <!-- Back Button -->
             <button type="button" class="btn btn-outline-secondary" wire:click="previousStep"
                     style="border-radius: 0.5rem; padding: 0.5rem 1.5rem; border-color: #c02425; color: #c02425;">

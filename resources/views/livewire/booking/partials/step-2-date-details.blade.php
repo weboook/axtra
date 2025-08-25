@@ -117,7 +117,7 @@
                                             $isNearFull = $availableCapacity <= 10;
                                             $isFull = $availableCapacity <= 0;
                                         @endphp
-                                        <div class="col-4">
+                                        <div class="col-6 col-lg-4">
                                             <button type="button" 
                                                     class="btn w-100 position-relative {{ $isFull ? 'disabled' : '' }}"
                                                     wire:click="$set('selectedTime', '{{ $slot }}')"
@@ -172,9 +172,9 @@
         </div>
 
         <!-- Event Type - 1/3 width -->
-        <div class="col-lg-4">
+        <div class="col-12 col-lg-4 order-2 order-lg-2">
             <div class="card border-0 h-100" style="background: white; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);">
-                <div class="card-body p-4">
+                <div class="card-body p-3 p-lg-4">
                     <h5 class="fw-bold text-dark mb-3">Event Type</h5>
                     
                     <!-- Event Type Selection -->
@@ -227,6 +227,20 @@
                         <textarea class="form-control" wire:model.defer="comments" rows="3" 
                                   placeholder="Any special requests..."
                                   style="border-radius: 0.5rem; resize: none; border: 1px solid #dee2e6;"></textarea>
+                    </div>
+                    
+                    <!-- Booking Policy -->
+                    <div class="alert alert-info border-0 mt-4" style="background: rgba(13, 202, 240, 0.1); border-radius: 0.75rem;">
+                        <div class="d-flex">
+                            <i class="fas fa-info-circle me-2 text-info mt-1"></i>
+                            <div>
+                                <h6 class="text-info fw-bold mb-1">Booking Policy</h6>
+                                <small class="text-info">
+                                    Changes to your booking can be made up to <strong>48 hours before</strong> your scheduled event. 
+                                    After this deadline, no changes will be accepted. Please plan accordingly.
+                                </small>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

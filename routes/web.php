@@ -120,6 +120,7 @@ Route::middleware([
         Route::get('/gift-cards', App\Livewire\Admin\GiftCards\GiftCardsIndex::class)->name('gift-cards');
         Route::get('/levels', App\Livewire\Admin\Levels\LevelsIndex::class)->name('levels');
         Route::get('/achievements', App\Livewire\Admin\Achievements\AchievementsIndex::class)->name('achievements');
+        Route::get('/email-previews', App\Livewire\Admin\EmailPreviews::class)->name('email-previews');
     });
 
     // Employee routes (admins and employees can access)

@@ -173,6 +173,28 @@
         </a>
     </div>
 
+    <!-- System Section -->
+    <div class="nav-section mb-4">
+        <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">System</small>
+        
+        <!-- Email Templates -->
+        <a class="nav-link d-flex align-items-center mb-1 rounded-3 text-decoration-none {{ request()->routeIs('admin.email-previews*') ? 'active' : '' }}" 
+           href="{{ route('admin.email-previews') }}"
+           style="color: {{ request()->routeIs('admin.email-previews*') ? 'white' : 'rgba(255, 255, 255, 0.8)' }};
+                  background: {{ request()->routeIs('admin.email-previews*') ? '#c02425' : 'transparent' }};
+                  transition: all 0.3s ease;
+                  border: 1px solid {{ request()->routeIs('admin.email-previews*') ? '#c02425' : 'transparent' }};
+                  padding: 0.7rem 0.75rem !important;">
+            <div class="me-3 d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div class="flex-grow-1">
+                <h6 class="mb-0 fw-semibold" style="font-size: 0.9rem;">Email Templates</h6>
+                <small class="opacity-75" style="font-size: 0.75rem;">Preview emails</small>
+            </div>
+        </a>
+    </div>
+
     <!-- Development Tools Section -->
     <div class="nav-section">
         <small class="nav-section-title fw-bold text-uppercase px-3 mb-2 d-block" style="color: rgba(255, 255, 255, 0.7); font-size: 0.7rem; letter-spacing: 1px;">Developer Tools</small>
