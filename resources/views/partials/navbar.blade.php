@@ -447,6 +447,8 @@
             min-width: 260px !important;
             left: auto !important;
             right: 0 !important;
+            max-width: calc(100vw - 20px) !important;
+            transform: translateX(0) !important;
         }
         
         /* Hide user name on very small screens */
@@ -457,7 +459,41 @@
         /* Notification dropdown mobile */
         .dropdown-menu.dropdown-menu-end {
             min-width: 300px !important;
-            max-width: calc(100vw - 20px);
+            max-width: calc(100vw - 20px) !important;
+            left: auto !important;
+            right: 0 !important;
+            transform: translateX(0) !important;
+        }
+        
+        /* Role switcher dropdown mobile */
+        .dropdown-menu[style*="min-width"] {
+            min-width: 250px !important;
+            max-width: calc(100vw - 20px) !important;
+            left: auto !important;
+            right: 0 !important;
+        }
+        
+        /* Ensure all dropdowns stay within viewport */
+        .navbar .dropdown {
+            position: static !important;
+        }
+        
+        .navbar .dropdown-menu {
+            position: fixed !important;
+            z-index: 9999 !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+            border-radius: 12px !important;
+            top: 65px !important;
+        }
+        
+        /* Navbar overflow handling */
+        .navbar {
+            overflow: visible !important;
+        }
+        
+        .navbar .container-fluid {
+            overflow: visible !important;
         }
         
         /* Mobile quick actions */
@@ -504,6 +540,21 @@
         .dropdown-menu {
             min-width: calc(100vw - 30px) !important;
             max-width: calc(100vw - 30px) !important;
+            left: 15px !important;
+            right: 15px !important;
+            transform: translateX(0) !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+        
+        /* Role switcher and notifications specific positioning */
+        .dropdown-menu.dropdown-menu-end,
+        .dropdown-menu[style*="min-width"] {
+            left: 15px !important;
+            right: 15px !important;
+            width: calc(100vw - 30px) !important;
+            max-width: calc(100vw - 30px) !important;
+            min-width: calc(100vw - 30px) !important;
         }
     }
 </style>
