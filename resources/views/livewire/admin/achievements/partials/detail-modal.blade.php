@@ -2,12 +2,21 @@
 @if($showDetailModal && $selectedAchievement)
 <div class="modal fade show d-block" tabindex="-1" style="background-color: rgba(0,0,0,0.5);">
     <div class="modal-dialog modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Achievement Details - {{ $selectedAchievement->name }}</h5>
-                <button type="button" class="btn-close" wire:click="closeModals"></button>
+        <div class="modal-content" style="border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);">
+            <div class="modal-header" style="border-bottom: 1px solid #f8f9fa; padding: 1.5rem;">
+                <div class="d-flex align-items-center">
+                    <div class="me-3 d-flex align-items-center justify-content-center" 
+                         style="width: 48px; height: 48px; background: rgba(192, 36, 37, 0.1); border-radius: 12px;">
+                        <i class="{{ $selectedAchievement->icon }}" style="color: {{ $selectedAchievement->color }}; font-size: 1.25rem;"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0" style="color: #1a1a1a; font-weight: 700;">Achievement Details - {{ $selectedAchievement->name }}</h5>
+                        <small class="text-muted">View achievement information and statistics</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" wire:click="closeModals" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="padding: 1.5rem;">
                 <div class="row g-4">
                     <!-- Achievement Information -->
                     <div class="col-md-6">
@@ -203,14 +212,16 @@
                     @endif
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" wire:click="closeModals">Close</button>
-                <button type="button" class="btn btn-outline-primary" wire:click="showEditAchievement({{ $selectedAchievement->id }})">
+            <div class="modal-footer" style="border-top: 1px solid #f8f9fa; padding: 1.5rem;">
+                <button type="button" class="btn btn-outline-secondary" wire:click="closeModals" style="border-radius: 8px; padding: 10px 20px; font-weight: 500;">
+                    Close
+                </button>
+                <button type="button" class="btn btn-outline-primary" wire:click="showEditAchievement({{ $selectedAchievement->id }})" style="border-radius: 8px; padding: 10px 20px; font-weight: 500; border-color: #c02425; color: #c02425;">
                     <i class="fas fa-edit me-2"></i>Edit Achievement
                 </button>
                 @if($selectedAchievement->userAchievements()->count() === 0)
                 <button type="button" wire:click="deleteAchievement({{ $selectedAchievement->id }})" 
-                        class="btn btn-outline-danger"
+                        class="btn btn-outline-danger" style="border-radius: 8px; padding: 10px 20px; font-weight: 500;"
                         onclick="return confirm('Are you sure you want to delete this achievement?')">
                     <i class="fas fa-trash me-2"></i>Delete Achievement
                 </button>

@@ -30,8 +30,14 @@
         <!-- SweetAlert2 -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+        <!-- Modal Styles -->
+        <link rel="stylesheet" href="{{ asset('css/modal-styles.css') }}">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        
+        <!-- Modal Helpers -->
+        <script src="{{ asset('js/modal-helpers.js') }}" defer></script>
 
         <!-- Styles -->
         @livewireStyles

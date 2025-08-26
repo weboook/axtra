@@ -85,15 +85,23 @@
          style="display: none;"
          x-transition.duration.200ms>
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0" style="border-radius: 1.25rem; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3); border: 2px solid rgba(220, 53, 69, 0.2);">
-                <div class="modal-header" style="background: rgba(220, 53, 69, 0.05); border-bottom: 1px solid rgba(220, 53, 69, 0.1); padding: 1.5rem 1.5rem 0; border-radius: 1.25rem 1.25rem 0 0;">
-                    <h5 class="modal-title fw-bold d-flex align-items-center" id="confirmDeleteModalLabel" style="color: #dc3545;">
-                        <i class="fas fa-exclamation-triangle me-2"></i>
-                        Confirm Account Deletion
-                    </h5>
+            <div class="modal-content" style="border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);">
+                <div class="modal-header" style="border-bottom: 1px solid #f8f9fa; padding: 1.5rem;">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3 d-flex align-items-center justify-content-center" 
+                             style="width: 48px; height: 48px; background: rgba(220, 53, 69, 0.1); border-radius: 12px;">
+                            <i class="fas fa-exclamation-triangle" style="color: #dc3545; font-size: 1.25rem;"></i>
+                        </div>
+                        <div>
+                            <h5 class="modal-title mb-0" id="confirmDeleteModalLabel" style="color: #1a1a1a; font-weight: 700;">
+                                Confirm Account Deletion
+                            </h5>
+                            <small class="text-muted">This action cannot be undone</small>
+                        </div>
+                    </div>
                     <button type="button" class="btn-close" x-on:click="show = false" aria-label="Close"></button>
                 </div>
-                <div class="modal-body p-4">
+                <div class="modal-body" style="padding: 1.5rem;">
                     <div class="alert alert-danger mb-4" style="border-radius: 1rem; border: none;">
                         <div class="d-flex align-items-start">
                             <i class="fas fa-exclamation-triangle me-3 mt-1"></i>
@@ -121,14 +129,14 @@
                         @enderror
                     </div>
                 </div>
-                <div class="modal-footer" style="background: transparent; border-top: 1px solid rgba(220, 53, 69, 0.1); padding: 0 1.5rem 1.5rem; border-radius: 0 0 1.25rem 1.25rem;">
-                    <button type="button" class="btn btn-outline-secondary px-4 py-2 me-2" 
-                            style="border-radius: 1rem;" 
+                <div class="modal-footer" style="border-top: 1px solid #f8f9fa; padding: 1.5rem;">
+                    <button type="button" class="btn btn-outline-secondary" 
+                            style="border-radius: 8px; padding: 10px 20px; font-weight: 500;" 
                             x-on:click="show = false" wire:loading.attr="disabled">
                         Cancel
                     </button>
-                    <button type="button" class="btn px-4 py-2" 
-                            style="background: linear-gradient(135deg, #dc3545 0%, #c82333 100%); color: white; border-radius: 1rem; border: none;"
+                    <button type="button" class="btn btn-danger" 
+                            style="border-radius: 8px; padding: 10px 20px; font-weight: 500;"
                             wire:click="deleteUser" wire:loading.attr="disabled">
                         <span wire:loading.remove>
                             <i class="fas fa-trash-alt me-2"></i>Delete Account Forever

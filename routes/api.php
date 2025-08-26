@@ -25,6 +25,7 @@ Route::prefix('v1')->group(function () {
     
     // Twilio webhooks (public)
     Route::post('/twilio/webhook', [TwilioController::class, 'webhook']);
+    Route::post('/twilio/incoming', [TwilioController::class, 'incomingMessage']);
 });
 
 // Authenticated API routes

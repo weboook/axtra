@@ -320,13 +320,22 @@
     @endphp
     @if($selectedBooking)
         <div class="modal fade show" style="display: block; background: rgba(0, 0, 0, 0.5);" tabindex="-1">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content" style="border-radius: 1.5rem; border: none; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);">
-                    <div class="modal-header" style="border-bottom: 1px solid rgba(0, 0, 0, 0.1); padding: 2rem 2rem 1rem;">
-                        <h4 class="modal-title fw-bold" style="color: #1b1b1b;">Booking Details</h4>
-                        <button type="button" class="btn-close" wire:click="hideBookingDetails"></button>
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content" style="border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);">
+                    <div class="modal-header" style="border-bottom: 1px solid #f8f9fa; padding: 1.5rem;">
+                        <div class="d-flex align-items-center">
+                            <div class="me-3 d-flex align-items-center justify-content-center" 
+                                 style="width: 48px; height: 48px; background: rgba(192, 36, 37, 0.1); border-radius: 12px;">
+                                <i class="fas fa-calendar-check" style="color: #c02425; font-size: 1.25rem;"></i>
+                            </div>
+                            <div>
+                                <h5 class="modal-title mb-0" style="color: #1a1a1a; font-weight: 700;">Booking Details</h5>
+                                <small class="text-muted">{{ $selectedBooking->booking_reference }}</small>
+                            </div>
+                        </div>
+                        <button type="button" class="btn-close" wire:click="hideBookingDetails" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" style="padding: 1rem 2rem 2rem;">
+                    <div class="modal-body" style="padding: 1.5rem;">
                         <div class="row">
                             <div class="col-md-6">
                                 <h6 class="fw-bold mb-3" style="color: #c02425;">Booking Information</h6>

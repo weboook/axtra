@@ -1,12 +1,21 @@
 <div class="modal fade show" style="display: block; background: rgba(0,0,0,0.5);">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content" style="border-radius: 16px;">
-            <div class="modal-header border-0 p-4">
-                <h5 class="modal-title fw-bold">Create New Employee</h5>
-                <button type="button" class="btn-close" wire:click="$dispatch('closeModals')"></button>
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content" style="border: none; border-radius: 16px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);">
+            <div class="modal-header" style="border-bottom: 1px solid #f8f9fa; padding: 1.5rem;">
+                <div class="d-flex align-items-center">
+                    <div class="me-3 d-flex align-items-center justify-content-center" 
+                         style="width: 48px; height: 48px; background: rgba(192, 36, 37, 0.1); border-radius: 12px;">
+                        <i class="fas fa-user-plus" style="color: #c02425; font-size: 1.25rem;"></i>
+                    </div>
+                    <div>
+                        <h5 class="modal-title mb-0" style="color: #1a1a1a; font-weight: 700;">Create New Employee</h5>
+                        <small class="text-muted">Add a new employee to the system</small>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" wire:click="$dispatch('closeModals')" aria-label="Close"></button>
             </div>
             <form wire:submit="createEmployee">
-                <div class="modal-body p-4">
+                <div class="modal-body" style="padding: 1.5rem;">
                     <div class="row g-3">
                         <!-- User Selection -->
                         <div class="col-12">
@@ -133,9 +142,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer border-0 p-4">
-                    <button type="button" class="btn btn-secondary" wire:click="$dispatch('closeModals')">Cancel</button>
-                    <button type="submit" class="btn btn-primary" style="background: #c02425; border-color: #c02425;">
+                <div class="modal-footer" style="border-top: 1px solid #f8f9fa; padding: 1.5rem;">
+                    <button type="button" class="btn btn-outline-secondary" wire:click="$dispatch('closeModals')" style="border-radius: 8px; padding: 10px 20px; font-weight: 500;">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary" style="background: #c02425; border-color: #c02425; border-radius: 8px; padding: 10px 20px; font-weight: 500;">
                         <i class="fas fa-plus me-2"></i>Create Employee
                     </button>
                 </div>

@@ -1,0 +1,272 @@
+/* Modern Modal Styling for Axtra App */
+
+/* Base Modal Styling */
+.modal .modal-content {
+    border: none !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15) !important;
+    overflow: hidden;
+}
+
+.modal .modal-header {
+    border-bottom: 1px solid #f8f9fa !important;
+    padding: 1.5rem !important;
+    background: white;
+}
+
+.modal .modal-body {
+    padding: 1.5rem !important;
+    background: white;
+}
+
+.modal .modal-footer {
+    border-top: 1px solid #f8f9fa !important;
+    padding: 1.5rem !important;
+    background: white;
+}
+
+/* Modern Modal Header with Icon */
+.modal-header-with-icon {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.modal-header-icon {
+    width: 48px;
+    height: 48px;
+    background: rgba(192, 36, 37, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+.modal-header-icon i {
+    color: #c02425;
+}
+
+/* Modal Title Styling */
+.modal-title {
+    color: #1a1a1a !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+    font-size: 1.25rem !important;
+    line-height: 1.2 !important;
+}
+
+.modal-subtitle {
+    color: #6c757d !important;
+    font-size: 0.875rem !important;
+    margin-top: 0.25rem !important;
+}
+
+/* Modal Close Button */
+.modal .btn-close {
+    opacity: 0.6;
+    transition: opacity 0.15s ease;
+}
+
+.modal .btn-close:hover {
+    opacity: 1;
+}
+
+/* Modal Animations */
+.modal.fade {
+    transition: opacity 0.15s linear;
+}
+
+.modal.fade .modal-content {
+    transition: transform 0.15s ease-out;
+    transform: scale(0.95);
+}
+
+.modal.show .modal-content {
+    transform: scale(1);
+}
+
+/* Button Styling in Modals */
+.modal-footer .btn {
+    border-radius: 8px !important;
+    padding: 10px 20px !important;
+    font-weight: 500 !important;
+    transition: all 0.15s ease !important;
+}
+
+.modal-footer .btn:hover {
+    transform: translateY(-1px);
+}
+
+.modal-footer .btn-primary {
+    background: #c02425 !important;
+    border-color: #c02425 !important;
+}
+
+.modal-footer .btn-primary:hover {
+    background: #a01e1f !important;
+    border-color: #a01e1f !important;
+}
+
+.modal-footer .btn-outline-primary {
+    border-color: #c02425 !important;
+    color: #c02425 !important;
+}
+
+.modal-footer .btn-outline-primary:hover {
+    background: #c02425 !important;
+    border-color: #c02425 !important;
+    color: white !important;
+}
+
+/* Custom scrollbar for modal bodies */
+.modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background: #c02425;
+    border-radius: 3px;
+}
+
+.modal-body::-webkit-scrollbar-thumb:hover {
+    background: #a01e1f;
+}
+
+/* Responsive Modal Styling */
+@media (max-width: 576px) {
+    .modal .modal-header,
+    .modal .modal-body,
+    .modal .modal-footer {
+        padding: 1rem !important;
+    }
+
+    .modal-header-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+
+    .modal-title {
+        font-size: 1.1rem !important;
+    }
+}
+
+/* Specific Modal Type Styling */
+
+/* Success Modals */
+.modal.modal-success .modal-header-icon {
+    background: rgba(40, 167, 69, 0.1);
+}
+
+.modal.modal-success .modal-header-icon i {
+    color: #28a745;
+}
+
+/* Warning/Danger Modals */
+.modal.modal-warning .modal-header-icon,
+.modal.modal-danger .modal-header-icon {
+    background: rgba(220, 53, 69, 0.1);
+}
+
+.modal.modal-warning .modal-header-icon i,
+.modal.modal-danger .modal-header-icon i {
+    color: #dc3545;
+}
+
+/* Info Modals */
+.modal.modal-info .modal-header-icon {
+    background: rgba(13, 110, 253, 0.1);
+}
+
+.modal.modal-info .modal-header-icon i {
+    color: #0d6efd;
+}
+
+/* Large Modal Adjustments */
+.modal-xl .modal-dialog,
+.modal-lg .modal-dialog {
+    max-width: none;
+    margin: 1.75rem auto;
+}
+
+@media (min-width: 1200px) {
+    .modal-xl .modal-dialog {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 992px) {
+    .modal-lg .modal-dialog {
+        max-width: 800px;
+    }
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-backdrop.fade {
+    opacity: 0;
+    transition: opacity 0.15s linear;
+}
+
+.modal-backdrop.show {
+    opacity: 1;
+}
+
+/* Form Elements in Modals */
+.modal .form-control,
+.modal .form-select {
+    border-radius: 8px !important;
+    border: 1px solid #dee2e6 !important;
+    transition: border-color 0.15s ease !important;
+}
+
+.modal .form-control:focus,
+.modal .form-select:focus {
+    border-color: #c02425 !important;
+    box-shadow: 0 0 0 0.2rem rgba(192, 36, 37, 0.25) !important;
+}
+
+/* Alert Components in Modals */
+.modal .alert {
+    border-radius: 12px !important;
+    border: none !important;
+}
+
+/* Card Components in Modals */
+.modal .card {
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.modal .card-header {
+    background: rgba(248, 249, 250, 0.8) !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Loading States */
+.modal .spinner-border-sm {
+    width: 0.875rem;
+    height: 0.875rem;
+}
+
+/* Modal-specific utilities */
+.modal .text-truncate-modal {
+    max-width: 200px;
+}
+
+/* Badge styling in modals */
+.modal .badge {
+    border-radius: 6px !important;
+    font-weight: 500 !important;
+}
